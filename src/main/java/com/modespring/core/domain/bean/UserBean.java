@@ -13,7 +13,7 @@ public abstract class UserBean {
     private String userEmail;
     private String userAvatar;
     private Date userRegisterDate;
-    private Date userLoginDate;
+    private Date userLastLoginDate;
     private Boolean userCertification;
     private Boolean userFrozen;
 
@@ -68,12 +68,12 @@ public abstract class UserBean {
         this.userRegisterDate = userRegisterDate;
     }
 
-    public Date getUserLoginDate() {
-        return userLoginDate;
+    public Date getUserLastLoginDate() {
+        return userLastLoginDate;
     }
 
-    public void setUserLoginDate(Date userLoginDate) {
-        this.userLoginDate = userLoginDate;
+    public void setUserLastLoginDate(Date userLastLoginDate) {
+        this.userLastLoginDate = userLastLoginDate;
     }
 
     public Boolean getUserCertification() {
