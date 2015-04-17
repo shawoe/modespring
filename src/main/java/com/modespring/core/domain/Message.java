@@ -14,9 +14,9 @@ public class Message extends MessageBean {
 
     public Message() {
         Date date = new Date();
-        this.setMessageSendtime(date);
+        this.setMessageSendTime(date);
         this.setMessageTitle(MESSAGE_TITLE);
-        this.setMessageMarkread(MESSAGE_MARKREAD);
+        this.setMessageMarkRead(MESSAGE_MARKREAD);
     }
 
 }

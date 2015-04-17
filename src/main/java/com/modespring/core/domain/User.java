@@ -18,7 +18,7 @@ public class User extends UserBean {
     public User() {
         Date date = new Date();
         this.setUserRegisterDate(date);
-        this.setUserLastLoginDate(date);
+        this.setUserLastLogin(date);
         this.setUserName(USER_NAME);
         this.setUserPassword(USER_PASSWORD);
         this.setUserAvatar(USER_AVATAR);

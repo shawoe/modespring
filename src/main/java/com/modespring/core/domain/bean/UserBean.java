@@ -1,31 +1,53 @@
 package com.modespring.core.domain.bean;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Shawoe on 2015/4/17.
  */
-public abstract class UserBean {
+@Entity
+@Table(name = "table_user")
+public abstract class UserBean extends BaseBean {
 
-    private Integer userID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private Integer userId;
+
+    @Column(name = "user_name")
     private String userName;
+
+    @Column(name = "user_password")
     private String userPassword;
+
+    @Column(name = "user_email")
     private String userEmail;
+
+    @Column(name = "user_avatar")
     private String userAvatar;
+
+    @Column(name = "user_register_date")
     private Date userRegisterDate;
-    private Date userLastLoginDate;
+
+    @Column(name = "user_last_login")
+    private Date userLastLogin;
+
+    @Column(name = "user_certification")
     private Boolean userCertification;
+
+    @Column(name = "user_frozen")
     private Boolean userFrozen;
 
     public UserBean() {
     }
 
-    public Integer getUserID() {
-        return userID;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -68,12 +90,12 @@ public abstract class UserBean {
         this.userRegisterDate = userRegisterDate;
     }
 
-    public Date getUserLastLoginDate() {
-        return userLastLoginDate;
+    public Date getUserLastLogin() {
+        return userLastLogin;
     }
 
-    public void setUserLastLoginDate(Date userLastLoginDate) {
-        this.userLastLoginDate = userLastLoginDate;
+    public void setUserLastLogin(Date userLastLogin) {
+        this.userLastLogin = userLastLogin;
     }
 
     public Boolean getUserCertification() {
