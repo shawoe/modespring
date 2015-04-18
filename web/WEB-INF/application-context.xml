@@ -11,16 +11,20 @@
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
+    <!-- 引入JDBC连接的属性文件 -->
+    <context:property-placeholder location="classpath:jdbc.properties" />
+
     <!-- MySQL数据源配置, 使用DBCP数据库连接池 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost/modespring?characterEncoding=utf8"/>
-        <property name="username" value="root"/>
-        <property name="password" value="admin"/>
-        <property name="initialSize" value="5"/>
-        <property name="maxActive" value="10"/>
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="${jdbc.initialSize}"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
     </bean>
 
+    <!-- 使用Hibernate JPA -->
     <bean id="jpaVendorAdapter"
           class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
         <property name="showSql" value="true"/>
@@ -36,15 +40,24 @@
         <property name="packagesToScan" value="com.modespring.*.domain"/>
     </bean>
 
+    <!-- JPA使用Spring的异常转换 -->
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+    <!-- JPA事务应用于JDBC -->
+    <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+
+    <!-- JPA事务管理 -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+        <property name="jpaDialect" ref="jpaDialect"/>
+    </bean>
+
+    <!-- 定义注解驱动的Spring声明性事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
     <context:component-scan base-package="com.modespring.*.controller,com.modespring.*.service"/>
 
     <context:annotation-config/>
-
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
-
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
     <aop:config proxy-target-class="true"/>
 
