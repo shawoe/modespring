@@ -1,2 +1,2 @@
-# modespring
-Spring内容管理模式
+# ModeSpring
+Spring RESTful Web Development Mode
