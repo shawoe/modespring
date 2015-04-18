@@ -10,13 +10,13 @@ import java.util.Date;
 public class Message extends MessageBean {
 
     private static final String MESSAGE_TITLE = "勿忘我";
-    private static final Boolean MESSAGE_MARKREAD = false;
+    private static final Boolean MESSAGE_MARK_READ = false;
 
     public Message() {
         Date date = new Date();
         this.setMessageSendTime(date);
         this.setMessageTitle(MESSAGE_TITLE);
-        this.setMessageMarkRead(MESSAGE_MARKREAD);
+        this.setMessageMarkRead(MESSAGE_MARK_READ);
     }
 
 }
