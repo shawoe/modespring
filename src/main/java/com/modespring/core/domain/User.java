@@ -1,12 +1,13 @@
 package com.modespring.core.domain;
 
 import com.modespring.core.domain.bean.UserBean;
-
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Shawoe on 2015/4/16.
  */
+@Entity
 public class User extends UserBean {
 
     private static final String USER_NAME = "无名侠士";

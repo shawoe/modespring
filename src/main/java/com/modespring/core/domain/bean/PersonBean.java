@@ -6,37 +6,19 @@ import java.util.Date;
 /**
  * Created by Shawoe on 2015/4/17.
  */
-@Entity
-@Table(name = "table_person")
+@MappedSuperclass
 public abstract class PersonBean extends BaseBean {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "person_id")
     private Integer personId;
-
-    @Column(name = "person_name")
     private String personName;
-
-    @Column(name = "person_english_name")
     private String personEnglishName;
-
-    @Column(name = "person_avatar")
     private String personAvatar;
-
-    @Column(name = "person_sex")
     private String personSex;
-
-    @Column(name = "person_email")
     private String personEmail;
-
-    @Column(name = "person_phone")
     private Integer personPhone;
-
-    @Column(name = "person_birthday")
     private Date personBirthday;
-
-    @Column(name = "person_certification")
     private Boolean personCertification;
 
     public PersonBean() {

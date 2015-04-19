@@ -6,41 +6,20 @@ import java.util.Date;
 /**
  * Created by Shawoe on 2015/4/17.
  */
-@Entity
-@Table(name = "table_user")
+@MappedSuperclass
 public abstract class UserBean extends BaseBean {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private Integer userId;
-
-    @Column(name = "user_name")
     private String userName;
-
-    @Column(name = "user_password")
     private String userPassword;
-
-    @Column(name = "user_email")
     private String userEmail;
-
-    @Column(name = "user_avatar")
     private String userAvatar;
-
-    @Column(name = "user_register_date")
     private Date userRegisterDate;
-
-    @Column(name = "user_last_login")
     private Date userLastLogin;
-
-    @Column(name = "user_certification")
     private Boolean userCertification;
-
-    @Column(name = "user_frozen")
     private Boolean userFrozen;
-
-    public UserBean() {
-    }
 
     public Integer getUserId() {
         return userId;

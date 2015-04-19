@@ -12,17 +12,18 @@
     <url>https://github.com/shawoe/modespring</url>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <java.version>1.7</java.version>
-        <spring.version>4.1.1.RELEASE</spring.version>
-        <spring-data-jpa.version>1.8.0.RELEASE</spring-data-jpa.version>
+        <spring.version>4.0.3.RELEASE</spring.version>
+        <spring-data-jpa.version>1.7.1.RELEASE</spring-data-jpa.version>
         <junit.version>4.11</junit.version>
         <hibernate.version>4.3.6.Final</hibernate.version>
         <mysql.version>5.1.6</mysql.version>
         <jstl.version>1.2</jstl.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-dbcp.version>1.4</commons-dbcp.version>
+        <logback.version>1.0.13</logback.version>
+        <slf4j.version>1.7.5</slf4j.version>
+        <servlet.version>3.0.1</servlet.version>
+        <aspectj.version>1.5.4</aspectj.version>
     </properties>
 
     <dependencies>
@@ -47,9 +48,26 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>${spring-data-jpa.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-aop</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- junit -->
@@ -94,5 +112,42 @@
             <version>${commons-dbcp.version}</version>
         </dependency>
 
+        <!-- slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- aspectj -->
+        <dependency>
+            <groupId>aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+
     </dependencies>
+
 </project>
