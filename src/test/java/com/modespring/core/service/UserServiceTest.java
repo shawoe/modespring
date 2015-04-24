@@ -1,7 +1,7 @@
 package com.modespring.core.service;
 
-import static com.modespring.core.common.ExceptionConstant.*;
-import static com.modespring.core.common.TestConstant.*;
+import static com.modespring.core.common.ExceptionMessage.*;
+import static com.modespring.core.common.TestDefaultValue.*;
 import com.modespring.core.domain.User;
 import org.junit.Assert;
 import org.junit.Before;

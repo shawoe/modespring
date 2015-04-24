@@ -1,6 +1,6 @@
 package com.modespring.core.service.impl;
 
-import static com.modespring.core.common.ExceptionConstant.*;
+import static com.modespring.core.common.ExceptionMessage.*;
 import com.modespring.core.domain.User;
 import com.modespring.core.repository.UserDao;
 import com.modespring.core.service.BaseService;

@@ -1,6 +1,6 @@
 package com.modespring.core.repository;
 
-import static com.modespring.core.common.TestConstant.*;
+import static com.modespring.core.common.TestDefaultValue.*;
 import com.modespring.core.domain.User;
 import org.junit.Assert;
 import org.junit.Before;

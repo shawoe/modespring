@@ -1,6 +1,6 @@
 package com.modespring.core.domain;
 
-import static com.modespring.core.common.DomainConstant.*;
+import static com.modespring.core.common.DomainDefaultValue.*;
 import com.modespring.core.domain.bean.MessageBean;
 import javax.persistence.Entity;
 import java.util.Date;
