@@ -1,5 +1,6 @@
 package com.modespring.core.domain;
 
+import static com.modespring.core.common.DomainConstant.*;
 import com.modespring.core.domain.bean.UserBean;
 import javax.persistence.*;
 import java.util.Date;
@@ -9,12 +10,6 @@ import java.util.Date;
  */
 @Entity
 public class User extends UserBean {
-
-    private static final String USER_DEFAULT_NAME = "无名侠士";
-    private static final String USER_DEFAULT_PASSWORD = "";
-    private static final String USER_DEFAULT_AVATAR = "";
-    private static final Boolean USER_DEFAULT_CERTIFICATION = false;
-    private static final Boolean USER_DEFAULT_FROZEN = false;
 
     public User() {
         Date date = new Date();

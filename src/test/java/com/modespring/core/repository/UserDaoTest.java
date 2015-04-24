@@ -1,5 +1,6 @@
 package com.modespring.core.repository;
 
+import static com.modespring.core.common.TestConstant.*;
 import com.modespring.core.domain.User;
 import org.junit.Assert;
 import org.junit.Before;
@@ -26,12 +27,6 @@ public class UserDaoTest {
     @Autowired
     private UserDao userTestDao;
     private static Integer userTestId;
-    private static final String userTestName = "测试用户";
-    private static final String userTestPassword = "123123";
-    private static final String userTestEmail = "test@modespring.com";
-    private static final String userNewTestName = "新测试用户";
-    private static final String userNewTestPassword = "666666";
-    private static final String userNewTestEmail = "123@modespring.com";
 
     @Before
     @Test

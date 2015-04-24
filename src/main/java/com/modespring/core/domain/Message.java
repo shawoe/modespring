@@ -1,5 +1,6 @@
 package com.modespring.core.domain;
 
+import static com.modespring.core.common.DomainConstant.*;
 import com.modespring.core.domain.bean.MessageBean;
 import javax.persistence.Entity;
 import java.util.Date;
@@ -10,14 +11,11 @@ import java.util.Date;
 @Entity
 public class Message extends MessageBean {
 
-    private static final String MESSAGE_TITLE = "勿忘我";
-    private static final Boolean MESSAGE_MARK_READ = false;
-
     public Message() {
         Date date = new Date();
         this.setMessageSendTime(date);
-        this.setMessageTitle(MESSAGE_TITLE);
-        this.setMessageMarkRead(MESSAGE_MARK_READ);
+        this.setMessageTitle(MESSAGE_DEFAULT_TITLE);
+        this.setMessageMarkRead(MESSAGE_DEFAULT_MARK_READ);
     }
 
 }

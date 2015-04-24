@@ -1,7 +1,8 @@
 package com.modespring.core.service;
 
+import static com.modespring.core.common.ExceptionConstant.*;
+import static com.modespring.core.common.TestConstant.*;
 import com.modespring.core.domain.User;
-import com.modespring.core.repository.UserDao;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +14,6 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 /**
  * Created by Shawoe on 2015/4/19.
@@ -28,12 +28,6 @@ public class UserServiceTest {
     @Autowired
     private UserService userTestService;
     private static Integer userTestId;
-    private static final String userTestName = "测试用户";
-    private static final String userTestPassword = "123123";
-    private static final String userTestEmail = "test@modespring.com";
-    private static final String userNewTestName = "新注册用户";
-    private static final String userNewTestPassword = "666666";
-    private static final String userNewTestEmail = "123@modespring.com";
 
     @Before
     @Test
@@ -45,7 +39,7 @@ public class UserServiceTest {
         try {
             user = userTestService.registerUser(user);
         } catch (Exception e) {
-            Assert.assertNotNull(e);
+            Assert.assertEquals(USER_EXISTENCE_EXCEPTION, e.getMessage());
         }
         Assert.assertEquals(userTestName, user.getUserName());
         Assert.assertEquals(userTestPassword, user.getUserPassword());

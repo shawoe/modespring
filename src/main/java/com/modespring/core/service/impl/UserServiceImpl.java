@@ -1,5 +1,6 @@
 package com.modespring.core.service.impl;
 
+import static com.modespring.core.common.ExceptionConstant.*;
 import com.modespring.core.domain.User;
 import com.modespring.core.repository.UserDao;
 import com.modespring.core.service.BaseService;
@@ -14,8 +15,6 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class UserServiceImpl extends BaseService implements UserService {
-
-    private static final String USER_EXISTENCE_EXCEPTION = "用户已存在";
 
     @Autowired
     UserDao userDao;
