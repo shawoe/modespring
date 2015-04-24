@@ -10,21 +10,21 @@ import java.util.Date;
 @Entity
 public class User extends UserBean {
 
-    private static final String USER_NAME = "无名侠士";
-    private static final String USER_PASSWORD = "";
-    private static final String USER_AVATAR = "";
-    private static final Boolean USER_CERTIFICATION = false;
-    private static final Boolean USER_FROZEN = false;
+    private static final String USER_DEFAULT_NAME = "无名侠士";
+    private static final String USER_DEFAULT_PASSWORD = "";
+    private static final String USER_DEFAULT_AVATAR = "";
+    private static final Boolean USER_DEFAULT_CERTIFICATION = false;
+    private static final Boolean USER_DEFAULT_FROZEN = false;
 
     public User() {
         Date date = new Date();
         this.setUserRegisterDate(date);
         this.setUserLastLogin(date);
-        this.setUserName(USER_NAME);
-        this.setUserPassword(USER_PASSWORD);
-        this.setUserAvatar(USER_AVATAR);
-        this.setUserCertification(USER_CERTIFICATION);
-        this.setUserFrozen(USER_FROZEN);
+        this.setUserName(USER_DEFAULT_NAME);
+        this.setUserPassword(USER_DEFAULT_PASSWORD);
+        this.setUserAvatar(USER_DEFAULT_AVATAR);
+        this.setUserCertification(USER_DEFAULT_CERTIFICATION);
+        this.setUserFrozen(USER_DEFAULT_FROZEN);
     }
 
 }

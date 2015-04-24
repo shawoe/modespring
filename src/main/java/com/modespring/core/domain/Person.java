@@ -9,18 +9,18 @@ import javax.persistence.Entity;
 @Entity
 public class Person extends PersonBean {
 
-    private static final String PERSON_NAME = "无名侠士";
-    private static final String PERSON_ENGLISH_NAME = "NAMELESS";
-    private static final String PERSON_AVATAR = "";
-    private static final String PERSON_SEX = "保密";
-    private static final Boolean PERSON_CERTIFICATION = false;
+    private static final String PERSON_DEFAULT_NAME = "无名侠士";
+    private static final String PERSON_DEFAULT_ENGLISH_NAME = "NAMELESS";
+    private static final String PERSON_DEFAULT_AVATAR = "";
+    private static final String PERSON_DEFAULT_SEX = "保密";
+    private static final Boolean PERSON_DEFAULT_CERTIFICATION = false;
 
     public Person() {
-        this.setPersonName(PERSON_NAME);
-        this.setPersonEnglishName(PERSON_ENGLISH_NAME);
-        this.setPersonAvatar(PERSON_AVATAR);
-        this.setPersonSex(PERSON_SEX);
-        this.setPersonCertification(PERSON_CERTIFICATION);
+        this.setPersonName(PERSON_DEFAULT_NAME);
+        this.setPersonEnglishName(PERSON_DEFAULT_ENGLISH_NAME);
+        this.setPersonAvatar(PERSON_DEFAULT_AVATAR);
+        this.setPersonSex(PERSON_DEFAULT_SEX);
+        this.setPersonCertification(PERSON_DEFAULT_CERTIFICATION);
     }
     
 }

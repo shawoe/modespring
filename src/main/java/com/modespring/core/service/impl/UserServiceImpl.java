@@ -15,12 +15,30 @@ import javax.transaction.Transactional;
 @Transactional
 public class UserServiceImpl extends BaseService implements UserService {
 
+    private static final String USER_EXISTENCE_EXCEPTION = "用户已存在";
+
     @Autowired
     UserDao userDao;
 
     @Autowired
     public UserServiceImpl(UserDao userDao) {
         super(userDao);
+    }
+
+    public Boolean isUserExistence(String userName) {
+        User user = userDao.findUserByUserName(userName);
+        if (user != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public User registerUser(User user) throws Exception {
+        if (isUserExistence(user.getUserName())) {
+            throw new Exception(USER_EXISTENCE_EXCEPTION);
+        }
+        user = userDao.save(user);
+        return user;
     }
 
     public User getUserDetailsById(Integer userId) {
