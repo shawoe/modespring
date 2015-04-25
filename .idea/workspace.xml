@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8da7de6-9b16-4b21-a3f3-6001d7fda1da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/Shawoe.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/web/WEB-INF/template/modespring1.0/user/memberCenter.html" />
-      <change type="DELETED" beforePath="D:\GitHub\modespring\src\main\web\WEB-INF\jsp\hello.jsp" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/modespring/core/webapp/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/modespring/core/webapp/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/modespring/core/service/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/modespring/core/service/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/modespring/core/service/impl/UserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/modespring/core/service/impl/UserServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modespring.iml" afterPath="$PROJECT_DIR$/modespring.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/WEB-INF/spring-mvc.xml" afterPath="$PROJECT_DIR$/src/main/web/WEB-INF/spring-mvc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\GitHub\modespring\src\main\web\WEB-INF\jsp\freemarker.html" afterPath="$PROJECT_DIR$/src/main/web/WEB-INF/template/modespring1.0/login.html" />
+      <change type="DELETED" beforePath="D:\GitHub\modespring\src\main\web\WEB-INF\jsp\freemarker.html" afterPath="" />
     </list>
     <ignored path="modespring.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1434,15 +1424,15 @@
       <workItem from="1429958302360" duration="3312000" />
       <workItem from="1429970636557" duration="3373000" />
       <workItem from="1429974077058" duration="103000" />
-      <workItem from="1429974323779" duration="2677000" />
+      <workItem from="1429974323779" duration="2740000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60622000" />
+    <option name="totallyTimeSpent" value="60685000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="1" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1463,7 +1453,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37191853" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37191853" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21328294" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
