@@ -11,6 +11,7 @@
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
+
     <!-- 引入JDBC连接的属性文件 -->
     <context:property-placeholder location="classpath:jdbc.properties" />
 
