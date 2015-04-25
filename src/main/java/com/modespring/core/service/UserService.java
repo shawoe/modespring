@@ -7,6 +7,7 @@ import com.modespring.core.domain.User;
 */
 public interface UserService {
     public Boolean isUserExistence(String userName);
+    public User loginUser(String userName, String userPassword) throws Exception;
     public User registerUser(User user) throws Exception;
     public User getUserDetailsById(Integer userId);
 }

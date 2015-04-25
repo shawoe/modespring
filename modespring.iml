@@ -27,6 +27,17 @@
         <fileset id="fileset3" name="Spring Application Context (3)" removed="false">
           <file>file://$MODULE_DIR$/src/main/web/WEB-INF/spring-mvc.xml</file>
         </fileset>
+        <fileset id="fileset4" name="Spring Application Context (4)" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/application-context.xml</file>
+          <file>file://$MODULE_DIR$/src/main/web/WEB-INF/application-context.xml</file>
+          <file>file://$MODULE_DIR$/.idea/encodings.xml</file>
+          <file>file://$MODULE_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml</file>
+          <file>file://$MODULE_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml</file>
+          <file>file://$MODULE_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_4_0_5_Final.xml</file>
+          <file>file://$MODULE_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_0_3_RELEASE.xml</file>
+          <file>file://$MODULE_DIR$/src/main/web/WEB-INF/spring-mvc.xml</file>
+          <file>file://$MODULE_DIR$/.idea/vcs.xml</file>
+        </fileset>
       </configuration>
     </facet>
   </component>
