@@ -1,6 +1,7 @@
 package com.modespring.core.service.impl;
 
 import static com.modespring.core.common.ExceptionMessage.*;
+
 import com.modespring.core.domain.User;
 import com.modespring.core.repository.UserDao;
 import com.modespring.core.service.BaseService;
@@ -57,11 +58,28 @@ public class UserServiceImpl extends BaseService implements UserService {
         request.getSession().removeAttribute("currentUser");
     }
 
-    public User register(User user) throws Exception {
-        if (isExisted(user.getUserName())) {
-            throw new Exception(USER_EXISTENCE_EXCEPTION);
+    public void registerFormValidate(HttpServletRequest request) throws Exception {
+        String userName = request.getParameter("userName");
+        String userPassword = request.getParameter("userPassword");
+        String confirmPassword = request.getParameter("confirmPassword");
+        if (userName == null || userName.isEmpty()) {
+            throw new Exception(USER_AUTHENTICATION_EXCEPTION);
+        } else if (!userPassword.equals(confirmPassword)) {
+            throw new Exception(USER_AUTHENTICATION_EXCEPTION);
         }
-        return userDao.save(user);
+    }
+
+    public void register(HttpServletRequest request) throws Exception {
+        String userName = request.getParameter("userName");
+        String userPassword = request.getParameter("userPassword");
+        if (isExisted(userName)) {
+            throw new Exception(USER_EXISTENCE_EXCEPTION);
+        } else {
+            User user = new User();
+            user.setUserName(userName);
+            user.setUserPassword(userPassword);
+            userDao.save(user);
+        }
     }
 
     public User getUserDetailsById(Integer userId) {
