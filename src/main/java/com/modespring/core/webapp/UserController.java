@@ -22,8 +22,7 @@ public class UserController {
 
     @RequestMapping(value = "/login.html", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView modelAndView, HttpServletRequest request) {
-        String currentUser = (String)request.getSession().getAttribute("currentUser");
-        if (currentUser != null) {
+        if (userService.isUserLogged(request)) {
             modelAndView.setViewName("forward:/memberCenter.html");
             modelAndView.addObject("errorMessage", USER_LOGGED_EXCEPTION);
         }
@@ -37,9 +36,9 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("/login");
         try {
             User user = userService.loginUser(userName,userPassword);
-            request.getSession().setAttribute("currentUser", user.getUserName());
-            modelAndView.setViewName("forward:/memberCenter.html");
-            modelAndView.addObject("user", user);
+            request.getSession().setAttribute("currentUser", user);
+            modelAndView.addObject("currentUser", user);
+            modelAndView.setViewName("/user/memberCenter");
         } catch (Exception e) {
             modelAndView.addObject("errorMessage", e.getMessage());
         }
@@ -48,8 +47,13 @@ public class UserController {
 
     @RequestMapping(value = "/memberCenter.html", method = RequestMethod.GET)
     public ModelAndView memberCenter(ModelAndView modelAndView, HttpServletRequest request) {
-        modelAndView.setViewName("/user/memberCenter");
-        modelAndView.addObject("userName", request.getParameter("userName"));
+        if (userService.isUserLogged(request)) {
+            modelAndView.setViewName("/user/memberCenter");
+            modelAndView.addObject("user", request.getSession().getAttribute("currentUser"));
+        } else {
+            modelAndView.setViewName("/login");
+            modelAndView.addObject("errorMessage", USER_NOT_LOGIN_EXCEPTION);
+        }
         return modelAndView;
     }
 

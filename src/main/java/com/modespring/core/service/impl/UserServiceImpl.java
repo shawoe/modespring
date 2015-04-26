@@ -7,6 +7,8 @@ import com.modespring.core.service.BaseService;
 import com.modespring.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 /**
@@ -27,6 +29,14 @@ public class UserServiceImpl extends BaseService implements UserService {
     public Boolean isUserExistence(String userName) {
         User user = userDao.findUserByUserName(userName);
         if (user == null) {
+            return false;
+        }
+        return true;
+    }
+
+    public Boolean isUserLogged (HttpServletRequest request) {
+        User currentUser = (User)request.getSession().getAttribute("currentUser");
+        if (currentUser == null) {
             return false;
         }
         return true;
