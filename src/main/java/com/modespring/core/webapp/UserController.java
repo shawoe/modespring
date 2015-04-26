@@ -23,22 +23,23 @@ public class UserController {
     @RequestMapping(value = "/login.html", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView modelAndView, HttpServletRequest request) {
         if (userService.isUserLogged(request)) {
-            modelAndView.setViewName("forward:/memberCenter.html");
             modelAndView.addObject("errorMessage", USER_LOGGED_EXCEPTION);
+            modelAndView.setViewName("/error");
+        } else {
+            modelAndView.setViewName("/user/login");
         }
         return modelAndView;
     }
 
-    @RequestMapping(value = "/loginAction.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/loginAction.html", method = RequestMethod.POST)
     public ModelAndView loginAction(HttpServletRequest request) {
         String userName = request.getParameter("userName");
         String userPassword = request.getParameter("userPassword");
-        ModelAndView modelAndView = new ModelAndView("/login");
+        ModelAndView modelAndView = new ModelAndView("/user/login");
         try {
             User user = userService.loginUser(userName,userPassword);
             request.getSession().setAttribute("currentUser", user);
-            modelAndView.addObject("currentUser", user);
-            modelAndView.setViewName("/user/memberCenter");
+            modelAndView.setViewName("redirect:/memberCenter.html");
         } catch (Exception e) {
             modelAndView.addObject("errorMessage", e.getMessage());
         }
@@ -51,8 +52,8 @@ public class UserController {
             modelAndView.setViewName("/user/memberCenter");
             modelAndView.addObject("user", request.getSession().getAttribute("currentUser"));
         } else {
-            modelAndView.setViewName("/login");
             modelAndView.addObject("errorMessage", USER_NOT_LOGIN_EXCEPTION);
+            modelAndView.setViewName("/error");
         }
         return modelAndView;
     }
