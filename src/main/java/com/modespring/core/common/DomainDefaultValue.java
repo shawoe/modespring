@@ -6,7 +6,7 @@ package com.modespring.core.common;
 public class DomainDefaultValue {
 
     public static final String USER_DEFAULT_NAME = "无名侠士";
-    public static final String USER_DEFAULT_PASSWORD = "";
+    public static final String USER_DEFAULT_PASSWORD = "password";
     public static final String USER_DEFAULT_AVATAR = "";
     public static final Boolean USER_DEFAULT_CERTIFICATION = false;
     public static final Boolean USER_DEFAULT_FROZEN = false;

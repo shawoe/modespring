@@ -1,14 +1,13 @@
 package com.modespring.core.service.impl;
 
 import static com.modespring.core.common.ExceptionMessage.*;
-
 import com.modespring.core.domain.User;
 import com.modespring.core.repository.UserDao;
 import com.modespring.core.service.BaseService;
 import com.modespring.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.Date;
 
@@ -27,19 +26,20 @@ public class UserServiceImpl extends BaseService implements UserService {
         super(userDao);
     }
 
+    @Override
     public Boolean isExisted(String userName) {
         User user = userDao.findUserByUserName(userName);
         return user != null;
     }
 
-    public Boolean isLogged(HttpServletRequest request) {
-        User currentUser = (User) request.getSession().getAttribute("currentUser");
+    @Override
+    public Boolean isLogged(HttpSession session) {
+        User currentUser = (User) session.getAttribute("currentUser");
         return currentUser != null;
     }
 
-    public void login(HttpServletRequest request) throws Exception {
-        String userName = request.getParameter("userName");
-        String userPassword = request.getParameter("userPassword");
+    @Override
+    public User login(String userName, String userPassword) throws Exception {
         User user = userDao.findUserByUserName(userName);
         if (user == null) {
             throw new Exception(USER_AUTHENTICATION_EXCEPTION);
@@ -48,40 +48,40 @@ public class UserServiceImpl extends BaseService implements UserService {
         } else if (user.getUserFrozen()) {
             throw new Exception(USER_FROZEN_EXCEPTION);
         }
-        request.getSession().setAttribute("currentUser", user);
+        return user;
     }
 
-    public void logout(HttpServletRequest request) {
-        User currentUser = (User) request.getSession().getAttribute("currentUser");
+    @Override
+    public void logout(HttpSession session) {
+        User currentUser = (User) session.getAttribute("currentUser");
         currentUser.setUserLastLogin(new Date());
         userDao.saveAndFlush(currentUser);
-        request.getSession().removeAttribute("currentUser");
+        session.removeAttribute("currentUser");
     }
 
-    public void registerFormValidate(HttpServletRequest request) throws Exception {
-        String userName = request.getParameter("userName");
-        String userPassword = request.getParameter("userPassword");
-        String confirmPassword = request.getParameter("confirmPassword");
-        if (userName == null || userName.isEmpty()) {
+    @Override
+    public void registerFormValidate(String userName, String userPassword, String confirmPassword, String userEmail) throws Exception {
+        if (userName.isEmpty() || userPassword.isEmpty() || confirmPassword.isEmpty() || userEmail.isEmpty()) {
             throw new Exception(USER_AUTHENTICATION_EXCEPTION);
         } else if (!userPassword.equals(confirmPassword)) {
             throw new Exception(USER_AUTHENTICATION_EXCEPTION);
         }
     }
 
-    public void register(HttpServletRequest request) throws Exception {
-        String userName = request.getParameter("userName");
-        String userPassword = request.getParameter("userPassword");
+    @Override
+    public void register(String userName, String userPassword, String userEmail) throws Exception {
         if (isExisted(userName)) {
             throw new Exception(USER_EXISTENCE_EXCEPTION);
         } else {
             User user = new User();
             user.setUserName(userName);
             user.setUserPassword(userPassword);
+            user.setUserEmail(userEmail);
             userDao.save(user);
         }
     }
 
+    @Override
     public User getUserDetailsById(Integer userId) {
         return userDao.findOne(userId);
     }

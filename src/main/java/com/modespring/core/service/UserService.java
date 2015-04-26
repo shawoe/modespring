@@ -1,27 +1,24 @@
 package com.modespring.core.service;
 
 import com.modespring.core.domain.User;
-import org.springframework.http.HttpRequest;
-
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
- * Created by Shawoe on 2015/4/23.
+ * Created by Shawoe on 2015/4/26.
  */
 public interface UserService {
 
-    public Boolean isExisted(String userName);
+    Boolean isExisted(String userName);
 
-    public Boolean isLogged(HttpServletRequest request);
+    Boolean isLogged(HttpSession session);
 
-    public void login(HttpServletRequest request) throws Exception;
+    User login(String userName, String userPassword) throws Exception;
 
-    public void logout(HttpServletRequest request);
+    void logout(HttpSession session);
 
-    public void registerFormValidate(HttpServletRequest request) throws Exception;
+    void registerFormValidate(String userName, String userPassword, String confirmPassword, String userEmail) throws Exception;
 
-    public void register(HttpServletRequest request) throws Exception;
+    void register(String userName, String userPassword, String userEmail) throws Exception;
 
-    public User getUserDetailsById(Integer userId);
-
+    User getUserDetailsById(Integer userId);
 }
