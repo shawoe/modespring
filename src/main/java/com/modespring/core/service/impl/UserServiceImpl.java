@@ -26,22 +26,22 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     public Boolean isUserExistence(String userName) {
         User user = userDao.findUserByUserName(userName);
-        if (user != null) {
-            return true;
+        if (user == null) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     public User loginUser(String userName, String userPassword) throws Exception {
         User user = userDao.findUserByUserName(userName);
         if (user==null) {
-            throw new Exception("用户名或密码不正确");
+            throw new Exception(USER_AUTHENTICATION_EXCEPTION);
         }
         else if (!user.getUserPassword().equals(userPassword)) {
-            throw new Exception("用户名或密码不正确");
+            throw new Exception(USER_AUTHENTICATION_EXCEPTION);
         }
         else if (user.getUserFrozen()) {
-            throw new Exception("用户已冻结！");
+            throw new Exception(USER_FROZEN_EXCEPTION);
         }
         return user;
     }

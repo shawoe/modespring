@@ -1,5 +1,6 @@
 package com.modespring.core.webapp;
 
+import static com.modespring.core.common.ExceptionMessage.*;
 import com.modespring.core.domain.User;
 import com.modespring.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,11 @@ public class UserController {
 
     @RequestMapping(value = "/login.html", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView modelAndView, HttpServletRequest request) {
-        modelAndView.addObject("userName", request.getParameter("userName"));
+        String currentUser = (String)request.getSession().getAttribute("currentUser");
+        if (currentUser != null) {
+            modelAndView.setViewName("forward:/memberCenter.html");
+            modelAndView.addObject("errorMessage", USER_LOGGED_EXCEPTION);
+        }
         return modelAndView;
     }
 
@@ -32,11 +37,19 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("/login");
         try {
             User user = userService.loginUser(userName,userPassword);
-            modelAndView.setViewName("/user/memberCenter");
+            request.getSession().setAttribute("currentUser", user.getUserName());
+            modelAndView.setViewName("forward:/memberCenter.html");
             modelAndView.addObject("user", user);
         } catch (Exception e) {
             modelAndView.addObject("errorMessage", e.getMessage());
         }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/memberCenter.html", method = RequestMethod.GET)
+    public ModelAndView memberCenter(ModelAndView modelAndView, HttpServletRequest request) {
+        modelAndView.setViewName("/user/memberCenter");
+        modelAndView.addObject("userName", request.getParameter("userName"));
         return modelAndView;
     }
 
