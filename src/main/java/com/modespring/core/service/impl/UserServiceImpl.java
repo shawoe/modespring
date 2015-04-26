@@ -7,9 +7,9 @@ import com.modespring.core.service.BaseService;
 import com.modespring.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.Date;
 
 /**
  * Created by Shawoe on 2015/4/18.
@@ -26,47 +26,46 @@ public class UserServiceImpl extends BaseService implements UserService {
         super(userDao);
     }
 
-    public Boolean isUserExistence(String userName) {
+    public Boolean isExisted(String userName) {
+        User user = userDao.findUserByUserName(userName);
+        return user != null;
+    }
+
+    public Boolean isLogged(HttpServletRequest request) {
+        User currentUser = (User) request.getSession().getAttribute("currentUser");
+        return currentUser != null;
+    }
+
+    public void login(HttpServletRequest request) throws Exception {
+        String userName = request.getParameter("userName");
+        String userPassword = request.getParameter("userPassword");
         User user = userDao.findUserByUserName(userName);
         if (user == null) {
-            return false;
-        }
-        return true;
-    }
-
-    public Boolean isUserLogged (HttpServletRequest request) {
-        User currentUser = (User)request.getSession().getAttribute("currentUser");
-        if (currentUser == null) {
-            return false;
-        }
-        return true;
-    }
-
-    public User loginUser(String userName, String userPassword) throws Exception {
-        User user = userDao.findUserByUserName(userName);
-        if (user==null) {
             throw new Exception(USER_AUTHENTICATION_EXCEPTION);
-        }
-        else if (!user.getUserPassword().equals(userPassword)) {
+        } else if (!user.getUserPassword().equals(userPassword)) {
             throw new Exception(USER_AUTHENTICATION_EXCEPTION);
-        }
-        else if (user.getUserFrozen()) {
+        } else if (user.getUserFrozen()) {
             throw new Exception(USER_FROZEN_EXCEPTION);
         }
-        return user;
+        request.getSession().setAttribute("currentUser", user);
     }
 
-    public User registerUser(User user) throws Exception {
-        if (isUserExistence(user.getUserName())) {
+    public void logout(HttpServletRequest request) {
+        User currentUser = (User) request.getSession().getAttribute("currentUser");
+        currentUser.setUserLastLogin(new Date());
+        userDao.saveAndFlush(currentUser);
+        request.getSession().removeAttribute("currentUser");
+    }
+
+    public User register(User user) throws Exception {
+        if (isExisted(user.getUserName())) {
             throw new Exception(USER_EXISTENCE_EXCEPTION);
         }
-        user = userDao.save(user);
-        return user;
+        return userDao.save(user);
     }
 
     public User getUserDetailsById(Integer userId) {
-        User user = userDao.findOne(userId);
-        return user;
+        return userDao.findOne(userId);
     }
 
 }

@@ -8,7 +8,7 @@
     <#if errorMessage?? >
         <h1>${errorMessage}</h1>
     </#if>
-    <form id="loginForm" action="javascript:void();" method="post">
+    <form id="loginForm" action="/loginAction.html" method="post">
         <input name="userName" type="text" placeholder="用户名" required="required" checked="checked" />
         <input name="userPassword" type="password" placeholder="密码" required="required" />
         <input id="loginButton" type="submit" value="登录" />
