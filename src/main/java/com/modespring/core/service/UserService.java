@@ -10,15 +10,11 @@ public interface UserService {
 
     Boolean isExisted(String userName);
 
-    Boolean isLogged(HttpSession session);
-
     User login(String userName, String userPassword) throws Exception;
 
     void logout(HttpSession session);
 
-    void registerFormValidate(String userName, String userPassword, String confirmPassword, String userEmail) throws Exception;
-
-    void register(String userName, String userPassword, String userEmail) throws Exception;
+    void register(User user) throws Exception;
 
     User getUserDetailsById(Integer userId);
 }
