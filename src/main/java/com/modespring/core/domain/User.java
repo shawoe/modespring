@@ -1,8 +1,7 @@
 package com.modespring.core.domain;
 
-import static com.modespring.core.common.DomainDefaultValue.*;
 import com.modespring.core.domain.bean.UserBean;
-import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.Date;
 
 /**
@@ -13,13 +12,10 @@ public class User extends UserBean {
 
     public User() {
         Date date = new Date();
-        this.setUserRegisterDate(date);
-        this.setUserLastLogin(date);
-        this.setUserName(USER_DEFAULT_NAME);
-        this.setUserPassword(USER_DEFAULT_PASSWORD);
-        this.setUserAvatar(USER_DEFAULT_AVATAR);
-        this.setUserCertification(USER_DEFAULT_CERTIFICATION);
-        this.setUserFrozen(USER_DEFAULT_FROZEN);
+        this.setRegisterDate(date);
+        this.setLastLogin(date);
+        this.setCertification(false);
+        this.setFrozen(false);
     }
 
 }

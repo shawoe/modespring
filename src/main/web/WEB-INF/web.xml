@@ -17,7 +17,7 @@
 
     <servlet-mapping>
         <servlet-name>framework</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
     <context-param>

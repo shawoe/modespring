@@ -1,5 +1,6 @@
 package com.modespring.core.domain.bean;
 
+import com.modespring.core.domain.Person;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -7,90 +8,112 @@ import java.util.Date;
  * Created by Shawoe on 2015/4/17.
  */
 @MappedSuperclass
-public abstract class UserBean extends BaseBean {
+public abstract class UserBean {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
-    private String userName;
-    private String userPassword;
-    private String userEmail;
-    private String userAvatar;
-    private Date userRegisterDate;
-    private Date userLastLogin;
-    private Boolean userCertification;
-    private Boolean userFrozen;
+    private Integer id;
 
-    public Integer getUserId() {
-        return userId;
+    @Column(unique = true, nullable = false)
+    private String username;
+
+    private String password;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    private String avatar;
+
+    @OneToOne
+    @JoinColumn
+    private Person contacts;
+
+    private Date registerDate;
+
+    private Date lastLogin;
+
+    private Boolean certification;
+
+    private Boolean frozen;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getUserAvatar() {
-        return userAvatar;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setUserAvatar(String userAvatar) {
-        this.userAvatar = userAvatar;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public Date getUserRegisterDate() {
-        return userRegisterDate;
+
+    public Person getContacts() {
+        return contacts;
     }
 
-    public void setUserRegisterDate(Date userRegisterDate) {
-        this.userRegisterDate = userRegisterDate;
+    public void setContacts(Person contacts) {
+        this.contacts = contacts;
     }
 
-    public Date getUserLastLogin() {
-        return userLastLogin;
+    public Date getRegisterDate() {
+        return registerDate;
     }
 
-    public void setUserLastLogin(Date userLastLogin) {
-        this.userLastLogin = userLastLogin;
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 
-    public Boolean getUserCertification() {
-        return userCertification;
+    public Date getLastLogin() {
+        return lastLogin;
     }
 
-    public void setUserCertification(Boolean userCertification) {
-        this.userCertification = userCertification;
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
     }
 
-    public Boolean getUserFrozen() {
-        return userFrozen;
+    public Boolean getCertification() {
+        return certification;
     }
 
-    public void setUserFrozen(Boolean userFrozen) {
-        this.userFrozen = userFrozen;
+    public void setCertification(Boolean certification) {
+        this.certification = certification;
     }
 
+    public Boolean getFrozen() {
+        return frozen;
+    }
+
+    public void setFrozen(Boolean frozen) {
+        this.frozen = frozen;
+    }
 }

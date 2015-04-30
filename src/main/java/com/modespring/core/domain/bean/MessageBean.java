@@ -8,74 +8,81 @@ import java.util.Date;
  * Created by Shawoe on 2015/4/17.
  */
 @MappedSuperclass
-public abstract class MessageBean extends BaseBean {
+public abstract class MessageBean {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer messageId;
-    private User messageSender;
-    private User messageAddressee;
-    private String messageTitle;
-    private String messageContent;
-    private Date messageSendTime;
-    private Boolean messageMarkRead;
+    private Integer id;
 
-    public MessageBean() {
+    @ManyToOne
+    @JoinColumn
+    private User sender;
+
+    @ManyToOne
+    @JoinColumn
+    private User addressee;
+
+    private String title;
+
+    private String content;
+
+    private Date sendTime;
+
+    private Boolean markRead;
+
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getMessageId() {
-        return messageId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setMessageId(Integer messageId) {
-        this.messageId = messageId;
+    public User getSender() {
+        return sender;
     }
 
-    public User getMessageSender() {
-        return messageSender;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
-    public void setMessageSender(User messageSender) {
-        this.messageSender = messageSender;
+    public User getAddressee() {
+        return addressee;
     }
 
-    public User getMessageAddressee() {
-        return messageAddressee;
+    public void setAddressee(User addressee) {
+        this.addressee = addressee;
     }
 
-    public void setMessageAddressee(User messageAddressee) {
-        this.messageAddressee = messageAddressee;
+    public String getTitle() {
+        return title;
     }
 
-    public String getMessageTitle() {
-        return messageTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setMessageTitle(String messageTitle) {
-        this.messageTitle = messageTitle;
+    public String getContent() {
+        return content;
     }
 
-    public String getMessageContent() {
-        return messageContent;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public void setMessageContent(String messageContent) {
-        this.messageContent = messageContent;
+    public Date getSendTime() {
+        return sendTime;
     }
 
-    public Date getMessageSendTime() {
-        return messageSendTime;
+    public void setSendTime(Date sendTime) {
+        this.sendTime = sendTime;
     }
 
-    public void setMessageSendTime(Date messageSendTime) {
-        this.messageSendTime = messageSendTime;
+    public Boolean getMarkRead() {
+        return markRead;
     }
 
-    public Boolean getMessageMarkRead() {
-        return messageMarkRead;
-    }
-
-    public void setMessageMarkRead(Boolean messageMarkRead) {
-        this.messageMarkRead = messageMarkRead;
+    public void setMarkRead(Boolean markRead) {
+        this.markRead = markRead;
     }
 }

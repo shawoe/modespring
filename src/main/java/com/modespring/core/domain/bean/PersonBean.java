@@ -7,93 +7,116 @@ import java.util.Date;
  * Created by Shawoe on 2015/4/17.
  */
 @MappedSuperclass
-public abstract class PersonBean extends BaseBean {
+public abstract class PersonBean {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer personId;
-    private String personName;
-    private String personEnglishName;
-    private String personAvatar;
-    private String personSex;
-    private String personEmail;
-    private Integer personPhone;
-    private Date personBirthday;
-    private Boolean personCertification;
+    private Integer id;
+    private String name;
+    private String englishName;
+    private String avatar;
+    private String sex;
+    private String address;
+    private Integer phone;
+    private Integer QQ;
+    private Integer weixin;
+    private Integer blog;
+    private Date birthday;
+    private Boolean certification;
 
-    public PersonBean() {
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getPersonId() {
-        return personId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
+    public String getName() {
+        return name;
     }
 
-    public String getPersonName() {
-        return personName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setPersonName(String personName) {
-        this.personName = personName;
+    public String getEnglishName() {
+        return englishName;
     }
 
-    public String getPersonEnglishName() {
-        return personEnglishName;
+    public void setEnglishName(String englishName) {
+        this.englishName = englishName;
     }
 
-    public void setPersonEnglishName(String personEnglishName) {
-        this.personEnglishName = personEnglishName;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public String getPersonAvatar() {
-        return personAvatar;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public void setPersonAvatar(String personAvatar) {
-        this.personAvatar = personAvatar;
+    public String getSex() {
+        return sex;
     }
 
-    public String getPersonSex() {
-        return personSex;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
-    public void setPersonSex(String personSex) {
-        this.personSex = personSex;
+    public String getAddress() {
+        return address;
     }
 
-    public Date getPersonBirthday() {
-        return personBirthday;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public void setPersonBirthday(Date personBirthday) {
-        this.personBirthday = personBirthday;
+    public Integer getPhone() {
+        return phone;
     }
 
-    public String getPersonEmail() {
-        return personEmail;
+    public void setPhone(Integer phone) {
+        this.phone = phone;
     }
 
-    public void setPersonEmail(String personEmail) {
-        this.personEmail = personEmail;
+    public Integer getQQ() {
+        return QQ;
     }
 
-    public Integer getPersonPhone() {
-        return personPhone;
+    public void setQQ(Integer QQ) {
+        this.QQ = QQ;
     }
 
-    public void setPersonPhone(Integer personPhone) {
-        this.personPhone = personPhone;
+    public Integer getWeixin() {
+        return weixin;
     }
 
-    public Boolean getPersonCertification() {
-        return personCertification;
+    public void setWeixin(Integer weixin) {
+        this.weixin = weixin;
     }
 
-    public void setPersonCertification(Boolean personCertification) {
-        this.personCertification = personCertification;
+    public Integer getBlog() {
+        return blog;
     }
 
+    public void setBlog(Integer blog) {
+        this.blog = blog;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Boolean getCertification() {
+        return certification;
+    }
+
+    public void setCertification(Boolean certification) {
+        this.certification = certification;
+    }
 }

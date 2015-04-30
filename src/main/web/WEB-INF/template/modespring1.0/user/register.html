@@ -5,14 +5,16 @@
     <title></title>
 </head>
 <body>
-    <#if errorMessage?? >
-        <h1>${errorMessage}</h1>
-    </#if>
-    <form id="registerForm" action="/user/register.html" method="post">
-        <input name="userName" type="text" placeholder="用户名" required="required" checked="checked" />
-        <input name="userPassword" type="password" placeholder="密码" required="required" />
-        <input name="confirmPassword" type="password" placeholder="确认密码" required="required" />
-        <input id="registerButton" type="submit" value="注册" />
-    </form>
+<#if errorMessage?? >
+    <h1>${errorMessage}</h1>
+</#if>
+<form id="J_RegisterForm" action="/user/register.html" method="post">
+    <input name="userName" type="text" placeholder="用户名" required="required" checked="checked"/>
+    <input name="userPassword" type="password" placeholder="密码" required="required"/>
+    <input name="confirmPassword" type="password" placeholder="确认密码" required="required"/>
+    <input name="userEmail" type="text" placeholder="邮箱" required="required"/>
+    <a href="javascript:void(0);" id="J_RegisterButton">注册</a>
+</form>
+
 </body>
 </html>

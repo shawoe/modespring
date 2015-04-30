@@ -6,7 +6,6 @@ import com.modespring.core.repository.UserDao;
 import com.modespring.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.Date;
 
@@ -21,38 +20,35 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     public Boolean isExisted(String userName) {
-        User user = userDao.findUserByUserName(userName);
+        User user = userDao.findByUserName(userName);
         return user != null;
     }
     public User login(String userName, String userPassword) throws Exception {
-        User user = userDao.findUserByUserName(userName);
+        User user = userDao.findByUserName(userName);
         if (user == null) {
             throw new Exception(USER_AUTHENTICATION_EXCEPTION);
-        } else if (!user.getUserPassword().equals(userPassword)) {
+        } else if (!user.getPassword().equals(userPassword)) {
             throw new Exception(USER_AUTHENTICATION_EXCEPTION);
-        } else if (user.getUserFrozen()) {
+        } else if (user.getFrozen()) {
             throw new Exception(USER_FROZEN_EXCEPTION);
         }
         return user;
     }
 
-    public void logout(HttpSession session) {
-        User currentUser = (User) session.getAttribute("currentUser");
-        currentUser.setUserLastLogin(new Date());
-        userDao.saveAndFlush(currentUser);
-        session.removeAttribute("currentUser");
+    public void logout(User user) {
+        user.setLastLogin(new Date());
+        userDao.saveAndFlush(user);
     }
 
-    public void register(User user) throws Exception {
-        if (isExisted(user.getUserName())) {
+    public User register(User user) throws Exception {
+        if (isExisted(user.getUsername())) {
             throw new Exception(USER_EXISTENCE_EXCEPTION);
-        } else {
-            userDao.save(user);
         }
+        return  userDao.save(user);
     }
 
-    public User getUserDetailsById(Integer userId) {
-        return userDao.findOne(userId);
+    public User editDetails(User user) {
+        return userDao.saveAndFlush(user);
     }
 
 }

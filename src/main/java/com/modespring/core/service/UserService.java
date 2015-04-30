@@ -1,20 +1,20 @@
 package com.modespring.core.service;
 
 import com.modespring.core.domain.User;
-import javax.servlet.http.HttpSession;
 
 /**
  * Created by Shawoe on 2015/4/26.
  */
 public interface UserService {
 
-    Boolean isExisted(String userName);
+    Boolean isExisted(String username);
 
-    User login(String userName, String userPassword) throws Exception;
+    User login(String username, String password) throws Exception;
 
-    void logout(HttpSession session);
+    void logout(User user);
 
-    void register(User user) throws Exception;
+    User register(User user) throws Exception;
 
-    User getUserDetailsById(Integer userId);
+    User editDetails(User user);
+
 }

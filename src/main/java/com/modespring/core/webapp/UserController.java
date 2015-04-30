@@ -3,11 +3,11 @@ package com.modespring.core.webapp;
 import static com.modespring.core.common.ExceptionMessage.*;
 import com.modespring.core.domain.User;
 import com.modespring.core.service.UserService;
+import com.modespring.core.common.WebsiteContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 
@@ -22,70 +22,118 @@ public class UserController {
     public UserService userService;
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    public ModelAndView login(ModelAndView modelAndView, HttpSession session) {
+    public WebsiteContext login(WebsiteContext website, HttpSession session) {
         if (session.getAttribute("currentUser") != null) {
-            modelAndView.setViewName("redirect:memberCenter.html");
+            website.setViewName("redirect:memberCenter.html");
         }
-        return modelAndView;
+        return website;
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public ModelAndView loginAction(ModelAndView modelAndView, HttpSession session, User user) {
+    public WebsiteContext loginAction(WebsiteContext website, HttpSession session, User user) {
         if (session.getAttribute("currentUser") != null) {
-            modelAndView.setViewName("redirect:memberCenter.html");
+            website.setViewName("redirect:memberCenter.html");
         } else try {
-            user = userService.login(user.getUserName(), user.getUserPassword());
+            user = userService.login(user.getUsername(), user.getPassword());
             session.setAttribute("currentUser", user);
-            modelAndView.setViewName("redirect:memberCenter.html");
+            website.setViewName("redirect:memberCenter.html");
         } catch (Exception e) {
-            modelAndView.addObject("errorMessage", e.getMessage());
+            website.addObject("errorMessage", e.getMessage());
         }
-        return modelAndView;
+        return website;
     }
 
     @RequestMapping(value = "memberCenter", method = RequestMethod.GET)
-    public ModelAndView memberCenter(ModelAndView modelAndView, HttpSession session) {
-        if (session.getAttribute("currentUser") != null) {
-            modelAndView.addObject("user", session.getAttribute("currentUser"));
-        } else {
-            modelAndView.addObject("errorMessage", USER_NOT_LOGIN_EXCEPTION);
-            modelAndView.setViewName("/error");
+    public WebsiteContext memberCenter(WebsiteContext website, HttpSession session) {
+        if (session.getAttribute("currentUser") == null) {
+            website.addObject("errorMessage", USER_NOT_LOGIN_EXCEPTION);
+            website.setViewName("/error");
         }
-        return modelAndView;
+        return website;
     }
 
     @RequestMapping(value = "logout", method = RequestMethod.GET)
-    public ModelAndView logout(ModelAndView modelAndView, HttpSession session) {
+    public WebsiteContext logout(WebsiteContext website, HttpSession session) {
         if (session.getAttribute("currentUser") != null) {
-            userService.logout(session);
-            modelAndView.setViewName("redirect:login.html");
+            User currentUser = (User) session.getAttribute("currentUser");
+            userService.logout(currentUser);
+            session.removeAttribute("currentUser");
+            website.setViewName("redirect:login.html");
         } else {
-            modelAndView.addObject("errorMessage", USER_NOT_LOGIN_EXCEPTION);
-            modelAndView.setViewName("/error");
+            website.addObject("errorMessage", USER_NOT_LOGIN_EXCEPTION);
+            website.setViewName("/error");
         }
-        return modelAndView;
+        return website;
     }
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
-    public ModelAndView register(ModelAndView modelAndView, HttpSession session) {
+    public WebsiteContext register(WebsiteContext website, HttpSession session) {
         if (session.getAttribute("currentUser") != null) {
-            modelAndView.addObject("errorMessage", USER_LOGGED_EXCEPTION);
-            modelAndView.setViewName("/error");
+            website.addObject("errorMessage", USER_LOGGED_EXCEPTION);
+            website.setViewName("/error");
         }
-        return modelAndView;
+        return website;
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public ModelAndView registerAction(ModelAndView modelAndView, HttpSession session, User user, String confirmPassword) {
+    public WebsiteContext registerAction(WebsiteContext website, HttpSession session, User user) {
         if (session.getAttribute("currentUser") != null) {
-            modelAndView.addObject("errorMessage", USER_LOGGED_EXCEPTION);
-            modelAndView.setViewName("/error");
+            website.addObject("errorMessage", USER_LOGGED_EXCEPTION);
+            website.setViewName("/error");
         } else try {
             userService.register(user);
-            modelAndView.setViewName("redirect:login.html");
+            website.setViewName("redirect:login.html");
         } catch (Exception e) {
-            modelAndView.addObject("errorMessage", e.getMessage());
+            website.addObject("errorMessage", e.getMessage());
         }
-        return modelAndView;
+        return website;
+    }
+
+    @RequestMapping(value = "edit", method = RequestMethod.GET)
+    public WebsiteContext edit(WebsiteContext website, HttpSession session) {
+        if (session.getAttribute("currentUser") == null) {
+            website.addObject("errorMessage", USER_NOT_LOGIN_EXCEPTION);
+            website.setViewName("/error");
+        }
+        return website;
+    }
+
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public WebsiteContext editAction(WebsiteContext website, HttpSession session, User user) {
+        if (session.getAttribute("currentUser") == null) {
+            website.addObject("errorMessage", USER_NOT_LOGIN_EXCEPTION);
+            website.setViewName("/error");
+        } else try {
+            userService.editDetails(user);
+            website.setViewName("redirect:memberCenter.html");
+        } catch (Exception e) {
+            website.addObject("errorMessage", e.getMessage());
+        }
+        return website;
+    }
+
+    @RequestMapping(value = "changePassword", method = RequestMethod.GET)
+    public WebsiteContext changePassword(WebsiteContext website, HttpSession session) {
+        if (session.getAttribute("currentUser") == null) {
+            website.addObject("errorMessage", USER_NOT_LOGIN_EXCEPTION);
+            website.setViewName("/error");
+        }
+        return website;
+    }
+
+    @RequestMapping(value = "changePassword", method = RequestMethod.POST)
+    public WebsiteContext changePasswordAction(WebsiteContext website, HttpSession session, User user, String newPassword) {
+        if (session.getAttribute("currentUser") == null) {
+            website.addObject("errorMessage", USER_NOT_LOGIN_EXCEPTION);
+            website.setViewName("/error");
+        } else try {
+            user = userService.login(user.getUsername(), user.getPassword());
+            user.setPassword(newPassword);
+            userService.editDetails(user);
+            website.setViewName("redirect:memberCenter.html");
+        } catch (Exception e) {
+            website.addObject("errorMessage", e.getMessage());
+        }
+        return website;
     }
 }
