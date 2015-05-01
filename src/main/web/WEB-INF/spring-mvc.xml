@@ -45,7 +45,7 @@
     </bean>
 
     <!-- 使Spring支持自动检测组件，如注解的Controller -->
-    <context:component-scan base-package="com.modespring.*.webapp"/>
+    <context:component-scan base-package="com.modespring.*.webapp,com.modespring.core.common"/>
     <mvc:annotation-driven/>
 
     <!--<bean id="viewResolver"-->
