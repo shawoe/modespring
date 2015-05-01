@@ -11,7 +11,7 @@ public interface UserService {
 
     public User login(String username, String password) throws Exception;
 
-    public void logout(User user);
+    public void logout(String username);
 
     public User register(User user) throws Exception;
 

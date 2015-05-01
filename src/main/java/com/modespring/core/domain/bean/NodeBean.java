@@ -8,11 +8,7 @@ import javax.persistence.*;
  * Created by Shawoe on 2015/4/30.
  */
 @MappedSuperclass
-public abstract class NodeBean {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public abstract class NodeBean  extends BaseBean {
 
     @Column(unique = true, nullable = false)
     private String title;
@@ -20,14 +16,6 @@ public abstract class NodeBean {
     @ManyToOne
     @JoinColumn
     private Node parentNode;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;

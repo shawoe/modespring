@@ -1,6 +1,8 @@
 package com.modespring.core.domain.bean;
 
 import com.modespring.core.domain.Person;
+import com.modespring.core.domain.Role;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,11 +10,7 @@ import java.util.Date;
  * Created by Shawoe on 2015/4/17.
  */
 @MappedSuperclass
-public abstract class UserBean {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public abstract class UserBean  extends BaseBean {
 
     @Column(unique = true, nullable = false)
     private String username;
@@ -23,6 +21,10 @@ public abstract class UserBean {
     private String email;
 
     private String avatar;
+
+    @ManyToOne
+    @JoinColumn
+    private Role role;
 
     @OneToOne
     @JoinColumn
@@ -35,14 +37,6 @@ public abstract class UserBean {
     private Boolean certification;
 
     private Boolean frozen;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -76,6 +70,13 @@ public abstract class UserBean {
         this.avatar = avatar;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public Person getContacts() {
         return contacts;

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpSession;
 
 
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping(value = "user")
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     public UserService userService;
@@ -36,7 +35,8 @@ public class UserController {
             modelAndView.setViewName("redirect:memberCenter.html");
         } else try {
             user = userService.login(user.getUsername(), user.getPassword());
-            session.setAttribute("currentUser", user);
+            session.setAttribute("currentUser", user.getUsername());
+            session.setAttribute("currentPower", user.getRole().getPower());
             modelAndView.setViewName("redirect:memberCenter.html");
         } catch (Exception e) {
             modelAndView.addObject("errorMessage", e.getMessage());
@@ -56,9 +56,10 @@ public class UserController {
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public ModelAndView logout(ModelAndView modelAndView, HttpSession session) {
         if (session.getAttribute("currentUser") != null) {
-            User currentUser = (User) session.getAttribute("currentUser");
+            String currentUser = (String) session.getAttribute("currentUser");
             userService.logout(currentUser);
             session.removeAttribute("currentUser");
+            session.removeAttribute("currentPower");
             modelAndView.setViewName("redirect:login.html");
         } else {
             modelAndView.addObject("errorMessage", USER_NOT_LOGIN_EXCEPTION);

@@ -8,11 +8,7 @@ import java.util.Date;
  * Created by Shawoe on 2015/4/17.
  */
 @MappedSuperclass
-public abstract class MessageBean {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public abstract class MessageBean extends BaseBean {
 
     @ManyToOne
     @JoinColumn
@@ -28,15 +24,7 @@ public abstract class MessageBean {
 
     private Date sendTime;
 
-    private Boolean markRead;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private Boolean readMark;
 
     public User getSender() {
         return sender;
@@ -78,11 +66,11 @@ public abstract class MessageBean {
         this.sendTime = sendTime;
     }
 
-    public Boolean getMarkRead() {
-        return markRead;
+    public Boolean getReadMark() {
+        return readMark;
     }
 
-    public void setMarkRead(Boolean markRead) {
-        this.markRead = markRead;
+    public void setReadMark(Boolean readMark) {
+        this.readMark = readMark;
     }
 }

@@ -9,11 +9,7 @@ import java.util.Date;
  * Created by Shawoe on 2015/4/30.
  */
 @MappedSuperclass
-public abstract class ArticleBean {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public abstract class ArticleBean  extends BaseBean {
 
     private String title;
 
@@ -26,14 +22,6 @@ public abstract class ArticleBean {
     @ManyToOne
     @JoinColumn
     private Node column;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;

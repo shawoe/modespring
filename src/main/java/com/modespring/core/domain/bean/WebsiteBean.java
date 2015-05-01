@@ -6,25 +6,13 @@ import javax.persistence.*;
  * Created by Shawoe on 2015/4/30.
  */
 @MappedSuperclass
-public abstract class WebsiteBean {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public abstract class WebsiteBean extends BaseBean {
 
     @Column(unique = true, nullable = false)
     private String title;
 
     @Column(unique = true, nullable = false)
     private Boolean open;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;

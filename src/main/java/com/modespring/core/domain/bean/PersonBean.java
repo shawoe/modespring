@@ -7,11 +7,8 @@ import java.util.Date;
  * Created by Shawoe on 2015/4/17.
  */
 @MappedSuperclass
-public abstract class PersonBean {
+public abstract class PersonBean  extends BaseBean {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private String name;
     private String englishName;
     private String avatar;
@@ -23,14 +20,6 @@ public abstract class PersonBean {
     private Integer blog;
     private Date birthday;
     private Boolean certification;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

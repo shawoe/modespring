@@ -35,7 +35,8 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    public void logout(User user) {
+    public void logout(String username) {
+        User user =  userDao.findByUserName(username);
         user.setLastLogin(new Date());
         userDao.saveAndFlush(user);
     }
