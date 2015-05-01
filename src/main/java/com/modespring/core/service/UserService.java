@@ -7,14 +7,14 @@ import com.modespring.core.domain.User;
  */
 public interface UserService {
 
-    Boolean isExisted(String username);
+    public Boolean isExisted(String username);
 
-    User login(String username, String password) throws Exception;
+    public User login(String username, String password) throws Exception;
 
-    void logout(User user);
+    public void logout(User user);
 
-    User register(User user) throws Exception;
+    public User register(User user) throws Exception;
 
-    User editDetails(User user);
+    public User updateDetails(User user);
 
 }

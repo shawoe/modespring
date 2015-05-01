@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
         return  userDao.save(user);
     }
 
-    public User editDetails(User user) {
+    public User updateDetails(User user) {
         return userDao.saveAndFlush(user);
     }
 
