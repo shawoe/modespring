@@ -1,11 +1,7 @@
 package com.modespring.core.common;
 
-import com.modespring.core.domain.Node;
-import com.modespring.core.domain.Role;
-import com.modespring.core.domain.User;
-import com.modespring.core.repository.NodeDao;
-import com.modespring.core.repository.RoleDao;
-import com.modespring.core.repository.UserDao;
+import com.modespring.core.domain.*;
+import com.modespring.core.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,13 +20,20 @@ public class WebsiteInitialize {
     private static boolean isFirstOpen = true;
 
     @Autowired
+    private RoleDao roleDao;
+
+    @Autowired
     private UserDao userDao;
 
     @Autowired
     private NodeDao nodeDao;
 
     @Autowired
-    private RoleDao roleDao;
+    private FieldDao fieldDao;
+
+    @Autowired
+    private ArticleDao articleDao;
+
 
     @RequestMapping(value = "error", method = RequestMethod.GET)
     public ModelAndView init(ModelAndView modelAndView) {
@@ -53,27 +56,48 @@ public class WebsiteInitialize {
             user.setUsername("admin");
             user.setPassword("admin");
             user.setEmail("admin@modespring.com");
+            user.setRole(role_admin);
             userDao.save(user);
 
             // save node
-            List<Node> nodeList = new ArrayList<Node>();
+            List<Node> parent_list = new ArrayList<Node>();
             for (int i = 0; i < 3; i++) {
-                Node node = new Node();
-                node.setTitle("新栏目" + i);
-                nodeList.add(node);
-            }
-            List<Node> parentList = nodeDao.save(nodeList);
-            nodeDao.flush();
-            List<Node> childList = new ArrayList<Node>();
-            for (int j = 0; j < 3; j++) {
-                for (int k = 0; k < 2; k++) {
-                    Node childNode = new Node();
-                    childNode.setTitle("子栏目" + j + k);
-                    childNode.setParentNode(parentList.get(j));
-                    childList.add(childNode);
+                List<Node> node_list = new ArrayList<Node>();
+                for (int j = 0; j < 2; j++) {
+                    Node child_node = new Node();
+                    child_node.setTitle("新栏目" + j);
+                    node_list.add(child_node);
                 }
+                List<Node> child_list = nodeDao.save(node_list);
+                Node parent_node = new Node();
+                parent_node.setTitle("栏目分类" + i);
+                parent_node.setChildNodelist(child_list);
+                parent_list.add(parent_node);
             }
-            nodeDao.save(childList);
+            nodeDao.save(parent_list);
+            nodeDao.flush();
+
+            // save field
+            List<Field> field_list = new ArrayList<Field>();
+            for (int i = 0; i < 3; i++) {
+                Field field = new Field();
+                field.setName("新增字段" + i);
+                field_list.add(field);
+            }
+            List<Field> fields = fieldDao.save(field_list);
+            fieldDao.flush();
+
+            // save article
+            List<Article> article_list = new ArrayList<Article>();
+            for (int i = 0; i < 5; i++) {
+                Article article = new Article();
+                article.setTitle("新文章" + i);
+                article.setFieldList(fields);
+                article_list.add(article);
+            }
+            articleDao.save(article_list);
+
+
 
 
 

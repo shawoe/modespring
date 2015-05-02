@@ -1,9 +1,11 @@
 package com.modespring.core.domain.bean;
 
+import com.modespring.core.domain.Field;
 import com.modespring.core.domain.Node;
 import com.modespring.core.domain.User;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Shawoe on 2015/4/30.
@@ -15,6 +17,8 @@ public abstract class ArticleBean  extends BaseBean {
 
     private Date publishDate;
 
+    private String content;
+
     @ManyToOne
     @JoinColumn
     private User author;
@@ -22,6 +26,9 @@ public abstract class ArticleBean  extends BaseBean {
     @ManyToOne
     @JoinColumn
     private Node column;
+
+    @ManyToMany
+    private List<Field> fieldList;
 
     public String getTitle() {
         return title;
@@ -54,4 +61,21 @@ public abstract class ArticleBean  extends BaseBean {
     public void setColumn(Node column) {
         this.column = column;
     }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public List<Field> getFieldList() {
+        return fieldList;
+    }
+
+    public void setFieldList(List<Field> fieldList) {
+        this.fieldList = fieldList;
+    }
+
 }

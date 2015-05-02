@@ -3,6 +3,7 @@ package com.modespring.core.domain.bean;
 import com.modespring.core.domain.Node;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Shawoe on 2015/4/30.
@@ -10,12 +11,12 @@ import javax.persistence.*;
 @MappedSuperclass
 public abstract class NodeBean  extends BaseBean {
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String title;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn
-    private Node parentNode;
+    private List<Node> childNodelist;
 
     public String getTitle() {
         return title;
@@ -25,11 +26,11 @@ public abstract class NodeBean  extends BaseBean {
         this.title = title;
     }
 
-    public Node getParentNode() {
-        return parentNode;
+    public List<Node> getChildNodelist() {
+        return childNodelist;
     }
 
-    public void setParentNode(Node parentNode) {
-        this.parentNode = parentNode;
+    public void setChildNodelist(List<Node> childNodelist) {
+        this.childNodelist = childNodelist;
     }
 }
