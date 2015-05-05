@@ -5,24 +5,127 @@
     <title></title>
 </head>
 <body>
+    <h2>创建栏目</h2>
+    <form id="newNodeForm" action="/admin/node.html" method="post">
+        <select name="parentNode.id">
+            <#list nodeList as node>
+                <#if node.level==0>
+                    <option value="${node.id}">${node.title}</option>
+                </#if>
+                <#list nodeList as childNode>
+                    <#if childNode.level==1 && childNode.parentNode.id==node.id>
+                        <option value="${childNode.id}">${childNode.title}</option>
+                    </#if>
+                </#list>
+            </#list>
+        </select>
+        <input type="hidden" name="_method" value="put" />
+        <input name="title" type="text" />
+        <input type="submit" value="创建栏目" />
+    </form>
+
     <table>
-        <tr><th>ID</th><th>栏目名称</th></tr>
-        <#list nodeList as node>
-            <#if !node.parentNode??>
-                <tr>
-                    <td>${node.id}</td>
-                    <td><input name="title" type="text" value="${node.title}"/></td>
-                </tr>
-            </#if>
-            <#list nodeList as childNode>
-                <#if childNode.parentNode?? && childNode.parentNode.id==node.id>
+        <tr><th>删除</th><th>ID</th><th>栏目名称</th><th>所属栏目</th></tr>
+        <form id="nodeListForm" action="/admin/node.html" method="post">
+
+            <!-- 根栏目 -->
+            <#list nodeList as rootNode>
+                <#if rootNode.level==0>
                     <tr>
-                        <td>${childNode.id}</td>
-                        <td><input name="title" type="text" value="${childNode.title}"/></td>
+                        <td><input type="checkbox" name="delete" value="${rootNode.id}"/></td>
+                        <td><input name="id" type="text" readonly="readonly" value="${rootNode.id}"/></td>
+                        <td><input name="title" type="text" value="${rootNode.title}"/></td>
+                        <td>
+                            <select name="parentId">
+                                <option value="-1">网站根目录</option>
+                            </select>
+                        </td>
                     </tr>
                 </#if>
             </#list>
-        </#list>
+
+            <!-- 分类栏目 -->
+            <#list nodeList as node>
+                <#if node.level==1>
+                    <tr>
+                        <td><input type="checkbox" name="delete" value="${node.id}"/></td>
+                        <td><input name="id" type="text" readonly="readonly" value="${node.id}"/></td>
+                        <td><input name="title" type="text" value="${node.title}"/></td>
+                        <td>
+                            <select name="parentId">
+                                <#list nodeList as rootNode>
+                                    <#if rootNode.level==0>
+                                        <option value="${rootNode.id}">${rootNode.title}</option>
+                                    </#if>
+                                    <#if rootNode.level==1 && rootNode.id==node.parentNode.id>
+                                        <option selected="selected" value="${rootNode.id}">${rootNode.title}</option>
+                                    </#if>
+                                    <#if rootNode.level==1 && rootNode.id!=node.parentNode.id>
+                                        <option value="${rootNode.id}">${rootNode.title}</option>
+                                    </#if>
+                                </#list>
+                            </select>
+                        </td>
+                    </tr>
+                </#if>
+
+                <!-- 子栏目 -->
+                <#list nodeList as childNode>
+                    <#if childNode.level==2 && childNode.parentNode.id==node.id>
+                        <tr>
+                            <td><input type="checkbox" name="delete" value="${childNode.id}"/></td>
+                            <td><input name="id" type="text" readonly="readonly" value="${childNode.id}"/></td>
+                            <td><input name="title" type="text" value="${childNode.title}"/></td>
+                            <td>
+                                <select name="parentId">
+                                    <#list nodeList as parentNode>
+                                        <#if parentNode.level==0>
+                                            <option value="${parentNode.id}">${parentNode.title}</option>
+                                        </#if>
+                                        <#if parentNode.level==1 && parentNode.id==childNode.parentNode.id>
+                                            <option selected="selected" value="${parentNode.id}">${parentNode.title}</option>
+                                        </#if>
+                                        <#if parentNode.level==1 && parentNode.id!=childNode.parentNode.id>
+                                            <option value="${parentNode.id}">${parentNode.title}</option>
+                                        </#if>
+                                    </#list>
+                                </select>
+                            </td>
+                        </tr>
+                    </#if>
+                </#list>
+            </#list>
+
+            <!-- 隐藏栏目 -->
+            <tr><th>删除</th><th>ID</th><th>隐藏栏目</th><th>所属栏目</th></tr>
+            <#list nodeList as hiddenNode>
+                <#if hiddenNode.level==3>
+                    <tr>
+                        <td><input type="checkbox" name="delete" value="${hiddenNode.id}"/></td>
+                        <td><input name="id" type="text" value="${hiddenNode.id}"/></td>
+                        <td><input name="title" type="text" value="${hiddenNode.title}"/></td>
+                        <td>
+                            <select name="parentId">
+                                <#list nodeList as parentNode>
+                                    <!--<#if parentNode.level==0>-->
+                                        <!--<option value="${parentNode.id}">${parentNode.title}</option>-->
+                                    <!--</#if>-->
+                                    <#if parentNode.level==2 && parentNode.id==hiddenNode.parentNode.id>
+                                        <option selected="selected" value="${parentNode.id}">${parentNode.title}</option>
+                                    </#if>
+                                    <#if parentNode.level==2 && parentNode.id!=hiddenNode.parentNode.id>
+                                        <option value="${parentNode.id}">${parentNode.title}</option>
+                                    </#if>
+                                </#list>
+                            </select>
+                        </td>
+                    </tr>
+                </#if>
+            </#list>
+
+            <tr><td></td><td></td><td></td><td><input type="submit" value="全部保存" /></td></tr>
+        </form>
     </table>
+
 </body>
 </html>

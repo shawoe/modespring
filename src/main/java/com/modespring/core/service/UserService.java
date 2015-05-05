@@ -15,6 +15,8 @@ public interface UserService {
 
     public User register(User user) throws Exception;
 
+    public User getDetailsByUsername(String username);
+
     public User updateDetails(User user);
 
 }

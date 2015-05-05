@@ -14,9 +14,12 @@ public abstract class NodeBean  extends BaseBean {
     @Column(nullable = false)
     private String title;
 
-    @OneToMany
+    @Column(nullable = false)
+    private Integer level;
+
+    @ManyToOne
     @JoinColumn
-    private List<Node> childNodelist;
+    private Node parentNode;
 
     public String getTitle() {
         return title;
@@ -26,11 +29,19 @@ public abstract class NodeBean  extends BaseBean {
         this.title = title;
     }
 
-    public List<Node> getChildNodelist() {
-        return childNodelist;
+    public Integer getLevel() {
+        return level;
     }
 
-    public void setChildNodelist(List<Node> childNodelist) {
-        this.childNodelist = childNodelist;
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Node getParentNode() {
+        return parentNode;
+    }
+
+    public void setParentNode(Node parentNode) {
+        this.parentNode = parentNode;
     }
 }

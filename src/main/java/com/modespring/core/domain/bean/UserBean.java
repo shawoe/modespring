@@ -28,7 +28,7 @@ public abstract class UserBean  extends BaseBean {
 
     @OneToOne
     @JoinColumn
-    private Person contacts;
+    private Person linkman;
 
     private Date registerDate;
 
@@ -78,12 +78,12 @@ public abstract class UserBean  extends BaseBean {
         this.role = role;
     }
 
-    public Person getContacts() {
-        return contacts;
+    public Person getLinkman() {
+        return linkman;
     }
 
-    public void setContacts(Person contacts) {
-        this.contacts = contacts;
+    public void setLinkman(Person linkman) {
+        this.linkman = linkman;
     }
 
     public Date getRegisterDate() {

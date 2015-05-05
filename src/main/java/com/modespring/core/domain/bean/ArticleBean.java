@@ -28,6 +28,7 @@ public abstract class ArticleBean  extends BaseBean {
     private Node column;
 
     @ManyToMany
+    @JoinTable
     private List<Field> fieldList;
 
     public String getTitle() {

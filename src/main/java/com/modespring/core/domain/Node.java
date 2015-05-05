@@ -8,4 +8,13 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Node extends NodeBean {
+
+    public Node() {
+        this.setLevel(0);
+    }
+
+    public Node(Node parentNode) {
+        this.setLevel(parentNode.getLevel() + 1);
+        this.setParentNode(parentNode);
+    }
 }

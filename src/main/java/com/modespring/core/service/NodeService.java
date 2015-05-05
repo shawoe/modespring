@@ -14,6 +14,10 @@ public interface NodeService {
 
     public Node update(Node node);
 
+    public void updateALL(List<Node> nodeList);
+
+    public Node getOne(Integer id);
+
     public List<Node> getAll();
 
 }

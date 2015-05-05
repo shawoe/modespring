@@ -12,9 +12,9 @@ import org.springframework.stereotype.Repository;
 public interface UserDao extends JpaRepository<User, Integer> {
 
     @Query("SELECT user FROM User user WHERE user.username = ?1")
-    public User findByUserName(String userName);
+    public User findByUsername(String usermame);
 
     @Query("SELECT user FROM User user WHERE user.email = ?1")
-    public User findByUserEmail(String userEmail);
+    public User findByEmail(String email);
 
 }

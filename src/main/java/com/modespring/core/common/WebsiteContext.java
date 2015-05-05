@@ -23,6 +23,18 @@ public class WebsiteContext {
     private Website context;
     private List<Node> nodeList;
 
+    @Autowired
+    NodeDao nodeDao;
+
+    @Autowired
+    public WebsiteContext(NodeDao nodeDao) {
+        this.nodeList = nodeDao.findAll();
+    }
+
+    public void flush() {
+        this.nodeList = nodeDao.findAll();
+    }
+
     public Website getContext() {
         return context;
     }
@@ -38,17 +50,4 @@ public class WebsiteContext {
     public void setNodeList(List<Node> nodeList) {
         this.nodeList = nodeList;
     }
-
-//    @Autowired
-//    public WebsiteContext() {
-//
-//    }
-
-    @Autowired
-    public WebsiteContext(NodeDao nodeDao) {
-//        super();
-        this.nodeList = nodeDao.findAll();
-//        this.addObject("nodeList", nodeList);
-    }
-
 }

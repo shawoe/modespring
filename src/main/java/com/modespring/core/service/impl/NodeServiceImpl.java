@@ -18,6 +18,8 @@ public class NodeServiceImpl implements NodeService {
     NodeDao nodeDao;
 
     public Node create(Node node) {
+        Node parentNode = nodeDao.findOne(node.getParentNode().getId());
+        node.setLevel(parentNode.getLevel() + 1);
         return nodeDao.save(node);
     }
 
@@ -27,6 +29,13 @@ public class NodeServiceImpl implements NodeService {
 
     public Node update(Node node) {
         return nodeDao.saveAndFlush(node);
+    }
+    public void updateALL(List<Node> nodeList) {
+        nodeDao.save(nodeList);
+    }
+
+    public Node getOne(Integer id){
+        return nodeDao.findOne(id);
     }
 
     public List<Node> getAll() {

@@ -20,6 +20,9 @@ public class WebsiteInitialize {
     private static boolean isFirstOpen = true;
 
     @Autowired
+    protected WebsiteContext Context;
+
+    @Autowired
     private RoleDao roleDao;
 
     @Autowired
@@ -60,22 +63,25 @@ public class WebsiteInitialize {
             userDao.save(user);
 
             // save node
+            Node root_node = new Node();
+            root_node.setTitle("首页");
+            nodeDao.save(root_node);
             List<Node> parent_list = new ArrayList<Node>();
+            List<Node> child_list = new ArrayList<Node>();
             for (int i = 0; i < 3; i++) {
-                List<Node> node_list = new ArrayList<Node>();
-                for (int j = 0; j < 2; j++) {
-                    Node child_node = new Node();
-                    child_node.setTitle("新栏目" + j);
-                    node_list.add(child_node);
-                }
-                List<Node> child_list = nodeDao.save(node_list);
-                Node parent_node = new Node();
+                Node parent_node = new Node(root_node);
                 parent_node.setTitle("栏目分类" + i);
-                parent_node.setChildNodelist(child_list);
                 parent_list.add(parent_node);
+                for (int j = 0; j < 2; j++) {
+                    Node child_node = new Node(parent_node);
+                    child_node.setTitle("新栏目" + j);
+                    child_list.add(child_node);
+                }
             }
             nodeDao.save(parent_list);
-            nodeDao.flush();
+            nodeDao.save(child_list);
+            Context.flush();
+
 
             // save field
             List<Field> field_list = new ArrayList<Field>();
@@ -85,7 +91,6 @@ public class WebsiteInitialize {
                 field_list.add(field);
             }
             List<Field> fields = fieldDao.save(field_list);
-            fieldDao.flush();
 
             // save article
             List<Article> article_list = new ArrayList<Article>();

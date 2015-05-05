@@ -20,11 +20,11 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     public Boolean isExisted(String userName) {
-        User user = userDao.findByUserName(userName);
+        User user = userDao.findByUsername(userName);
         return user != null;
     }
     public User login(String userName, String userPassword) throws Exception {
-        User user = userDao.findByUserName(userName);
+        User user = userDao.findByUsername(userName);
         if (user == null) {
             throw new Exception(USER_AUTHENTICATION_EXCEPTION);
         } else if (!user.getPassword().equals(userPassword)) {
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public void logout(String username) {
-        User user =  userDao.findByUserName(username);
+        User user =  userDao.findByUsername(username);
         user.setLastLogin(new Date());
         userDao.saveAndFlush(user);
     }
@@ -46,6 +46,10 @@ public class UserServiceImpl implements UserService {
             throw new Exception(USER_EXISTENCE_EXCEPTION);
         }
         return  userDao.save(user);
+    }
+
+    public User getDetailsByUsername(String username) {
+        return userDao.findByUsername(username);
     }
 
     public User updateDetails(User user) {
