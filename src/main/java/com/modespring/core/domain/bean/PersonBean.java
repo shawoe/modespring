@@ -16,7 +16,7 @@ public abstract class PersonBean  extends BaseBean {
     private String address;
     private Integer phone;
     private Integer QQ;
-    private Integer weixin;
+    private Integer weChat;
     private Integer blog;
     private Date birthday;
     private Boolean certification;
@@ -77,12 +77,12 @@ public abstract class PersonBean  extends BaseBean {
         this.QQ = QQ;
     }
 
-    public Integer getWeixin() {
-        return weixin;
+    public Integer getWeChat() {
+        return weChat;
     }
 
-    public void setWeixin(Integer weixin) {
-        this.weixin = weixin;
+    public void setWeChat(Integer weChat) {
+        this.weChat = weChat;
     }
 
     public Integer getBlog() {

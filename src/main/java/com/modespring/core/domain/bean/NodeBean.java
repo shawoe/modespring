@@ -12,7 +12,9 @@ import java.util.List;
 public abstract class NodeBean  extends BaseBean {
 
     @Column(nullable = false)
-    private String title;
+    private String name;
+
+    private String url;
 
     @Column(nullable = false)
     private Integer level;
@@ -21,12 +23,12 @@ public abstract class NodeBean  extends BaseBean {
     @JoinColumn
     private Node parentNode;
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getLevel() {
@@ -35,6 +37,14 @@ public abstract class NodeBean  extends BaseBean {
 
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Node getParentNode() {

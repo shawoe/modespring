@@ -23,6 +23,9 @@ public class WebsiteInitialize {
     protected WebsiteContext Context;
 
     @Autowired
+    private PowerDao powerDao;
+
+    @Autowired
     private RoleDao roleDao;
 
     @Autowired
@@ -42,11 +45,19 @@ public class WebsiteInitialize {
     public ModelAndView init(ModelAndView modelAndView) {
         if (isFirstOpen) {
 
+            // save power
+            List<Power> powerList = new ArrayList<Power>();
+            Power power = new Power();
+            power.setName("栏目管理");
+            powerList.add(power);
+            powerDao.save(powerList);
+
             // save role
             List<Role> roleList = new ArrayList<Role>();
             Role role_admin = new Role();
             role_admin.setName("管理员");
             role_admin.setPower(100);
+            role_admin.setPowerList(powerList);
             roleList.add(role_admin);
             Role role_user = new Role();
             role_user.setName("注册用户");
@@ -55,26 +66,40 @@ public class WebsiteInitialize {
             roleDao.save(roleList);
 
             // save user
-            User user = new User();
-            user.setUsername("admin");
-            user.setPassword("admin");
-            user.setEmail("admin@modespring.com");
-            user.setRole(role_admin);
-            userDao.save(user);
+            List<User> user_list = new ArrayList<User>();
+            User user_shawoe = new User();
+            user_shawoe.setName("shawoe");
+            user_shawoe.setPassword("shawoe");
+            user_shawoe.setEmail("shawoe@modespring.com");
+            user_shawoe.setRole(role_admin);
+            user_list.add(user_shawoe);
+            User user_modespring = new User();
+            user_modespring.setName("modespring");
+            user_modespring.setPassword("modespring");
+            user_modespring.setEmail("modespring@modespring.com");
+            user_modespring.setRole(role_admin);
+            user_list.add(user_modespring);
+            User user_admin = new User();
+            user_admin.setName("admin");
+            user_admin.setPassword("admin");
+            user_admin.setEmail("admin@modespring.com");
+            user_admin.setRole(role_admin);
+            user_list.add(user_admin);
+            userDao.save(user_list);
 
             // save node
             Node root_node = new Node();
-            root_node.setTitle("首页");
+            root_node.setName("首页");
             nodeDao.save(root_node);
             List<Node> parent_list = new ArrayList<Node>();
             List<Node> child_list = new ArrayList<Node>();
             for (int i = 0; i < 3; i++) {
                 Node parent_node = new Node(root_node);
-                parent_node.setTitle("栏目分类" + i);
+                parent_node.setName("栏目分类" + i);
                 parent_list.add(parent_node);
                 for (int j = 0; j < 2; j++) {
                     Node child_node = new Node(parent_node);
-                    child_node.setTitle("新栏目" + j);
+                    child_node.setName("新栏目" + j);
                     child_list.add(child_node);
                 }
             }

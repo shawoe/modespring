@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - modespring@localhost" uuid="7680136b-0fa6-44f2-8129-6954b09eaa19">
+    <database-info product="MySQL" version="5.0.22-community-nt" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="modespring"/>
+    <table name="article" schema="" catalog="modespring" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="timestamp" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="content" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="publishDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="author_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="column_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_6urmq2t7227am1bhrcx5fls5s" columns="column_id" ref-table="node" ref-schema="" ref-catalog="modespring" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_i83utkpqpts0yrsy4ydqocrj1" columns="author_id" ref-table="user" ref-schema="" ref-catalog="modespring" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_m5dptjvl1w49vfrwinqa6li65" table="article_field" schema="" catalog="modespring" columns="Article_id"/>
+      <index name="FK_6urmq2t7227am1bhrcx5fls5s" unique="false" columns="column_id"/>
+      <index name="FK_i83utkpqpts0yrsy4ydqocrj1" unique="false" columns="author_id"/>
+    </table>
+    <table name="article_field" schema="" catalog="modespring" type="TABLE">
+      <column name="Article_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="fieldList_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <foreign-key name="FK_m5dptjvl1w49vfrwinqa6li65" columns="Article_id" ref-table="article" ref-schema="" ref-catalog="modespring" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_8f9sk5rt3qjwt3top3uwydcka" columns="fieldList_id" ref-table="field" ref-schema="" ref-catalog="modespring" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_8f9sk5rt3qjwt3top3uwydcka" unique="false" columns="fieldList_id"/>
+      <index name="FK_m5dptjvl1w49vfrwinqa6li65" unique="false" columns="Article_id"/>
+    </table>
+    <table name="field" schema="" catalog="modespring" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="timestamp" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="defaultValue" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="type" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_8f9sk5rt3qjwt3top3uwydcka" table="article_field" schema="" catalog="modespring" columns="fieldList_id"/>
+    </table>
+    <table name="message" schema="" catalog="modespring" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="timestamp" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="content" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="readMark" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="sendTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="addressee_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="sender_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_tbto6hemu447oixxk730el2vx" columns="sender_id" ref-table="user" ref-schema="" ref-catalog="modespring" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_98y60i5xnmgwl8xsxyxhw6flj" columns="addressee_id" ref-table="user" ref-schema="" ref-catalog="modespring" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_98y60i5xnmgwl8xsxyxhw6flj" unique="false" columns="addressee_id"/>
+      <index name="FK_tbto6hemu447oixxk730el2vx" unique="false" columns="sender_id"/>
+    </table>
+    <table name="node" schema="" catalog="modespring" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="timestamp" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="level" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="parentNode_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_gk1wmmx3gdplaoeysykh5q0vo" columns="parentNode_id" ref-table="node" ref-schema="" ref-catalog="modespring" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_6urmq2t7227am1bhrcx5fls5s" table="article" schema="" catalog="modespring" columns="column_id"/>
+      <exported-key name="FK_gk1wmmx3gdplaoeysykh5q0vo" table="node" schema="" catalog="modespring" columns="parentNode_id"/>
+      <index name="FK_gk1wmmx3gdplaoeysykh5q0vo" unique="false" columns="parentNode_id"/>
+    </table>
+    <table name="person" schema="" catalog="modespring" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="timestamp" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="QQ" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="avatar" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="birthday" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="blog" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="certification" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="englishName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="phone" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="sex" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="weChat" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_odkeyagkhxlsv7tkxb7mlxhn3" table="user" schema="" catalog="modespring" columns="linkman_id"/>
+    </table>
+    <table name="power" schema="" catalog="modespring" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="timestamp" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_b19x8c86r2i69w2hs8d0un1yc" table="role_power" schema="" catalog="modespring" columns="powerList_id"/>
+    </table>
+    <table name="role" schema="" catalog="modespring" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="timestamp" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="power" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_fivsy6mymnto3v4v8rdmowpna" table="role_power" schema="" catalog="modespring" columns="Role_id"/>
+      <exported-key name="FK_fe6nqh4mlcjr068gcfrstmh2y" table="user" schema="" catalog="modespring" columns="role_id"/>
+      <index name="UK_7d8a768x6aiuvmsa24hqiharg" unique="true" columns="name"/>
+    </table>
+    <table name="role_power" schema="" catalog="modespring" type="TABLE">
+      <column name="Role_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="powerList_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <foreign-key name="FK_fivsy6mymnto3v4v8rdmowpna" columns="Role_id" ref-table="role" ref-schema="" ref-catalog="modespring" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_b19x8c86r2i69w2hs8d0un1yc" columns="powerList_id" ref-table="power" ref-schema="" ref-catalog="modespring" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_b19x8c86r2i69w2hs8d0un1yc" unique="false" columns="powerList_id"/>
+      <index name="FK_fivsy6mymnto3v4v8rdmowpna" unique="false" columns="Role_id"/>
+    </table>
+    <table name="user" schema="" catalog="modespring" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="timestamp" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="avatar" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="frozen" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="lastLogin" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="registerDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="username" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="linkman_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="role_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_fe6nqh4mlcjr068gcfrstmh2y" columns="role_id" ref-table="role" ref-schema="" ref-catalog="modespring" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_odkeyagkhxlsv7tkxb7mlxhn3" columns="linkman_id" ref-table="person" ref-schema="" ref-catalog="modespring" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_i83utkpqpts0yrsy4ydqocrj1" table="article" schema="" catalog="modespring" columns="author_id"/>
+      <exported-key name="FK_tbto6hemu447oixxk730el2vx" table="message" schema="" catalog="modespring" columns="sender_id"/>
+      <exported-key name="FK_98y60i5xnmgwl8xsxyxhw6flj" table="message" schema="" catalog="modespring" columns="addressee_id"/>
+      <index name="UK_e6gkqunxajvyxl5uctpl2vl2p" unique="true" columns="email"/>
+      <index name="UK_jreodf78a7pl5qidfh43axdfb" unique="true" columns="username"/>
+      <index name="FK_fe6nqh4mlcjr068gcfrstmh2y" unique="false" columns="role_id"/>
+      <index name="FK_odkeyagkhxlsv7tkxb7mlxhn3" unique="false" columns="linkman_id"/>
+    </table>
+    <table name="website" schema="" catalog="modespring" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="timestamp" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="open" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="UK_di0abkp5ptrncwrdksbjavfvm" unique="true" columns="open"/>
+      <index name="UK_ocfmgyvsfn0i8omelu9med0b5" unique="true" columns="title"/>
+    </table>
+  </data-source>
+</component>

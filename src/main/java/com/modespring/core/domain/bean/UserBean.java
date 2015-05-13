@@ -2,7 +2,6 @@ package com.modespring.core.domain.bean;
 
 import com.modespring.core.domain.Person;
 import com.modespring.core.domain.Role;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,7 +12,7 @@ import java.util.Date;
 public abstract class UserBean  extends BaseBean {
 
     @Column(unique = true, nullable = false)
-    private String username;
+    private String name;
 
     private String password;
 
@@ -34,16 +33,14 @@ public abstract class UserBean  extends BaseBean {
 
     private Date lastLogin;
 
-    private Boolean certification;
-
     private Boolean frozen;
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
@@ -100,14 +97,6 @@ public abstract class UserBean  extends BaseBean {
 
     public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
-    }
-
-    public Boolean getCertification() {
-        return certification;
-    }
-
-    public void setCertification(Boolean certification) {
-        this.certification = certification;
     }
 
     public Boolean getFrozen() {

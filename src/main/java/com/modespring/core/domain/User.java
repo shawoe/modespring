@@ -14,9 +14,6 @@ public class User extends UserBean {
         Date date = new Date();
         this.setRegisterDate(date);
         this.setLastLogin(date);
-        Person person = new Person();
-        //this.setLinkman(person);
-        this.setCertification(false);
         this.setFrozen(false);
     }
 

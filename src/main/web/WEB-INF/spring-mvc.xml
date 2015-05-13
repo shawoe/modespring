@@ -22,12 +22,12 @@
     <!-- 设置freeMarker的配置 -->
     <bean id="freemarkerResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="order" value="1" />
-        <property name="suffix" value=".html" />
+        <property name="suffix" value=".ftl" />
         <property name="contentType" value="text/html;charset=utf-8" />
         <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
     </bean>
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/WEB-INF/template/modespring1.0/" />
+        <property name="templateLoaderPath" value="/template/modespring1.0/" />
         <property name="freemarkerSettings">
             <props>
                 <prop key="template_update_delay">5</prop>
@@ -45,8 +45,9 @@
     </bean>
 
     <!-- 使Spring支持自动检测组件，如注解的Controller -->
-    <context:component-scan base-package="com.modespring.*.webapp,com.modespring.core.common"/>
+    <context:component-scan base-package="com.modespring.*.webapp,com.modespring.core.common,com.modespring.*.aspect"/>
     <mvc:annotation-driven/>
+    <aop:aspectj-autoproxy/>
 
     <!--<bean id="viewResolver"-->
           <!--class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->

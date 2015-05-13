@@ -2,11 +2,12 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title> -- ${(site.name)!''}</title>
 </head>
 <body>
-    <form id="J_RegisterForm" action="/user/edit.html" method="post">
-        <input name="username" type="text" placeholder="用户名" value="${(currentUser.username)!''}" required="required"/>
+    <#include "../common/_header.ftl">
+    <form id="J_RegisterForm" action="/user_${currentUser.id}.html" method="post">
+        <input name="name" type="text" placeholder="用户名" value="${(currentUser.name)!''}" readonly="readonly" required="required"/>
         <input name="password" type="password" placeholder="原密码" required="required"/>
         <input name="newPassword" type="password" placeholder="新密码"/>
         <input name="passwordConfirm" type="password" placeholder="确认密码"/>
