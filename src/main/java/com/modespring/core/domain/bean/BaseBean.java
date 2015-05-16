@@ -1,9 +1,6 @@
 package com.modespring.core.domain.bean;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -15,6 +12,11 @@ public abstract class BaseBean {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(unique = true, nullable = false)
+    private String name;
+
+    private String title;
 
     private Date timestamp;
 
@@ -30,6 +32,22 @@ public abstract class BaseBean {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Date getTimestamp() {
         return timestamp;
     }
@@ -37,5 +55,4 @@ public abstract class BaseBean {
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
-
 }

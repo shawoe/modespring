@@ -11,8 +11,7 @@ import java.util.Date;
 @MappedSuperclass
 public abstract class UserBean  extends BaseBean {
 
-    @Column(unique = true, nullable = false)
-    private String name;
+    private String nickname;
 
     private String password;
 
@@ -35,12 +34,12 @@ public abstract class UserBean  extends BaseBean {
 
     private Boolean frozen;
 
-    public String getName() {
-        return name;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPassword() {

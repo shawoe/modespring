@@ -1,6 +1,6 @@
 package com.modespring.core.repository;
 
-import com.modespring.core.domain.Website;
+import com.modespring.core.domain.Site;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * Created by Shawoe on 2015/4/30.
  */
 @Repository
-public interface WebsiteDao extends JpaRepository<Website, Integer> {
+public interface SiteDao extends JpaRepository<Site, Integer> {
 
 }

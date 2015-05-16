@@ -14,22 +14,11 @@ import java.util.List;
 @MappedSuperclass
 public abstract class RoleBean  extends BaseBean {
 
-    @Column(unique = true, nullable = false)
-    private String name;
-
     private Integer power;
 
     @ManyToMany
     @JoinTable
     private List<Power> powerList;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Integer getPower() {
         return power;

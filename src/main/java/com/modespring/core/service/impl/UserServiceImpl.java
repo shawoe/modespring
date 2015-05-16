@@ -1,6 +1,5 @@
 package com.modespring.core.service.impl;
 
-import static com.modespring.core.common.ExceptionMessage.*;
 import com.modespring.core.domain.User;
 import com.modespring.core.repository.UserDao;
 import com.modespring.core.service.UserService;
@@ -27,29 +26,24 @@ public class UserServiceImpl implements UserService {
     public User login(String userName, String userPassword) throws Exception {
         User user = userDao.findByUsername(userName);
         if (user == null) {
-            throw new Exception(USER_AUTHENTICATION_EXCEPTION);
+            throw new Exception("用户不存在");
         } else if (!user.getPassword().equals(userPassword)) {
-            throw new Exception(USER_AUTHENTICATION_EXCEPTION);
+            throw new Exception("密码不正确");
         } else if (user.getFrozen()) {
-            throw new Exception(USER_FROZEN_EXCEPTION);
+            throw new Exception("用户已冻结");
         }
-        return user;
-    }
-
-    public void logout(String username) {
-        User user =  userDao.findByUsername(username);
         user.setLastLogin(new Date());
-        userDao.saveAndFlush(user);
+        return userDao.saveAndFlush(user);
     }
 
     public User register(User user) throws Exception {
         if (isExisted(user.getName())) {
-            throw new Exception(USER_EXISTENCE_EXCEPTION);
+            throw new Exception("用户已存在");
         }
         return  userDao.save(user);
     }
 
-    public User getDetailsByUsername(String username) {
+    public User getByName(String username) {
         return userDao.findByUsername(username);
     }
 

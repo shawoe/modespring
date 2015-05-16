@@ -5,7 +5,7 @@
     <title>${(node.name)!''} -- ${(site.name)!''}</title>
 </head>
 <body>
-<#include "../common/_header.ftl">
+<#include "common/_header.ftl">
 
 
 </form>

@@ -1,12 +1,9 @@
-package com.modespring.core.webapp.admin;
+package com.modespring.core.webapp.modespring;
 
 import com.modespring.core.domain.Node;
-import com.modespring.core.domain.Power;
-import com.modespring.core.repository.PowerDao;
 import com.modespring.core.service.NodeService;
 import com.modespring.core.service.RoleService;
-import com.modespring.core.service.UserService;
-import com.modespring.core.webapp.BaseController;
+import com.modespring.core.webapp.access.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +19,7 @@ import java.util.List;
  * Created by Shawoe on 2015/5/1.
  */
 @Controller
-@RequestMapping(value = "admin")
+@RequestMapping(value = "modespring")
 public class NodeManageController extends BaseController {
 
     @Autowired

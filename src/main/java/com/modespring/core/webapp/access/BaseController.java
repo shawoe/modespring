@@ -1,6 +1,6 @@
-package com.modespring.core.webapp;
+package com.modespring.core.webapp.access;
 
-import com.modespring.core.common.WebsiteContext;
+import com.modespring.core.service.singleton.ContextService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -9,6 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class BaseController {
 
     @Autowired
-    protected WebsiteContext Context;
+    protected ContextService Context;
 
 }

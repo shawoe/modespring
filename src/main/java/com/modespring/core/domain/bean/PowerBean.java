@@ -1,5 +1,7 @@
 package com.modespring.core.domain.bean;
 
+import com.modespring.core.domain.Node;
+
 import javax.persistence.MappedSuperclass;
 
 /**
@@ -7,14 +9,4 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 public abstract class PowerBean extends BaseBean {
-
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

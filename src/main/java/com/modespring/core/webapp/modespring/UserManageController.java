@@ -1,9 +1,9 @@
-package com.modespring.core.webapp.admin;
+package com.modespring.core.webapp.modespring;
 
 import com.modespring.core.domain.User;
 import com.modespring.core.service.RoleService;
 import com.modespring.core.service.UserService;
-import com.modespring.core.webapp.BaseController;
+import com.modespring.core.webapp.access.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
  * Created by Shawoe on 2015/5/8.
  */
 @Controller
-@RequestMapping(value = "admin")
+@RequestMapping(value = "modespring")
 public class UserManageController extends BaseController {
 
     @Autowired
@@ -46,7 +46,7 @@ public class UserManageController extends BaseController {
     @RequestMapping(value = "user/{username}", method = RequestMethod.GET)
     public ModelAndView getUserDetails(ModelAndView modelAndView, HttpSession session, @PathVariable String username) {
         modelAndView.setViewName("admin/userDetails");
-        modelAndView.addObject("user", userService.getDetailsByUsername(username));
+        modelAndView.addObject("user", userService.getByName(username));
         return modelAndView;
     }
 

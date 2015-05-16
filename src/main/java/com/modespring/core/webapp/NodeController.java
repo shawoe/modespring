@@ -4,6 +4,7 @@ import com.modespring.core.domain.Article;
 import com.modespring.core.domain.Node;
 import com.modespring.core.service.ArticleService;
 import com.modespring.core.service.NodeService;
+import com.modespring.core.webapp.access.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import java.util.List;
  * Created by Shawoe on 2015/5/14.
  */
 @Controller
-@RequestMapping(value = "node")
+@RequestMapping
 public class NodeController extends BaseController {
 
     @Autowired
@@ -27,12 +28,12 @@ public class NodeController extends BaseController {
     @Autowired
     private ArticleService articleService;
 
-    @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable Integer id) {
-        Node node = nodeService.getOne(id);
-        List<Article> articleList = articleService.getArticleByColumnId(id);
+    @RequestMapping(value = "{name}", method = RequestMethod.GET)
+    public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
+        modelAndView.addObject("nodeList",Context.getNodeList());
+        Node node = nodeService.getByName(name);
+        List<Article> articleList = articleService.getArticleByColumnId(node.getId());
         modelAndView.addObject("node", node);
-        modelAndView.addObject("nodeList", Context.getNodeList());
         modelAndView.addObject("articleList", articleList);
         modelAndView.setViewName(node.getUrl());
         return modelAndView;

@@ -18,8 +18,6 @@ public abstract class MessageBean extends BaseBean {
     @JoinColumn
     private User addressee;
 
-    private String title;
-
     private String content;
 
     private Date sendTime;
@@ -40,14 +38,6 @@ public abstract class MessageBean extends BaseBean {
 
     public void setAddressee(User addressee) {
         this.addressee = addressee;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getContent() {

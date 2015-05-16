@@ -9,7 +9,6 @@ import java.util.Date;
 @MappedSuperclass
 public abstract class PersonBean  extends BaseBean {
 
-    private String name;
     private String englishName;
     private String avatar;
     private String sex;
@@ -20,14 +19,6 @@ public abstract class PersonBean  extends BaseBean {
     private Integer blog;
     private Date birthday;
     private Boolean certification;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getEnglishName() {
         return englishName;

@@ -38,6 +38,10 @@ public class NodeServiceImpl implements NodeService {
         return nodeDao.findOne(id);
     }
 
+    public Node getByName(String name){
+        return nodeDao.findByName(name);
+    }
+
     public List<Node> getAll() {
         return nodeDao.findAll();
     }

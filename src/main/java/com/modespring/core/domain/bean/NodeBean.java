@@ -11,9 +11,6 @@ import java.util.List;
 @MappedSuperclass
 public abstract class NodeBean  extends BaseBean {
 
-    @Column(nullable = false)
-    private String name;
-
     private String url;
 
     @Column(nullable = false)
@@ -22,14 +19,6 @@ public abstract class NodeBean  extends BaseBean {
     @ManyToOne
     @JoinColumn
     private Node parentNode;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Integer getLevel() {
         return level;

@@ -13,8 +13,6 @@ import java.util.List;
 @MappedSuperclass
 public abstract class ArticleBean  extends BaseBean {
 
-    private String title;
-
     private Date publishDate;
 
     private String content;
@@ -30,14 +28,6 @@ public abstract class ArticleBean  extends BaseBean {
     @ManyToMany
     @JoinTable
     private List<Field> fieldList;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public Date getPublishDate() {
         return publishDate;

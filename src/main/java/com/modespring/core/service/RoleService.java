@@ -5,9 +5,5 @@ import java.util.List;
 /**
  * Created by Shawoe on 2015/5/8.
  */
-public interface RoleService {
-
-    public List<Role> getAll();
-
-    public void accessControl();
+public interface RoleService extends BaseService<Role> {
 }

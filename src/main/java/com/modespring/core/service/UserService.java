@@ -13,11 +13,9 @@ public interface UserService {
 
     public User login(String username, String password) throws Exception;
 
-    public void logout(String username);
-
     public User register(User user) throws Exception;
 
-    public User getDetailsByUsername(String username);
+    public User getByName(String username);
 
     public List<User> getAll();
 

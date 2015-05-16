@@ -1,7 +1,9 @@
 package com.modespring.core.repository;
 
 import com.modespring.core.domain.Node;
+import com.modespring.core.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +11,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface NodeDao extends JpaRepository<Node, Integer> {
+
+    @Query("SELECT node FROM Node node WHERE node.name = ?1")
+    public Node findByName(String name);
+
 }

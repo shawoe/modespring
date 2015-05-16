@@ -1,16 +1,11 @@
-package com.modespring.core.common;
+package com.modespring.core.service.singleton;
 
 import com.modespring.core.domain.Node;
-import com.modespring.core.domain.Website;
+import com.modespring.core.domain.Site;
 import com.modespring.core.repository.NodeDao;
-import com.modespring.core.repository.WebsiteDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.List;
 
 /**
@@ -18,16 +13,16 @@ import java.util.List;
  */
 @Service
 @Scope(value = "singleton")
-public class WebsiteContext {
+public class ContextService {
 
-    private Website context;
+    private Site context;
     private List<Node> nodeList;
 
     @Autowired
     NodeDao nodeDao;
 
     @Autowired
-    public WebsiteContext(NodeDao nodeDao) {
+    public ContextService(NodeDao nodeDao) {
         this.nodeList = nodeDao.findAll();
     }
 
@@ -35,11 +30,11 @@ public class WebsiteContext {
         this.nodeList = nodeDao.findAll();
     }
 
-    public Website getContext() {
+    public Site getContext() {
         return context;
     }
 
-    public void setContext(Website context) {
+    public void setContext(Site context) {
         this.context = context;
     }
 
