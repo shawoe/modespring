@@ -21,6 +21,12 @@ public class ModeSpringController extends BaseController {
     @Autowired
     public UserService userService;
 
+    @RequestMapping(value = "index", method = RequestMethod.GET)
+    public ModelAndView getOne(ModelAndView modelAndView, HttpSession session) {
+        modelAndView.setViewName("redirect:/modespring/login.html");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "center", method = RequestMethod.GET)
     public ModelAndView center(ModelAndView modelAndView, HttpSession session) {
         User user = (User) session.getAttribute("ModeSpringUser");

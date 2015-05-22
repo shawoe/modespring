@@ -9,11 +9,11 @@
     <form action="/modespring/node/${(currentNode.id)!''}.html" method="post">
         <label>栏目编码<input name="name" type="text" value="${(currentNode.name)!''}"></label>
         <label>栏目名称<input name="title" type="text" value="${(currentNode.title)!''}"></label>
-        <label>栏目列表模板<input name="url" type="text" value="${(currentNode.url)!''}"></label>
+        <label>栏目URL<input name="url" type="text" value="${(currentNode.url)!''}"></label>
         <label>上级栏目
             <select name="parentNode.id">
             <#list nodeList as node>
-                <#if node.level lte 1>
+                <#if node.level?? && node.level lte 1>
                     <#if node.id == currentNode.parentNode.id>
                         <option selected="selected" value="${node.id}">${node.title}</option>
                     <#else>
