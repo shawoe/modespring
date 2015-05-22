@@ -7,6 +7,10 @@ article, aside, details, figcaption, figure, footer, header, menu, nav, section 
     margin: 0;
 }
 
+body {
+    font-family: "微软雅黑", Arial;
+}
+
 .clearfix {
     zoom: 1;
     display: table;
@@ -17,24 +21,31 @@ ul {
     list-style-type: none;
 }
 
+a {
+    color: #000;
+    text-decoration: none;
+}
+
 .wrapper {
     min-height: 1200px;
     width: 100%;
     min-width: 1110px;
-    background: #eeeeee;
+    background: #e7e8eb;
 }
 
 header {
-    height: 100px;
+    height: 50px;
     width: 100%;
     background: #fcfcfc;
+    border-bottom: solid 1px #ccc;
+    box-shadow: 0 0 10px 0 #ccc;
 }
 
 header h1 {
     display: inline;
     width: 100px;
     float: left;
-    padding: 5px 20px;
+    padding: 0 20px;
 }
 
 header address {
@@ -44,7 +55,7 @@ header address {
 
 header address li {
     float: left;
-    padding: 20px;
+    padding: 15px;
 }
 
 header address {
@@ -52,31 +63,53 @@ header address {
     max-width: 1000px;
 }
 
-header nav ul li {
-    float: left;
-    padding: 5px;
-    width: 100px;
+nav {
+    margin: 40px auto 0;
+    background: #fcfcfc;
+    border-bottom: solid 1px #eee;
+    border-radius: 5px 5px 0 0;
+    max-width: 1200px;
+    box-shadow: 0 0 10px 0 #ccc;
+
 }
 
-header nav ul li ul {
+nav ul li {
+    float: left;
+    height: 60px;
+    line-height: 60px;
+}
+
+nav ul li a {
+    padding: 20px 100px;
+    width: 50px;
+    border-right: solid 1px #eee;
+}
+
+.selected a {
+    background: #44b549;
+    color: #fff;
+}
+
+nav ul li ul {
     position: absolute;
     left: -99999px;
 }
 
-header nav ul li:hover ul{
-    background: #fcfcfc;
-    position: relative;
-    left: 0;
-    float: left;
-    z-index: 1000;
-    width: 100px;
-}
+/*nav ul li:hover ul{*/
+    /*background: #fcfcfc;*/
+    /*position: relative;*/
+    /*left: 0;*/
+    /*float: left;*/
+    /*z-index: 1000;*/
+    /*width: 100px;*/
+/*}*/
 
 section {
-    border-radius: 5px;
-    margin: 50px auto 0;
+    border-radius: 0 0 5px 5px;
+    margin: 0 auto;
     padding: 20px 100px;
-    width: 1000px;
+    max-width: 1000px;
     background: #fcfcfc;
+    box-shadow: 0 5px 10px 0 #ccc;
 
 }

@@ -6,21 +6,18 @@
             <li><a href="/center.html">会员中心</a></li>
         </ul>
     </address>
-    <nav>
-        <ul class="clearfix">
-            <#list nodeList as node>
-                <#if node.level lt 2>
-                    <li><a href="/${(node.name)!'javascript:;'}.html">${(node.title)!''}</a>
-                        <ul>
-                            <#list nodeList as childNode>
-                                <#if childNode.level == 2 && childNode.parentNode.name == node.name>
-                                    <li>${(childNode.title)!''}</li>
-                                </#if>
-                            </#list>
-                        </ul>
-                    </li>
-                </#if>
-            </#list>
-        </ul>
-    </nav>
 </header>
+
+<nav>
+    <ul class="clearfix">
+    <#list nodeList as currentNode>
+        <#if currentNode.level lt 2>
+            <#if node?? && node.name == currentNode.name>
+                <li class="selected"><a href="/${(currentNode.name)!'javascript:;'}.html">${(currentNode.title)!''}</a></li>
+            <#else>
+            <li><a href="/${(currentNode.name)!'javascript:;'}.html">${(currentNode.title)!''}</a></li>
+            </#if>
+        </#if>
+    </#list>
+    </ul>
+</nav>
