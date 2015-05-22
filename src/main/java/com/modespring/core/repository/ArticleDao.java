@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface ArticleDao extends JpaRepository<Article, Integer> {
 
-    @Query("SELECT article FROM Article article WHERE article.column.id = ?1")
-    public List<Article> findByColumnId(Integer id);
+    @Query("SELECT article FROM Article article WHERE article.node.id = ?1")
+    public List<Article> findByNodeId(Integer id);
 
 }

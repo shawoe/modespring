@@ -32,10 +32,14 @@ public class NodeController extends BaseController {
     public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
         modelAndView.addObject("nodeList",Context.getNodeList());
         Node node = nodeService.getByName(name);
-        List<Article> articleList = articleService.getArticleByColumnId(node.getId());
-        modelAndView.addObject("node", node);
+        List<Article> articleList = articleService.getByNodeId(node.getId());
+            modelAndView.addObject("node", node);
         modelAndView.addObject("articleList", articleList);
-        modelAndView.setViewName(node.getUrl());
+        if (node.getUrl() == null) {
+            modelAndView.setViewName("/column");
+        } else {
+            modelAndView.setViewName(node.getUrl());
+        }
         return modelAndView;
     }
 

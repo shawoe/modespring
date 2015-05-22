@@ -10,9 +10,12 @@ import java.util.Date;
 @Entity
 public class Article extends ArticleBean {
 
-    public Article(Node column) {
-        this.setColumn(column);
+    public Article(Node node) {
+        this.setNode(node);
         this.setPublishDate(new Date());
+    }
+
+    public Article() {
     }
 
 }

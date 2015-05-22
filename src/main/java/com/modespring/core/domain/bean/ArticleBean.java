@@ -23,7 +23,7 @@ public abstract class ArticleBean  extends BaseBean {
 
     @ManyToOne
     @JoinColumn
-    private Node column;
+    private Node node;
 
     @ManyToMany
     @JoinTable
@@ -45,12 +45,12 @@ public abstract class ArticleBean  extends BaseBean {
         this.author = author;
     }
 
-    public Node getColumn() {
-        return column;
+    public Node getNode() {
+        return node;
     }
 
-    public void setColumn(Node column) {
-        this.column = column;
+    public void setNode(Node node) {
+        this.node = node;
     }
 
     public String getContent() {

@@ -23,9 +23,6 @@ import java.util.List;
 public class NodeManageController extends BaseController {
 
     @Autowired
-    private RoleService roleService;
-
-    @Autowired
     private NodeService nodeService;
 
     @RequestMapping(value = "node", method = RequestMethod.GET)
@@ -43,11 +40,12 @@ public class NodeManageController extends BaseController {
     }
 
     @RequestMapping(value = "node", method = RequestMethod.POST)
-    public ModelAndView editAll(ModelAndView modelAndView, HttpSession session, Integer[] id, String[] name, Integer[] delete) throws UnsupportedEncodingException {
+    public ModelAndView editAll(ModelAndView modelAndView, HttpSession session, Integer[] id, String[] name, String[] title, Integer[] delete) throws UnsupportedEncodingException {
         List<Node> nodeList = new ArrayList<Node>();
         for (int i = 0; i < id.length; i++) {
             Node node = nodeService.getOne(id[i]);
             node.setName(name[i]);
+            node.setTitle(title[i]);
             nodeList.add(node);
         }
         nodeService.updateALL(nodeList);
@@ -59,20 +57,20 @@ public class NodeManageController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "node_{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "node/{id}", method = RequestMethod.GET)
     public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable Integer id) {
         Node node = nodeService.getOne(id);
         modelAndView.addObject("currentNode", node);
         modelAndView.addObject("nodeList", Context.getNodeList());
-        modelAndView.setViewName("/admin/nodeDetail");
+        modelAndView.setViewName("/modespring/nodeDetail");
         return modelAndView;
     }
 
-    @RequestMapping(value = "node_{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "node/{id}", method = RequestMethod.POST)
     public ModelAndView edit(ModelAndView modelAndView, HttpSession session, @PathVariable Integer id, Node node) {
         nodeService.update(node);
         Context.flush();
-        modelAndView.setViewName("redirect:/admin/node.html");
+        modelAndView.setViewName("redirect:/modespring/node.html");
         return modelAndView;
     }
 }

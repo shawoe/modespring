@@ -11,6 +11,7 @@
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
+
     <!-- 引入JDBC连接的属性文件 -->
     <context:property-placeholder location="classpath:jdbc.properties" />
 
@@ -52,17 +53,16 @@
         <property name="jpaDialect" ref="jpaDialect"/>
     </bean>
 
-    <!-- 配置Spring Data JPA扫描目录 -->
-    <jpa:repositories base-package="com.modespring.*.repository" />
-
     <!-- 定义注解驱动的Spring声明性事务 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
-    <context:component-scan base-package="com.modespring.*.webapp,com.modespring.*.service.impl,com.modespring.*.access"/>
+    <context:component-scan base-package="com.modespring.*.webapp,com.modespring.*.webapp.*,com.modespring.*.service.*"/>
 
     <context:annotation-config/>
 
     <aop:config proxy-target-class="true"/>
+
+    <jpa:repositories base-package="com.modespring.*.repository" />
 
 
 </beans>

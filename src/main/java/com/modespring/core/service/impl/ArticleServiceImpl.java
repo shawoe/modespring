@@ -16,7 +16,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleDao articleDao;
 
-    public List<Article> getArticleByColumnId(Integer id) {
-        return articleDao.findByColumnId(id);
+    public List<Article> getByNodeId(Integer id) {
+        return articleDao.findByNodeId(id);
     }
 }
