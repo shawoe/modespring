@@ -1,0 +1,82 @@
+article, aside, details, figcaption, figure, footer, header, menu, nav, section {
+    display: block;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.clearfix {
+    zoom: 1;
+    display: table;
+    width: 100%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.wrapper {
+    min-height: 1200px;
+    width: 100%;
+    min-width: 1110px;
+    background: #eeeeee;
+}
+
+header {
+    height: 100px;
+    width: 100%;
+    background: #fcfcfc;
+}
+
+header h1 {
+    display: inline;
+    width: 100px;
+    float: left;
+    padding: 5px 20px;
+}
+
+header address {
+    float: right;
+    max-width: 1000px;
+}
+
+header address li {
+    float: left;
+    padding: 20px;
+}
+
+header address {
+    float: right;
+    max-width: 1000px;
+}
+
+header nav ul li {
+    float: left;
+    padding: 5px;
+    width: 100px;
+}
+
+header nav ul li ul {
+    position: absolute;
+    left: -99999px;
+}
+
+header nav ul li:hover ul{
+    background: #fcfcfc;
+    position: relative;
+    left: 0;
+    float: left;
+    z-index: 1000;
+    width: 100px;
+}
+
+section {
+    border-radius: 5px;
+    margin: 50px auto 0;
+    padding: 20px 100px;
+    width: 1000px;
+    background: #fcfcfc;
+
+}

@@ -19,4 +19,31 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getByNodeId(Integer id) {
         return articleDao.findByNodeId(id);
     }
+
+    public Article create(Article article) {
+        return articleDao.save(article);
+    }
+
+    public void delete(Integer id) {
+        articleDao.delete(id);
+    }
+
+    public Article update(Article article) {
+        return articleDao.saveAndFlush(article);
+    }
+    public void updateALL(List<Article> articleList) {
+        articleDao.save(articleList);
+    }
+
+    public Article getOne(Integer id){
+        return articleDao.findOne(id);
+    }
+
+    public Article getByName(String name){
+        return null;
+    }
+
+    public List<Article> getAll() {
+        return articleDao.findAll();
+    }
 }

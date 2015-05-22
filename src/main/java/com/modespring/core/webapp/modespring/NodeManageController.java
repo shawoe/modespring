@@ -2,7 +2,6 @@ package com.modespring.core.webapp.modespring;
 
 import com.modespring.core.domain.Node;
 import com.modespring.core.service.NodeService;
-import com.modespring.core.service.RoleService;
 import com.modespring.core.webapp.access.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -15,9 +15,9 @@
             <#list nodeList as node>
                 <#if node.level?? && node.level lte 1>
                     <#if node.id == currentNode.parentNode.id>
-                        <option selected="selected" value="${node.id}">${node.title}</option>
+                        <option selected="selected" value="${(node.id)!''}">${(node.title)!''}</option>
                     <#else>
-                        <option value="${node.id}">${node.title}</option>
+                        <option value="${(node.id)!''}">${(node.title)!''}</option>
                     </#if>
                 </#if>
             </#list>

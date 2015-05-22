@@ -3,19 +3,21 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>${(node.title)!''} -- ${(site.title)!''}</title>
+    <link rel="stylesheet" type="text/css" href="/style/layout.css" />
 </head>
 <body>
+<div class="wrapper">
 <#include "common/_header.ftl">
-    <h1>${(node.title)!''}</h1>
     <section>
+        <h2>${(node.title)!''}</h2>
     <table>
         <tr><th>删除</th><th>ID</th><th>文章标题</th></tr>
         <form id="deleteArticleForm" action="" method="post">
             <#list articleList as article>
                 <tr>
-                    <td><input name="delete" type="checkbox" value="${article.id}"/></td>
-                    <td>${article.id}</td>
-                    <td>${(article.title)!''}</a></td>
+                    <td><input name="delete" type="checkbox" value="${(article.id)!''}"/></td>
+                    <td>${(article.id)!''}</td>
+                    <td><a href="/${(node.name)!''}/${(article.id)!''}.html">${(article.title)!''}</a></td>
                 </tr>
             </#list>
             <input type="hidden" name="_method" value="delete" />
@@ -23,6 +25,6 @@
         </form>
     </table>
     </section>
-
+</div>
 </body>
 </html>
