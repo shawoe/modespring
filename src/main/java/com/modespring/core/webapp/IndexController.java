@@ -17,7 +17,7 @@ public class IndexController extends BaseBean {
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public ModelAndView index(ModelAndView modelAndView, HttpSession session) {
-        modelAndView.setViewName("redirect:/login.html");
+        modelAndView.setViewName("redirect:/focus.html");
         return modelAndView;
     }
 }

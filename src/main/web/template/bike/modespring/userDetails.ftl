@@ -3,9 +3,12 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title> -- ${(site.name)!''}</title>
+    <link rel="stylesheet" type="text/css" href="/style/layout.css" />
 </head>
 <body>
-    <#include "common/_header.ftl">
+<div class="wrapper">
+<#include "common/_header.ftl">
+    <section>
     <form id="deleteUserForm" action="/admin/user/${user.username}.html" method="post">
         <input name="id" type="text" readonly="readonly" value="${user.id}" />
         <input name="username" type="text" required="required" value="${user.username}" />
@@ -19,5 +22,8 @@
         <input type="submit" value="保存修改"/>
     </form>
 
+
+    </section>
+    </div>
 </body>
 </html>

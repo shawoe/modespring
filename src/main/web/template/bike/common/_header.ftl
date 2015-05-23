@@ -1,21 +1,20 @@
 <header>
     <h1>${(site.title)!'ModeSpring'}</h1>
-    <address>
-        <ul class="clearfix">
-            <li><a>济南</a></li>
-            <li><a href="/center.html">会员中心</a></li>
-        </ul>
-    </address>
+    <ul>
+        <li><a>济南</a></li>
+        <li><a href="/center.html">会员中心</a></li>
+        <li><a href="/modespring/index.html">后台管理</a></li>
+    </ul>
 </header>
 
 <nav>
     <ul class="clearfix">
     <#list nodeList as currentNode>
-        <#if currentNode.level lt 2>
+        <#if currentNode.level == 1>
             <#if node?? && node.name == currentNode.name>
-                <li class="selected"><a href="/${(currentNode.name)!'javascript:;'}.html">${(currentNode.title)!''}</a></li>
+                <a href="/${(currentNode.name)!'javascript:;'}.html"><li class="selected">${(currentNode.title)!''}</li></a>
             <#else>
-            <li><a href="/${(currentNode.name)!'javascript:;'}.html">${(currentNode.title)!''}</a></li>
+                <a href="/${(currentNode.name)!'javascript:;'}.html"><li>${(currentNode.title)!''}</li></a>
             </#if>
         </#if>
     </#list>

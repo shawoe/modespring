@@ -27,9 +27,9 @@ a {
 }
 
 .wrapper {
-    min-height: 1200px;
+    min-height: 1100px;
     width: 100%;
-    min-width: 1110px;
+    min-width: 600px;
     background: #e7e8eb;
 }
 
@@ -48,22 +48,18 @@ header h1 {
     padding: 0 20px;
 }
 
-header address {
+header ul {
     float: right;
     max-width: 1000px;
 }
 
-header address li {
+header ul li {
     float: left;
     padding: 15px;
 }
 
-header address {
-    float: right;
-    max-width: 1000px;
-}
-
 nav {
+    overflow: hidden;
     margin: 40px auto 0;
     background: #fcfcfc;
     border-bottom: solid 1px #eee;
@@ -72,20 +68,17 @@ nav {
     box-shadow: 0 0 10px 0 #ccc;
 
 }
-
 nav ul li {
     float: left;
+    box-sizing: border-box;
     height: 60px;
+    width: 20%;
     line-height: 60px;
-}
-
-nav ul li a {
-    padding: 20px 100px;
-    width: 50px;
+    text-align: center;
     border-right: solid 1px #eee;
 }
 
-.selected a {
+.selected {
     background: #44b549;
     color: #fff;
 }
@@ -95,20 +88,12 @@ nav ul li ul {
     left: -99999px;
 }
 
-/*nav ul li:hover ul{*/
-    /*background: #fcfcfc;*/
-    /*position: relative;*/
-    /*left: 0;*/
-    /*float: left;*/
-    /*z-index: 1000;*/
-    /*width: 100px;*/
-/*}*/
-
 section {
     border-radius: 0 0 5px 5px;
     margin: 0 auto;
     padding: 20px 100px;
     max-width: 1000px;
+    height: 800px;
     background: #fcfcfc;
     box-shadow: 0 5px 10px 0 #ccc;
 
