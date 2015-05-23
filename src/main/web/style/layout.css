@@ -1,3 +1,6 @@
+/* ----------------------------------------------------------------
+--- @group global reset -------------------------------------------
+----------------------------------------------------------------- */
 article, aside, details, figcaption, figure, footer, header, menu, nav, section {
     display: block;
 }
@@ -11,12 +14,6 @@ body {
     font-family: "微软雅黑", Arial;
 }
 
-.clearfix {
-    zoom: 1;
-    display: table;
-    width: 100%;
-}
-
 ul {
     list-style-type: none;
 }
@@ -26,26 +23,69 @@ a {
     text-decoration: none;
 }
 
-.wrapper {
-    min-height: 1100px;
+.clearfix {
+    zoom: 1;
+    display: table;
     width: 100%;
-    min-width: 600px;
+}
+
+/* ----------------------------------------------------------------
+--- @group page structure -----------------------------------------
+----------------------------------------------------------------- */
+.wrapper {
+    min-width: 480px;
+    max-width: 1600px;
+    min-height: 800px;
+    margin: 0 auto;
     background: #e7e8eb;
 }
 
 header {
     height: 50px;
     width: 100%;
-    background: #fcfcfc;
-    border-bottom: solid 1px #ccc;
+    background: #dae0de;
+    border-bottom: solid 1px #aba;
     box-shadow: 0 0 10px 2px #ccc;
 }
 
+header li a {
+    font-size: 18px;
+    color: #061;
+}
+
+nav {
+    margin: 30px 3%;
+}
+
+section.content {
+    padding-left: 1%;
+    padding-top: 45px;
+}
+
+div.ad {
+    color: #aaa;
+    margin: 25px 3% 0;
+}
+
+div.ad img {
+    width: 100%;
+    box-shadow: 0 2px 10px 2px #ccc;
+}
+
+/* ----------------------------------------------------------------
+--- @group header styles ------------------------------------------
+----------------------------------------------------------------- */
 header h1 {
     display: inline;
-    width: 100px;
+    height: 55px;
+    color: #005500;
+    font-size: 28px;
     float: left;
     padding: 0 20px;
+}
+
+header h1 img {
+    height: 100%;
 }
 
 header ul {
@@ -58,52 +98,63 @@ header ul li {
     padding: 15px;
 }
 
-nav {
-    overflow: hidden;
-    margin: 35px 30px 0;
-    background: #fcfcfc;
-    border-radius: 5px 5px 0 0;
-    /*max-width: 1200px;*/
+/*nav ul.nav li {*/
+    /*float: left;*/
+    /*box-sizing: border-box;*/
+    /*height: 50px;*/
+    /*width: 20%;*/
+    /*line-height: 55px;*/
+    /*text-align: center;*/
+    /*border-right: solid 1px #eee;*/
+/*}*/
+
+nav ul.nav {
+    float: left;
     box-shadow: 0 2px 10px 2px #ccc;
 
 }
+
+nav ul.menu {
+    float: right;
+    box-shadow: 0 2px 10px 2px #ccc;
+}
+
 nav ul li {
     float: left;
-    box-sizing: border-box;
-    height: 60px;
-    width: 20%;
-    line-height: 60px;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
     text-align: center;
+    background: #fcfcfc;
     border-right: solid 1px #eee;
 }
 
 .selected {
-    background: #44b549;
+    background: #0a0;
     color: #fff;
 }
 
-nav ul li ul {
-    position: absolute;
-    left: -99999px;
-}
+/*nav ul li ul {*/
+/*position: absolute;*/
+/*left: -99999px;*/
+/*}*/
 
-.content {
-    border-radius: 0 0 5px 5px;
-    margin: 0 auto;
-    /*max-width: 1200px;*/
-    height: 800px;
+/*.content {*/
+/*border-radius: 0 0 5px 5px;*/
+/*margin: 0 auto;*/
+/*max-width: 1200px;*/
+/*height: 800px;*/
 
-}
+/*}*/
 
 section ul li {
     overflow: hidden;
     display: inline-block;
-    width: 46%;
+    width: 46.3%;
     height: 100px;
-    margin: 25px 0 0 30px;
+    margin: 20px 0 0 2%;
     background: #fcfcfc;
     box-shadow: 0 2px 10px 2px #ccc;
-    border-radius: 5px;
 }
 
 section ul li img {
@@ -112,5 +163,21 @@ section ul li img {
     width: 150px;
 }
 
+/* ----------------------------------------------------------------
+--- @group article styles -----------------------------------------
+----------------------------------------------------------------- */
 section article {
+}
+
+/* ----------------------------------------------------------------
+--- @group aside styles -------------------------------------------
+----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------
+--- @group mobile devices -----------------------------------------
+----------------------------------------------------------------- */
+@media screen and (max-width: 960px) {
+    section ul li {
+        width: 95%;
+    }
 }
