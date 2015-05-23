@@ -1,6 +1,7 @@
 package com.modespring.core.domain;
 
 import com.modespring.core.domain.bean.UserBean;
+
 import javax.persistence.Entity;
 import java.util.Date;
 

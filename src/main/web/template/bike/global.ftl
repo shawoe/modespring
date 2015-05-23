@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>${(node.title)!''} -- ${(site.title)!''}</title>
+    <title>${(article.title)!''} - ${(node.title)!''} - ${(site.title)!''} - Powered by ModeSpring</title>
     <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
 <#include "common/_script.ftl">
 </head>
@@ -29,5 +29,6 @@
         </form>
     </section>
 <#include "common/_footer.ftl">
+</div>
 </body>
 </html>

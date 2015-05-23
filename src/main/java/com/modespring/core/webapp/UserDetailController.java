@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpSession;
 
 
@@ -24,14 +25,14 @@ public class UserDetailController extends BaseController {
 
     @RequestMapping(value = "{name}", method = RequestMethod.GET)
     public ModelAndView edit(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
-        modelAndView.addObject("nodeList",Context.getNodeList());
+        modelAndView.addObject("nodeList", Context.getNodeList());
         String username = (String) session.getAttribute("currentUserName");
         if (username == null) {
             modelAndView.setViewName("redirect:/login.html");
         } else {
             User currentUser = userService.getByName(username);
             modelAndView.addObject("currentUser", currentUser);
-            modelAndView.setViewName("/user/edit");
+            modelAndView.setViewName("profile");
         }
         return modelAndView;
     }
@@ -44,7 +45,7 @@ public class UserDetailController extends BaseController {
         } else try {
             User currentUser = userService.login(user.getName(), user.getPassword());
             user.setId(currentUser.getId());
-            if (! newPassword.isEmpty()){
+            if (!newPassword.isEmpty()) {
                 user.setPassword(newPassword);
             }
             userService.updateDetails(user);

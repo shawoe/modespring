@@ -2,7 +2,6 @@ package com.modespring.core.domain.bean;
 
 import com.modespring.core.domain.Power;
 
-import javax.persistence.Column;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
@@ -12,7 +11,7 @@ import java.util.List;
  * Created by Shawoe on 2015/5/1.
  */
 @MappedSuperclass
-public abstract class RoleBean  extends BaseBean {
+public abstract class RoleBean extends BaseBean {
 
     private Integer power;
 

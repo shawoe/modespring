@@ -1,6 +1,7 @@
 package com.modespring.core.domain;
 
 import com.modespring.core.domain.bean.FieldBean;
+
 import javax.persistence.Entity;
 
 /**
@@ -9,7 +10,7 @@ import javax.persistence.Entity;
 @Entity
 public class Field extends FieldBean {
 
-    public Field(){
+    public Field() {
         this.setType("text");
     }
 

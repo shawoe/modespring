@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpSession;
 
 /**
@@ -22,7 +23,7 @@ public class UserCenterController extends BaseController {
 
     @RequestMapping(value = "center", method = RequestMethod.GET)
     public ModelAndView memberCenter(ModelAndView modelAndView, HttpSession session) {
-        modelAndView.addObject("nodeList",Context.getNodeList());
+        modelAndView.addObject("nodeList", Context.getNodeList());
         String username = (String) session.getAttribute("currentUserName");
         if (username == null) {
             modelAndView.setViewName("redirect:/login.html");

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpSession;
 
 /**
@@ -30,7 +31,7 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView loginAction(ModelAndView modelAndView, HttpSession session, User user) {
-        modelAndView.addObject("nodeList",Context.getNodeList());
+        modelAndView.addObject("nodeList", Context.getNodeList());
         try {
             user = userService.login(user.getName(), user.getPassword());
             session.setAttribute("currentUserName", user.getName());
@@ -43,7 +44,7 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public ModelAndView logout(ModelAndView modelAndView, HttpSession session) {
-        modelAndView.addObject("nodeList",Context.getNodeList());
+        modelAndView.addObject("nodeList", Context.getNodeList());
         if (session.getAttribute("currentUserName") != null) {
             session.removeAttribute("currentUserName");
         }

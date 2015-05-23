@@ -17,29 +17,29 @@ import javax.servlet.http.HttpSession;
 @RequestMapping
 public class RegisterController extends BaseController {
 
-        @Autowired
-        public UserService userService;
+    @Autowired
+    public UserService userService;
 
-        @RequestMapping(value = "register", method = RequestMethod.GET)
-        public ModelAndView register(ModelAndView modelAndView, HttpSession session) {
-            modelAndView.addObject("nodeList",Context.getNodeList());
-            if (session.getAttribute("currentUser") != null) {
-                modelAndView.setViewName("redirect:/user/center.html");
-                modelAndView.setViewName("/error");
-            }
-            return modelAndView;
+    @RequestMapping(value = "register", method = RequestMethod.GET)
+    public ModelAndView register(ModelAndView modelAndView, HttpSession session) {
+        modelAndView.addObject("nodeList", Context.getNodeList());
+        if (session.getAttribute("currentUser") != null) {
+            modelAndView.setViewName("redirect:/user/center.html");
+            modelAndView.setViewName("/error");
         }
+        return modelAndView;
+    }
 
-        @RequestMapping(value = "register", method = RequestMethod.POST)
-        public ModelAndView registerAction(ModelAndView modelAndView, HttpSession session, User user) {
-            if (session.getAttribute("currentUser") != null) {
-                modelAndView.setViewName("redirect:/user/center.html");
-            } else try {
-                userService.register(user);
-                modelAndView.setViewName("redirect:login.ftl");
-            } catch (Exception e) {
-                modelAndView.addObject("errorMessage", e.getMessage());
-            }
-            return modelAndView;
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public ModelAndView registerAction(ModelAndView modelAndView, HttpSession session, User user) {
+        if (session.getAttribute("currentUser") != null) {
+            modelAndView.setViewName("redirect:/user/center.html");
+        } else try {
+            userService.register(user);
+            modelAndView.setViewName("redirect:login.ftl");
+        } catch (Exception e) {
+            modelAndView.addObject("errorMessage", e.getMessage());
         }
+        return modelAndView;
+    }
 }

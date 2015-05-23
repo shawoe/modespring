@@ -3,11 +3,11 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title> -- ${(site.name)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css" />
+    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
 </head>
 <body>
 <div class="wrapper">
-    <#include "../common/_header.ftl">
+<#include "common/_header.ftl">
     <section>
         <form id="editUserForm" action="/user/${currentUser.name}.html" method="post">
             <label for="editUserFormName">用户名</label>

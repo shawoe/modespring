@@ -6,6 +6,7 @@ import com.modespring.core.repository.NodeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 /**

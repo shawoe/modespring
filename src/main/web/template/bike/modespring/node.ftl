@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title> -- ${(site.title)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css" />
+    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
 </head>
 <body>
 <div class="wrapper">
@@ -11,6 +11,7 @@
     <section>
 
         <h2>创建栏目</h2>
+
         <form id="newNodeForm" action="/modespring/node.html" method="post">
             <select name="parentNode.id">
             <#list nodeList as node>
@@ -24,15 +25,21 @@
                 </#list>
             </#list>
             </select>
-            <input type="hidden" name="_method" value="put" />
-            <input name="name" type="text" />
-            <input name="title" type="text" />
-            <input type="submit" value="创建栏目" />
+            <input type="hidden" name="_method" value="put"/>
+            <input name="name" type="text"/>
+            <input name="title" type="text"/>
+            <input type="submit" value="创建栏目"/>
         </form>
 
 
         <table>
-            <tr><th></th><th>ID</th><th>栏目编号</th><th>栏目名称</th><th></th></tr>
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>栏目编号</th>
+                <th>栏目名称</th>
+                <th></th>
+            </tr>
             <form id="nodeListForm" action="/modespring/node.html" method="post">
             <#list nodeList as node>
                 <#if node.level lte 1 >
@@ -58,7 +65,9 @@
 
                 </#if>
             </#list>
-                <tr><td colspan="5"><input type="submit" value="保存并删除选中" /></td></tr>
+                <tr>
+                    <td colspan="5"><input type="submit" value="保存并删除选中"/></td>
+                </tr>
             </form>
         </table>
 

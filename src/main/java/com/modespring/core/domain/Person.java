@@ -1,6 +1,7 @@
 package com.modespring.core.domain;
 
 import com.modespring.core.domain.bean.PersonBean;
+
 import javax.persistence.Entity;
 
 /**
@@ -12,5 +13,5 @@ public class Person extends PersonBean {
     public Person() {
         this.setCertification(false);
     }
-    
+
 }

@@ -6,6 +6,6 @@
 </head>
 <body>
 <#include "common/_header.ftl">
-    <h1>${errorMessage}</h1>
+<h1>${errorMessage}</h1>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.modespring.core.domain.bean;
 
 import com.modespring.core.domain.Person;
 import com.modespring.core.domain.Role;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import java.util.Date;
  * Created by Shawoe on 2015/4/17.
  */
 @MappedSuperclass
-public abstract class UserBean  extends BaseBean {
+public abstract class UserBean extends BaseBean {
 
     private String nickname;
 

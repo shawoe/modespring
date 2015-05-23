@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by Shawoe on 2015/4/17.
  */
 @MappedSuperclass
-public abstract class PersonBean  extends BaseBean {
+public abstract class PersonBean extends BaseBean {
 
     private String englishName;
     private String avatar;

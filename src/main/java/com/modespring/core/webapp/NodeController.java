@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class NodeController extends BaseController {
 
     @RequestMapping(value = "{name}", method = RequestMethod.GET)
     public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
-        modelAndView.addObject("nodeList",Context.getNodeList());
+        modelAndView.addObject("nodeList", Context.getNodeList());
         Node node = nodeService.getByName(name);
         modelAndView.addObject("node", node);
         List<Article> articleList = articleService.getByNodeId(node.getId());

@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>${(currentNode.title)!''} -- ${(site.title)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css" />
+    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
 </head>
 <body>
 <div class="wrapper">
@@ -13,6 +13,7 @@
             <label>栏目编码<input name="name" type="text" value="${(currentNode.name)!''}"></label>
             <label>栏目名称<input name="title" type="text" value="${(currentNode.title)!''}"></label>
             <label>栏目URL<input name="url" type="text" value="${(currentNode.url)!''}"></label>
+            <label>栏目模板<input name="template" type="text" value="${(currentNode.template)!''}"></label>
             <label>上级栏目
                 <select name="parentNode.id">
                 <#list nodeList as node>

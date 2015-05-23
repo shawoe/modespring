@@ -3,15 +3,16 @@ package com.modespring.core.domain.bean;
 import com.modespring.core.domain.Node;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by Shawoe on 2015/4/30.
  */
 @MappedSuperclass
-public abstract class NodeBean  extends BaseBean {
+public abstract class NodeBean extends BaseBean {
 
     private String url;
+
+    private String template;
 
     @Column(nullable = false)
     private Integer level;
@@ -34,6 +35,14 @@ public abstract class NodeBean  extends BaseBean {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(String template) {
+        this.template = template;
     }
 
     public Node getParentNode() {

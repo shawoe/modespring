@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>用户中心 -- ${(site.title)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css" />
+    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
 </head>
 <body>
 <div class="wrapper">

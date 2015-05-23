@@ -38,7 +38,7 @@ header {
     width: 100%;
     background: #fcfcfc;
     border-bottom: solid 1px #ccc;
-    box-shadow: 0 0 10px 0 #ccc;
+    box-shadow: 0 0 10px 2px #ccc;
 }
 
 header h1 {
@@ -60,12 +60,11 @@ header ul li {
 
 nav {
     overflow: hidden;
-    margin: 40px auto 0;
+    margin: 35px 30px 0;
     background: #fcfcfc;
-    border-bottom: solid 1px #eee;
     border-radius: 5px 5px 0 0;
-    max-width: 1200px;
-    box-shadow: 0 0 10px 0 #ccc;
+    /*max-width: 1200px;*/
+    box-shadow: 0 2px 10px 2px #ccc;
 
 }
 nav ul li {
@@ -88,13 +87,30 @@ nav ul li ul {
     left: -99999px;
 }
 
-section {
+.content {
     border-radius: 0 0 5px 5px;
     margin: 0 auto;
-    padding: 20px 100px;
-    max-width: 1000px;
+    /*max-width: 1200px;*/
     height: 800px;
-    background: #fcfcfc;
-    box-shadow: 0 5px 10px 0 #ccc;
 
+}
+
+section ul li {
+    overflow: hidden;
+    display: inline-block;
+    width: 46%;
+    height: 100px;
+    margin: 25px 0 0 30px;
+    background: #fcfcfc;
+    box-shadow: 0 2px 10px 2px #ccc;
+    border-radius: 5px;
+}
+
+section ul li img {
+    float: left;
+    height: 100px;
+    width: 150px;
+}
+
+section article {
 }

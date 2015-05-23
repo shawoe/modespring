@@ -12,9 +12,13 @@
     <#list nodeList as currentNode>
         <#if currentNode.level == 1>
             <#if node?? && node.name == currentNode.name>
-                <a href="/${(currentNode.name)!'javascript:;'}.html"><li class="selected">${(currentNode.title)!''}</li></a>
+                <a href="/${(currentNode.name)!'javascript:;'}.html">
+                    <li class="selected">${(currentNode.title)!''}</li>
+                </a>
             <#else>
-                <a href="/${(currentNode.name)!'javascript:;'}.html"><li>${(currentNode.title)!''}</li></a>
+                <a href="/${(currentNode.name)!'javascript:;'}.html">
+                    <li>${(currentNode.title)!''}</li>
+                </a>
             </#if>
         </#if>
     </#list>

@@ -5,6 +5,7 @@ import com.modespring.core.repository.ArticleDao;
 import com.modespring.core.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 /**
@@ -31,15 +32,16 @@ public class ArticleServiceImpl implements ArticleService {
     public Article update(Article article) {
         return articleDao.saveAndFlush(article);
     }
+
     public void updateALL(List<Article> articleList) {
         articleDao.save(articleList);
     }
 
-    public Article getOne(Integer id){
+    public Article getOne(Integer id) {
         return articleDao.findOne(id);
     }
 
-    public Article getByName(String name){
+    public Article getByName(String name) {
         return null;
     }
 

@@ -5,6 +5,7 @@ import com.modespring.core.repository.UserDao;
 import com.modespring.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
         User user = userDao.findByUsername(userName);
         return user != null;
     }
+
     public User login(String userName, String userPassword) throws Exception {
         User user = userDao.findByUsername(userName);
         if (user == null) {
@@ -40,7 +42,7 @@ public class UserServiceImpl implements UserService {
         if (isExisted(user.getName())) {
             throw new Exception("用户已存在");
         }
-        return  userDao.save(user);
+        return userDao.save(user);
     }
 
     public User getByName(String username) {

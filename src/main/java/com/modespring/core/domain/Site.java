@@ -1,6 +1,7 @@
 package com.modespring.core.domain;
 
 import com.modespring.core.domain.bean.SiteBean;
+
 import javax.persistence.Entity;
 
 /**

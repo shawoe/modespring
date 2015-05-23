@@ -1,7 +1,5 @@
 package com.modespring.core.domain.bean;
 
-import com.modespring.core.domain.Node;
-
 import javax.persistence.MappedSuperclass;
 
 /**
