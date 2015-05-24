@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>${(article.title)!''} - ${(node.title)!''} - ${(site.title)!''} - Powered by ModeSpring</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="/template/bike/style/column.css"/>
 <#include "common/_script.ftl">
 </head>
 <body>

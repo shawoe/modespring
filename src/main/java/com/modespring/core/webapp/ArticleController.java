@@ -33,6 +33,7 @@ public class ArticleController extends BaseController {
         Article article = articleService.getOne(id);
         modelAndView.addObject("article", article);
         Node node = nodeService.getByName(name);
+        modelAndView.addObject("node", node);
         String template = node.getTemplate();
         if (template == null || template.isEmpty()) {
             modelAndView.setViewName("/article");

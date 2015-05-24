@@ -3,12 +3,12 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title> -- ${(site.name)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="/template/bike/modespring/style/layout.css"/>
 </head>
 <body>
 <div class="wrapper">
 <#include "common/_header.ftl">
-    <section>
+    <section class="content">
         <form id="deleteUserForm" action="/admin/user/${user.name}.html" method="post">
             <input name="id" type="text" readonly="readonly" value="${user.id}"/>
             <input name="username" type="text" required="required" value="${user.name}"/>

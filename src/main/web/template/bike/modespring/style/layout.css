@@ -1,0 +1,146 @@
+/* ----------------------------------------------------------------
+--- @group global reset -------------------------------------------
+----------------------------------------------------------------- */
+article, aside, details, figcaption, figure, footer, header, menu, nav, section {
+    display: block;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "微软雅黑", Arial;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+.clearfix {
+    zoom: 1;
+    display: table;
+    width: 100%;
+}
+
+/* ----------------------------------------------------------------
+--- @group page structure -----------------------------------------
+----------------------------------------------------------------- */
+.wrapper {
+    min-width: 480px;
+    max-width: 1600px;
+    min-height: 800px;
+    margin: 0 auto;
+    background: #e7e8eb;
+}
+
+header {
+    height: 50px;
+    width: 100%;
+    background: #f0f0f0;
+    border-bottom: solid 1px #aba;
+    box-shadow: 0 0 10px 2px #ccc;
+}
+
+header li a {
+    font-size: 18px;
+}
+
+nav {
+    margin: 30px 3% 0;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 10px 2px #ccc;
+    border-bottom: solid 1px #eee;
+}
+
+section.content {
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 0 10px 2px #ccc;
+    margin: 0 3%;
+    padding: 30px 50px;
+    background: #fcfcfc;
+}
+
+/* ----------------------------------------------------------------
+--- @group header styles ------------------------------------------
+----------------------------------------------------------------- */
+header h1 {
+    display: inline;
+    height: 50px;
+    float: left;
+    color: #444;
+    padding: 0 20px;
+}
+
+header h1 img {
+    height: 100%;
+}
+
+header ul {
+    float: right;
+    max-width: 1000px;
+}
+
+header ul li {
+    float: left;
+    padding: 15px;
+}
+
+nav ul li {
+    float: left;
+    box-sizing: border-box;
+    height: 50px;
+    width: 20%;
+    background: #fcfcfc;
+    line-height: 55px;
+    text-align: center;
+    border-right: solid 1px #eee;
+}
+
+
+.selected {
+    background: #0a0;
+    color: #fff;
+}
+
+section ul li {
+    overflow: hidden;
+    display: inline-block;
+    width: 46.3%;
+    height: 100px;
+    margin: 20px 0 0 2%;
+    background: #fcfcfc;
+    box-shadow: 0 2px 10px 2px #ccc;
+}
+
+section ul li img {
+    float: left;
+    height: 100px;
+    width: 150px;
+}
+
+/* ----------------------------------------------------------------
+--- @group article styles -----------------------------------------
+----------------------------------------------------------------- */
+section article {
+}
+
+/* ----------------------------------------------------------------
+--- @group aside styles -------------------------------------------
+----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------
+--- @group mobile devices -----------------------------------------
+----------------------------------------------------------------- */
+@media screen and (max-width: 960px) {
+    section ul li {
+        width: 95%;
+    }
+}

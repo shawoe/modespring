@@ -3,12 +3,12 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title> -- ${(site.name)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="/template/bike/style/article.css"/>
 </head>
 <body>
 <div class="wrapper">
 <#include "common/_header.ftl">
-    <section>
+    <article class="content">
         <form id="editUserForm" action="/user/${currentUser.name}.html" method="post">
             <label for="editUserFormName">用户名</label>
             <input id="editUserFormName" name="name" type="text" value="${(currentUser.name)!''}">
@@ -24,7 +24,7 @@
             <input id="editUserFormEmail" name="email" type="text" value="${(currentUser.email)!''}">
             <input id="editUserFormButton" type="submit" value="保存">
         </form>
-    </section>
+    </article>
 </div>
 </body>
 </html>

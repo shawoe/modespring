@@ -3,12 +3,12 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>用户管理 -- ${(site.name)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="/template/bike/modespring/style/layout.css"/>
 </head>
 <body>
 <div class="wrapper">
 <#include "common/_header.ftl">
-    <section>
+    <section class="content">
         <h2>创建用户</h2>
 
         <form id="newUserForm" action="/admin/user.html" method="post">

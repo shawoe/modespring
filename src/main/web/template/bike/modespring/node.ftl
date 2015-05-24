@@ -3,12 +3,12 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title> -- ${(site.title)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="/template/bike/modespring/style/layout.css"/>
 </head>
 <body>
 <div class="wrapper">
 <#include "common/_header.ftl">
-    <section>
+    <section class="content">
 
         <h2>创建栏目</h2>
 

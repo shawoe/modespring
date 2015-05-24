@@ -2,8 +2,12 @@
     <h1><img src="/image/logo2.png"></h1>
     <ul class="shortcut">
         <li><a>济南</a></li>
+    <#if currentUser??>
         <li><a href="/center.html">会员中心</a></li>
         <li><a href="/modespring/index.html">后台管理</a></li>
+    <#else>
+        <li><a href="/login.html">登录</a></li>
+    </#if>
     </ul>
 </header>
 
@@ -15,10 +19,16 @@
     <ul class="nav">
     <#list nodeList as cur_node>
         <#if cur_node.level == 1>
-            <#if node?? && ( cur_node.name == node.name || cur_node.name == node.parentNode.name )>
-                <a href="/${(cur_node.name)!'javascript:;'}.html">
-                    <li class="selected">${(cur_node.title)!''}</li>
-                </a>
+            <#if node??>
+                <#if cur_node.name == node.name || cur_node.name == node.parentNode.name >
+                    <a href="/${(cur_node.name)!'javascript:;'}.html">
+                        <li class="selected">${(cur_node.title)!''}</li>
+                    </a>
+                <#else>
+                    <a href="/${(cur_node.name)!'javascript:;'}.html">
+                        <li>${(cur_node.title)!''}</li>
+                    </a>
+                </#if>
             <#else>
                 <a href="/${(cur_node.name)!'javascript:;'}.html">
                     <li>${(cur_node.title)!''}</li>

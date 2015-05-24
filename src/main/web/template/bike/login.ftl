@@ -3,12 +3,12 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>登录 -- ${(site.title)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="/template/bike/style/article.css"/>
 </head>
 <body>
 <div class="wrapper">
 <#include "common/_header.ftl">
-    <section>
+    <article class="content">
         <form id="loginForm" action="/login.html" method="post">
             <div class="formgroup">
                 <label for="loginFormName">用户名:</label>
@@ -25,7 +25,7 @@
             </div>
 
         </form>
-    </section>
+    </article>
 </div>
 </body>
 </html>

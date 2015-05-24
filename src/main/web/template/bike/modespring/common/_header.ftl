@@ -1,9 +1,8 @@
 <header>
-    <h1>${(site.title)!'ModeSpring'}</h1>
+    <h1><img src="/image/modespring.png"></h1>
     <ul>
-        <li><a>济南</a></li>
-        <li><a href="/center.html">会员中心</a></li>
         <li><a href="/index.html">前台首页</a></li>
+        <li><a href="/logout.html">退出登录</a></li>
     </ul>
 </header>
 

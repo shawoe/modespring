@@ -2,8 +2,9 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0" />
     <title>${(node.title)!''} - ${(site.title)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="/template/bike/style/column.css"/>
 <#include "common/_script.ftl">
 </head>
 <body>

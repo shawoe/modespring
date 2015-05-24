@@ -2,18 +2,17 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>${(article.title)!''} -- ${(node.title)!''} -- ${(site.title)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
+    <title>${(article.title)!''} - ${(node.title)!''} - ${(site.title)!''}</title>
+    <link rel="stylesheet" type="text/css" href="/template/bike/style/article.css"/>
+<#include "common/_script.ftl">
 </head>
 <body>
 <div class="wrapper">
 <#include "common/_header.ftl">
-
-    <section>
+    <article class="content">
         <h2>${(article.title)!''}</h2>
-
         <p>${(article.content)!''}</p>
-    </section>
+    </article>
 </div>
 </body>
 </html>

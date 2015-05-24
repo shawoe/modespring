@@ -3,12 +3,12 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>${(currentNode.title)!''} -- ${(site.title)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/style/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="/template/bike/modespring/style/layout.css"/>
 </head>
 <body>
 <div class="wrapper">
 <#include "common/_header.ftl">
-    <section>
+    <section class="content">
         <form action="/modespring/node/${(currentNode.id)!''}.html" method="post">
             <label>栏目编码<input name="name" type="text" value="${(currentNode.name)!''}"></label>
             <label>栏目名称<input name="title" type="text" value="${(currentNode.title)!''}"></label>
