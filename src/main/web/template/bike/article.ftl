@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>${(article.title)!''} - ${(node.title)!''} - ${(site.title)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/template/bike/style/layout.css"/>
-<#include "common/_head.ftl">
-</head>
-<body>
-<div class="wrapper">
+<#include "common/_html.ftl">
 <#include "common/_header.ftl">
-    <article class="content">
-        <h2>${(article.title)!''}</h2>
-        <p>${(article.content)!''}</p>
-    </article>
-</div>
-</body>
-</html>
+<article class="content">
+    <h2>${(article.title)!''}</h2>
+
+    <p>${(article.content)!''}</p>
+</article>
+<#include "common/_footer.ftl">

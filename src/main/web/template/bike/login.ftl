@@ -1,31 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>登录 -- ${(site.title)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/template/bike/style/layout.css"/>
-</head>
-<body>
-<div class="wrapper">
+<#include "common/_html.ftl">
 <#include "common/_header.ftl">
-    <section class="content">
-        <form id="loginForm" action="/login.html" method="post">
-            <div class="formgroup">
-                <label for="loginFormName">用户名:</label>
-                <input id="loginFormName" name="name" type="text">
-            </div>
-            <div class="formgroup">
-                <label for="loginFormPassword">密码:
-                </label>
-                <input id="loginFormPassword" name="password" type="password">
-            </div>
-            <div class="btnGroup">
-                <input id="loginButton" type="submit" value="登录"/>
-                <a href="/register.html">注册</a>
-            </div>
+<section class="content">
+    <form id="loginForm" action="/login.html" method="post">
+        <div class="formgroup">
+            <label for="loginFormName">用户名:</label>
+            <input id="loginFormName" name="name" type="text">
+        </div>
+        <div class="formgroup">
+            <label for="loginFormPassword">密码:
+            </label>
+            <input id="loginFormPassword" name="password" type="password">
+        </div>
+        <div class="btnGroup">
+            <input id="loginButton" type="submit" value="登录"/>
+            <a href="/register.html">注册</a>
+        </div>
 
-        </form>
-    </section>
-</div>
-</body>
-</html>
+    </form>
+</section>
+<#include "common/_footer.ftl">

@@ -13,9 +13,12 @@
         <a href="/modespring/node.html">
             <li>栏目管理</li>
         </a>
+        <li>权限管理</li>
         <a href="/modespring/user.html">
             <li>用户管理</li>
         </a>
-        <li>扩展设置</li>
+        <li>日志管理</li>
+        <li>插件设置</li>
+        <li>关于我们</li>
     </ul>
 </nav>
