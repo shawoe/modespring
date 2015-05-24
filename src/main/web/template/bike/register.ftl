@@ -3,12 +3,12 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>用户注册 -- ${(site.name)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/template/bike/style/article.css"/>
+    <link rel="stylesheet" type="text/css" href="/template/bike/style/layout.css"/>
 </head>
 <body>
 <div class="wrapper">
 <#include "common/_header.ftl">
-    <article class="content">
+    <section class="content">
 
         <form id="J_RegisterForm" action="/register.html" method="post">
             <div class="formgroup">
@@ -36,7 +36,7 @@
             </div>
 
         </form>
-    </article>
+    </section>
 </div>
 </body>
 </html>

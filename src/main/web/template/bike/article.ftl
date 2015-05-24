@@ -3,8 +3,8 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>${(article.title)!''} - ${(node.title)!''} - ${(site.title)!''}</title>
-    <link rel="stylesheet" type="text/css" href="/template/bike/style/article.css"/>
-<#include "common/_script.ftl">
+    <link rel="stylesheet" type="text/css" href="/template/bike/style/layout.css"/>
+<#include "common/_head.ftl">
 </head>
 <body>
 <div class="wrapper">
