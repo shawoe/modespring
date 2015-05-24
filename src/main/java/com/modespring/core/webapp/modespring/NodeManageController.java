@@ -68,6 +68,7 @@ public class NodeManageController extends BaseController {
 
     @RequestMapping(value = "node/{id}", method = RequestMethod.POST)
     public ModelAndView edit(ModelAndView modelAndView, HttpSession session, @PathVariable Integer id, Node node) {
+        node.setLevel(node.getParentNode().getLevel() + 1);
         nodeService.update(node);
         Context.flush();
         modelAndView.setViewName("redirect:/modespring/node.html");

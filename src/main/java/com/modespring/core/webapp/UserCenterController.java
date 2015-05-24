@@ -1,6 +1,8 @@
 package com.modespring.core.webapp;
 
+import com.modespring.core.domain.Node;
 import com.modespring.core.domain.User;
+import com.modespring.core.service.NodeService;
 import com.modespring.core.service.UserService;
 import com.modespring.core.webapp.access.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +21,17 @@ import javax.servlet.http.HttpSession;
 public class UserCenterController extends BaseController {
 
     @Autowired
+    private NodeService nodeService;
+
+    @Autowired
     public UserService userService;
 
     @RequestMapping(value = "center", method = RequestMethod.GET)
     public ModelAndView memberCenter(ModelAndView modelAndView, HttpSession session) {
         modelAndView.addObject("nodeList", Context.getNodeList());
         String username = (String) session.getAttribute("currentUserName");
+        Node node = nodeService.getByName("member");
+        modelAndView.addObject("node", node);
         if (username == null) {
             modelAndView.setViewName("redirect:/login.html");
         } else {

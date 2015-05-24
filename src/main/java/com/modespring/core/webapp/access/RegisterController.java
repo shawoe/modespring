@@ -1,6 +1,8 @@
 package com.modespring.core.webapp.access;
 
+import com.modespring.core.domain.Node;
 import com.modespring.core.domain.User;
+import com.modespring.core.service.NodeService;
 import com.modespring.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +20,16 @@ import javax.servlet.http.HttpSession;
 public class RegisterController extends BaseController {
 
     @Autowired
+    private NodeService nodeService;
+
+    @Autowired
     public UserService userService;
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public ModelAndView register(ModelAndView modelAndView, HttpSession session) {
         modelAndView.addObject("nodeList", Context.getNodeList());
+        Node node = nodeService.getByName("member");
+        modelAndView.addObject("node", node);
         if (session.getAttribute("currentUser") != null) {
             modelAndView.setViewName("redirect:/user/center.html");
             modelAndView.setViewName("/error");

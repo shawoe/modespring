@@ -46,6 +46,8 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "{name}/write", method = RequestMethod.GET)
     public ModelAndView write(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
         modelAndView.addObject("nodeList", Context.getNodeList());
+        Node node = nodeService.getByName(name);
+        modelAndView.addObject("node", node);
         modelAndView.setViewName("write");
         return modelAndView;
     }
