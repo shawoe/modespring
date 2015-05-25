@@ -26,5 +26,8 @@
         <module name="modespring" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="modespring" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
