@@ -13,8 +13,8 @@
         </ul>
     </header>
 
-    <div class="ad">
-        <img src="/image/ad.gif">
+    <div class="slide">
+        <img src="/image/background.gif" alt="头部导航">
     </div>
 
     <nav>
@@ -35,20 +35,11 @@
             </#if>
         </#list>
         </ul>
+    </nav>
 
-        <ul class="action">
-            <li>
-                <ul class="filter">
-                    <li>精华主题</li>
-                    <li>最新发表</li>
-                    <li>最后评论</li>
-                    <li>最多关注</li>
-                </ul>
-            </li>
-
-            <li>
+    <div class="menu">
             <#if  node??>
-                <ul class="menu">
+                <ul>
                     <#assign isFirst = true>
                     <#list nodeList as cur_menu>
                         <#if cur_menu.level == 2>
@@ -77,6 +68,11 @@
                     </#list>
                 </ul>
             </#if>
-            </li>
+
+        <ul class="sequence">
+            <li><a href="javascript:;">精华</a></li>
+            <li class="selected"><a href="javascript:;">最新</a></li>
+            <li><a href="javascript:;">热门</a></li>
+            <li><a href="javascript:;">关注</a></li>
         </ul>
-    </nav>
+    </div>

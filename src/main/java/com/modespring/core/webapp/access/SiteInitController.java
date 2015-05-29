@@ -141,23 +141,22 @@ public class SiteInitController {
             nodeDao.save(nodeList);
             nodeDao.save(childList);
 
-            // 添加字段
-            List<Field> fieldList = new ArrayList<Field>();
-            for (int i = 0; i < 3; i++) {
-                Field field = new Field();
-                field.setName("field" + i);
-                field.setTitle("新增字段" + i);
-                fieldList.add(field);
-            }
-            fieldDao.save(fieldList);
-
             // 添加文章
             List<Article> articleList = new ArrayList<Article>();
             for (int i = 0; i < 5; i++) {
                 Article article = new Article(node_focus);
                 article.setName("focus" + i);
                 article.setTitle("推荐文章" + i);
-                article.setFieldList(fieldList);
+                // 添加字段
+                List<Field> fieldList = new ArrayList<Field>();
+                for (int j = 0; j < 3; j++) {
+                    Field field = new Field();
+                    field.setName("field" + j);
+                    field.setTitle("新增字段" + j);
+                    fieldList.add(field);
+                }
+                fieldDao.save(fieldList);
+                article.setValueList(fieldList);
                 articleList.add(article);
             }
             articleDao.save(articleList);

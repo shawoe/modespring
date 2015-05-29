@@ -1,8 +1,6 @@
 package com.modespring.core.domain.bean;
 
-import com.modespring.core.domain.Field;
-import com.modespring.core.domain.Node;
-import com.modespring.core.domain.User;
+import com.modespring.core.domain.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,6 +16,8 @@ public abstract class ArticleBean extends BaseBean {
 
     private String content;
 
+    private String nodeTree;
+
     @ManyToOne
     @JoinColumn
     private User author;
@@ -26,9 +26,20 @@ public abstract class ArticleBean extends BaseBean {
     @JoinColumn
     private Node node;
 
-    @ManyToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable
-    private List<Field> fieldList;
+    private List<Field> valueList;
+
+    @OneToMany
+    @JoinColumn
+    private List<Image> imageList;
+
+    @OneToMany
+    @JoinColumn
+    private List<File> fileList;
+
+    protected ArticleBean() {
+    }
 
     public Date getPublishDate() {
         return publishDate;
@@ -54,6 +65,14 @@ public abstract class ArticleBean extends BaseBean {
         this.node = node;
     }
 
+    public String getNodeTree() {
+        return nodeTree;
+    }
+
+    public void setNodeTree(String nodeTree) {
+        this.nodeTree = nodeTree;
+    }
+
     public String getContent() {
         return content;
     }
@@ -62,12 +81,27 @@ public abstract class ArticleBean extends BaseBean {
         this.content = content;
     }
 
-    public List<Field> getFieldList() {
-        return fieldList;
+    public List<Field> getValueList() {
+        return valueList;
     }
 
-    public void setFieldList(List<Field> fieldList) {
-        this.fieldList = fieldList;
+    public void setValueList(List<Field> valueList) {
+        this.valueList = valueList;
     }
 
+    public List<Image> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
+    }
+
+    public List<File> getFileList() {
+        return fileList;
+    }
+
+    public void setFileList(List<File> fileList) {
+        this.fileList = fileList;
+    }
 }

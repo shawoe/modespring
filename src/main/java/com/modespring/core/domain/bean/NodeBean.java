@@ -1,5 +1,6 @@
 package com.modespring.core.domain.bean;
 
+import com.modespring.core.domain.Model;
 import com.modespring.core.domain.Node;
 
 import javax.persistence.*;
@@ -16,6 +17,10 @@ public abstract class NodeBean extends BaseBean {
 
     @Column(nullable = false)
     private Integer level;
+
+    @OneToOne
+    @JoinColumn
+    private Model model;
 
     @ManyToOne
     @JoinColumn
@@ -43,6 +48,14 @@ public abstract class NodeBean extends BaseBean {
 
     public void setTemplate(String template) {
         this.template = template;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
     }
 
     public Node getParentNode() {

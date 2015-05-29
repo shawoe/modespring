@@ -1,6 +1,8 @@
 package com.modespring.core.webapp.modespring;
 
+import com.modespring.core.domain.Model;
 import com.modespring.core.domain.Node;
+import com.modespring.core.service.ModelService;
 import com.modespring.core.service.NodeService;
 import com.modespring.core.webapp.access.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class NodeManageController extends BaseController {
 
     @Autowired
     private NodeService nodeService;
+
+    @Autowired
+    private ModelService modelService;
 
     @RequestMapping(value = "node", method = RequestMethod.GET)
     public ModelAndView getAll(ModelAndView modelAndView, HttpSession session) {
@@ -62,13 +67,17 @@ public class NodeManageController extends BaseController {
         Node node = nodeService.getOne(id);
         modelAndView.addObject("currentNode", node);
         modelAndView.addObject("nodeList", Context.getNodeList());
+        List<Model> modelList = modelService.getAll();
+        modelAndView.addObject("modelList", modelList);
         modelAndView.setViewName("/modespring/nodeDetail");
         return modelAndView;
     }
 
     @RequestMapping(value = "node/{id}", method = RequestMethod.POST)
-    public ModelAndView edit(ModelAndView modelAndView, HttpSession session, @PathVariable Integer id, Node node) {
+    public ModelAndView edit(ModelAndView modelAndView, HttpSession session, @PathVariable Integer id, Node node, String modelName) {
+        Model model = modelService.getByName(modelName);
         node.setLevel(node.getParentNode().getLevel() + 1);
+        node.setModel(model);
         nodeService.update(node);
         Context.flush();
         modelAndView.setViewName("redirect:/modespring/node.html");

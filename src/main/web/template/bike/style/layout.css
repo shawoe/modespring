@@ -56,12 +56,12 @@ section.main {
     padding-left: 1%;
 }
 
-div.ad {
+div.slide {
     color: #aaa;
     margin: 25px 3% 0;
 }
 
-div.ad img {
+div.slide img {
     width: 100%;
     box-shadow: 0 2px 10px 2px #ccc;
 }
@@ -96,27 +96,34 @@ header ul li {
 --- @group nav styles ------------------------------------------
 ----------------------------------------------------------------- */
 
-nav {
+nav,
+div.menu {
     padding: 30px 3% 25px;
     overflow: auto;
 }
 
-nav ul.nav {
-    float: left;
-    box-shadow: 0 2px 10px 2px #ccc;
-
-}
-
-nav ul.menu {
+nav ul,
+div.menu ul {
+    margin-right: 20px;
     float: left;
     box-shadow: 0 2px 10px 2px #ccc;
 }
 
-nav ul li {
+div.menu ul.sequence {
+    float: right;
+}
+
+div.menu {
+    display: none;
+}
+
+nav ul li,
+div.menu ul li {
     float: left;
 }
 
-nav ul li a {
+nav ul li a,
+div.menu ul li a {
     display: block;
     float: left;
     padding: 0 5px;
@@ -128,32 +135,10 @@ nav ul li a {
     border-right: solid 1px #eee;
 }
 
-nav ul li.selected a {
+nav ul li.selected a,
+div.menu ul li.selected a {
     background: #0a0;
     color: #fff;
-}
-
-ul.filter {
-    float: right;
-    margin-top: -6px;
-}
-
-ul.filter li {
-    font-size: 14px;
-    float: left;
-    height: 32px;
-    width: 32px;
-    line-height: 16px;
-    text-align: center;
-    padding: 8px;
-    border-radius: 24px;
-    margin-right: 16px;
-    background: #fcfcfc;
-    border: solid 2px #0a0;
-}
-
-nav ul.action {
-    display: none;
 }
 
 /* ----------------------------------------------------------------
