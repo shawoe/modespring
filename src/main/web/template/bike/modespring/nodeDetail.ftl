@@ -5,7 +5,7 @@
         <label>栏目唯一编码<input name="name" type="text" value="${(currentNode.name)!''}"></label>
         <label>栏目名称<input name="title" type="text" value="${(currentNode.title)!''}"></label>
         <label>栏目模型
-            <select name="model.name">
+            <select name="modelName">
             <#list modelList as model>
                     <#if (node.model.name)?? && model.name == node.model.name>
                         <option selected="selected" value="${(model.name)!''}">${(model.title)!''}</option>

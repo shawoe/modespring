@@ -1,7 +1,9 @@
 package com.modespring.core.webapp;
 
 import com.modespring.core.domain.Article;
+import com.modespring.core.domain.Field;
 import com.modespring.core.domain.Node;
+import com.modespring.core.repository.FieldDao;
 import com.modespring.core.service.ArticleService;
 import com.modespring.core.service.NodeService;
 import com.modespring.core.webapp.access.BaseController;
@@ -18,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Shawoe on 2015/5/22.
@@ -31,6 +35,9 @@ public class ArticleController extends BaseController {
 
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private FieldDao fieldDao;
 
     @RequestMapping(value = "upload", method = RequestMethod.GET)
     public ModelAndView upload(ModelAndView modelAndView, HttpSession session) {
@@ -58,12 +65,12 @@ public class ArticleController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "{name}/{id}", method = RequestMethod.GET)
-    public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable String name, @PathVariable Integer id) {
+    @RequestMapping(value = "{nodeName}/{id}", method = RequestMethod.GET)
+    public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, @PathVariable Integer id) {
         modelAndView.addObject("nodeList", Context.getNodeList());
         Article article = articleService.getOne(id);
         modelAndView.addObject("article", article);
-        Node node = nodeService.getByName(name);
+        Node node = nodeService.getByName(nodeName);
         modelAndView.addObject("node", node);
         String template = node.getTemplate();
         if (template == null || template.isEmpty()) {
@@ -74,19 +81,32 @@ public class ArticleController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "{name}/write", method = RequestMethod.GET)
-    public ModelAndView write(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
+    @RequestMapping(value = "{nodeName}/write", method = RequestMethod.GET)
+    public ModelAndView write(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName) {
         modelAndView.addObject("nodeList", Context.getNodeList());
-        Node node = nodeService.getByName(name);
+        Node node = nodeService.getByName(nodeName);
         modelAndView.addObject("node", node);
         modelAndView.setViewName("write");
         return modelAndView;
     }
 
-    @RequestMapping(value = "{name}/write", method = RequestMethod.POST)
-    public ModelAndView writeAction(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
+    @RequestMapping(value = "{nodeName}/write", method = RequestMethod.POST)
+    public ModelAndView writeAction(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, Article article, String fieldName[], String fieldTitle[], String fieldValue[]) {
         modelAndView.addObject("nodeList", Context.getNodeList());
-        modelAndView.setViewName("write");
+        List<Field> fieldList = new ArrayList<>();
+        for (int i = 0; i < fieldName.length; i++) {
+            Field field = new Field();
+            field.setName(fieldName[i]);
+            field.setTitle(fieldTitle[i]);
+            field.setValue(fieldValue[i]);
+            fieldList.add(field);
+        }
+        fieldList = fieldDao.save(fieldList);
+        Node node = nodeService.getByName(nodeName);
+        article.setNode(node);
+        article.setValueList(fieldList);
+        article = articleService.create(article);
+        modelAndView.setViewName("redirect:/" + nodeName + "/" + article.getId() + ".html");
         return modelAndView;
     }
 }

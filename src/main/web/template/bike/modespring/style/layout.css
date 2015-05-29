@@ -68,6 +68,14 @@ section.content {
     background: #fcfcfc;
 }
 
+section.login {
+    border-radius: 10px;
+    box-shadow: 0 0 10px 2px #ccc;
+    margin: 50px 30%;
+    padding: 30px 50px;
+    background: #fcfcfc;
+}
+
 section.content section {
 
     margin-bottom: 30px;

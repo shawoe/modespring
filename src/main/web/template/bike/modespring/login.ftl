@@ -1,6 +1,12 @@
 <#include "common/_html.ftl">
-<#include "common/_header.ftl">
-<section class="content">
+<header>
+    <h1><img src="/image/modespring.png"></h1>
+    <ul>
+        <li><a href="/index.html">前台首页</a></li>
+        <li><a href="/logout.html">退出登录</a></li>
+    </ul>
+</header>
+<section class="login">
     <form id="loginForm" action="/login.html" method="post">
         <label for="loginFormName">用户名</label>
         <input id="loginFormName" name="name" type="text">
