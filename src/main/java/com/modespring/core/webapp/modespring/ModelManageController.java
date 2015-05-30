@@ -27,6 +27,8 @@ public class ModelManageController extends BaseController {
 
     @RequestMapping(value = "model", method = RequestMethod.GET)
     public ModelAndView getAll(ModelAndView modelAndView, HttpSession session) {
+        modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("MospNodeName", "model");
         modelAndView.addObject("modelList", modelService.getAll());
         return modelAndView;
     }
@@ -35,7 +37,7 @@ public class ModelManageController extends BaseController {
     public ModelAndView create(ModelAndView modelAndView, HttpSession session, Model model) {
         modelService.create(model);
         Context.flush();
-        modelAndView.addObject("modelList", modelService.getAll());
+        modelAndView.setViewName("redirect:/modespring/model.html");
         return modelAndView;
     }
 
@@ -53,12 +55,14 @@ public class ModelManageController extends BaseController {
             modelService.delete(delete[i]);
         }
         Context.flush();
-        modelAndView.addObject("modelList", modelService.getAll());
+        modelAndView.setViewName("redirect:/modespring/model.html");
         return modelAndView;
     }
 
     @RequestMapping(value = "model/{id}", method = RequestMethod.GET)
     public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable Integer id) {
+        modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("MospNodeName", "model");
         Model model = modelService.getOne(id);
         modelAndView.addObject("currentModel", model);
         modelAndView.setViewName("/modespring/modelDetail");

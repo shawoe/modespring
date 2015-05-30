@@ -57,7 +57,6 @@ nav {
     border-radius: 10px 10px 0 0;
     overflow: hidden;
     box-shadow: 0 0 10px 2px #ccc;
-    border-bottom: solid 1px #eee;
 }
 
 section.content {
@@ -106,20 +105,20 @@ header ul li {
     padding: 15px;
 }
 
-nav ul li {
+nav ul li a {
     float: left;
     box-sizing: border-box;
     height: 50px;
     width: 12.5%;
-    background: #fcfcfc;
+    background: #f0f0ff;
     line-height: 55px;
     text-align: center;
-    border-right: solid 1px #eee;
+    border: solid 1px #e2e2e6;
 }
 
-.selected {
-    background: #0a0;
-    color: #fff;
+.selected a {
+    border-bottom: hidden;
+    background: #fcfcfc;
 }
 
 section ul li {

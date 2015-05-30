@@ -21,7 +21,7 @@
         <ul class="nav">
         <#list nodeList as cur_node>
             <#if cur_node.level == 1>
-                <#if node??>
+                <#if node?? && node.parentNode??>
                     <#if cur_node.name == node.name || cur_node.name == node.parentNode.name >
                         <li class="selected">
                             <a href="/${(cur_node.name)!'javascript:;'}.html">${(cur_node.title)!''}</a>
@@ -35,10 +35,16 @@
             </#if>
         </#list>
         </ul>
+
+        <div class="action">
+            <ul>
+                <li><a href="/${(node.name)!''}/write.html">发表文章</a></li>
+            </ul>
+        </div>
     </nav>
 
     <div class="menu">
-            <#if  node??>
+            <#if  node?? && node.parentNode??>
                 <ul>
                     <#assign isFirst = true>
                     <#list nodeList as cur_menu>

@@ -58,12 +58,15 @@ public class FieldManageController extends BaseController {
 //        }
 //        Context.flush();
 //        modelAndView.addObject("modelList", modelService.getAll());
+        modelAndView.setViewName("redirect:/modespring/model/" + modelName + "/field.html");
         return modelAndView;
     }
 
     @Transactional
     @RequestMapping(value = "model/{name}/field", method = RequestMethod.GET)
     public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
+        modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("MospNodeName", "model");
         Model model = modelService.getByName(name);
         modelAndView.addObject("currentModel", model);
         List<Field> fieldList = modelService.getFieldList(name);

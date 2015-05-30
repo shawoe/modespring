@@ -8,19 +8,12 @@
 
 <nav>
     <ul class="clearfix">
-        <li>站点统计</li>
-        <li>全局设置</li>
-        <a href="/modespring/node.html">
-            <li>栏目管理</li>
-        </a>
-        <a href="/modespring/model.html">
-            <li>模型管理</li>
-        </a>
-        <li>权限管理</li>
-        <a href="/modespring/user.html">
-            <li>用户管理</li>
-        </a>
-        <li>日志管理</li>
-        <li>关于我们</li>
+        <#list mospList as cur_mosp>
+            <#if MospNodeName == cur_mosp.name>
+                <li class="selected"><a href="/modespring/${(cur_mosp.name)!''}.html">${(cur_mosp.title)!''}</a></li>
+            <#else>
+                <li><a href="/modespring/${(cur_mosp.name)!''}.html">${(cur_mosp.title)!''}</a></li>
+            </#if>
+        </#list>
     </ul>
 </nav>

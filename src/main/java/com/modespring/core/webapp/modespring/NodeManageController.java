@@ -32,6 +32,8 @@ public class NodeManageController extends BaseController {
 
     @RequestMapping(value = "node", method = RequestMethod.GET)
     public ModelAndView getAll(ModelAndView modelAndView, HttpSession session) {
+        modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("MospNodeName", "node");
         modelAndView.addObject("nodeList", Context.getNodeList());
         return modelAndView;
     }
@@ -40,7 +42,7 @@ public class NodeManageController extends BaseController {
     public ModelAndView create(ModelAndView modelAndView, HttpSession session, Node node) {
         nodeService.create(node);
         Context.flush();
-        modelAndView.addObject("nodeList", Context.getNodeList());
+        modelAndView.setViewName("redirect:/modespring/node.html");
         return modelAndView;
     }
 
@@ -58,14 +60,16 @@ public class NodeManageController extends BaseController {
             nodeService.delete(delete[i]);
         }
         Context.flush();
-        modelAndView.addObject("nodeList", Context.getNodeList());
+        modelAndView.setViewName("redirect:/modespring/node.html");
         return modelAndView;
     }
 
     @RequestMapping(value = "node/{id}", method = RequestMethod.GET)
     public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable Integer id) {
+        modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("MospNodeName", "node");
         Node node = nodeService.getOne(id);
-        modelAndView.addObject("currentNode", node);
+        modelAndView.addObject("node", node);
         modelAndView.addObject("nodeList", Context.getNodeList());
         List<Model> modelList = modelService.getAll();
         modelAndView.addObject("modelList", modelList);
@@ -74,8 +78,8 @@ public class NodeManageController extends BaseController {
     }
 
     @RequestMapping(value = "node/{id}", method = RequestMethod.POST)
-    public ModelAndView edit(ModelAndView modelAndView, HttpSession session, @PathVariable Integer id, Node node, String modelName) {
-        Model model = modelService.getByName(modelName);
+    public ModelAndView edit(ModelAndView modelAndView, HttpSession session, @PathVariable Integer id, Node node) {
+        Model model = modelService.getOne(node.getModel().getId());
         node.setLevel(node.getParentNode().getLevel() + 1);
         node.setModel(model);
         nodeService.update(node);

@@ -141,6 +141,16 @@ div.menu ul li.selected a {
     color: #fff;
 }
 
+div.action ul {
+    float: right;
+}
+
+div.action ul li {
+    float: left;
+    overflow: hidden;
+    border: solid 2px #0a0;
+}
+
 /* ----------------------------------------------------------------
 --- @group section styles -----------------------------------------
 ----------------------------------------------------------------- */

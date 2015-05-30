@@ -28,6 +28,8 @@ public class UserManageController extends BaseController {
 
     @RequestMapping(value = "user", method = RequestMethod.GET)
     public ModelAndView getAll(ModelAndView modelAndView, HttpSession session) {
+        modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("MospNodeName", "user");
         modelAndView.addObject("userList", userService.getAll());
         modelAndView.addObject("roleList", roleService.getAll());
         return modelAndView;
@@ -40,12 +42,14 @@ public class UserManageController extends BaseController {
         } catch (Exception e) {
             modelAndView.addObject("errorMessage", e.getMessage());
         }
-        modelAndView.setViewName("redirect:/admin/user.html");
+        modelAndView.setViewName("redirect:/modespring/user.html");
         return modelAndView;
     }
 
     @RequestMapping(value = "user/{username}", method = RequestMethod.GET)
     public ModelAndView getUserDetails(ModelAndView modelAndView, HttpSession session, @PathVariable String username) {
+        modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("MospNodeName", "user");
         modelAndView.setViewName("modespring/userDetails");
         modelAndView.addObject("user", userService.getByName(username));
         return modelAndView;

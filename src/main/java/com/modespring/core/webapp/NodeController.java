@@ -5,6 +5,7 @@ import com.modespring.core.domain.Node;
 import com.modespring.core.service.ArticleService;
 import com.modespring.core.service.NodeService;
 import com.modespring.core.webapp.access.BaseController;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +36,7 @@ public class NodeController extends BaseController {
         modelAndView.addObject("node", node);
         List<Article> articleList = articleService.getByNodeId(node.getId());
         modelAndView.addObject("articleList", articleList);
-        if (node.getUrl() == null) {
+        if (StringUtils.isBlank(node.getUrl())) {
             modelAndView.setViewName("/column");
         } else {
             modelAndView.setViewName(node.getUrl());

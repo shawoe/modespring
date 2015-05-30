@@ -5,6 +5,7 @@ import com.modespring.core.service.UserService;
 import com.modespring.core.webapp.access.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,8 +28,10 @@ public class ModeSpringController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "center", method = RequestMethod.GET)
-    public ModelAndView center(ModelAndView modelAndView, HttpSession session) {
+    @RequestMapping(value = "{name}", method = RequestMethod.GET)
+    public ModelAndView center(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
+        modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("MospNodeName", name);
         User user = (User) session.getAttribute("ModeSpringUser");
         if (user == null) {
             modelAndView.setViewName("redirect:/modespring/login.html");
