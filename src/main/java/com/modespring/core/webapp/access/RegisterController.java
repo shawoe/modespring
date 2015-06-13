@@ -31,7 +31,7 @@ public class RegisterController extends BaseController {
         Node node = nodeService.getByName("member");
         modelAndView.addObject("node", node);
         if (session.getAttribute("currentUser") != null) {
-            modelAndView.setViewName("redirect:/user/center.html");
+            modelAndView.setViewName("redirect:/center.html");
             modelAndView.setViewName("/error");
         }
         return modelAndView;
@@ -40,10 +40,10 @@ public class RegisterController extends BaseController {
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public ModelAndView registerAction(ModelAndView modelAndView, HttpSession session, User user) {
         if (session.getAttribute("currentUser") != null) {
-            modelAndView.setViewName("redirect:/user/center.html");
+            modelAndView.setViewName("redirect:/center.html");
         } else try {
             userService.register(user);
-            modelAndView.setViewName("redirect:login.ftl");
+            modelAndView.setViewName("redirect:/login.html");
         } catch (Exception e) {
             modelAndView.addObject("errorMessage", e.getMessage());
         }

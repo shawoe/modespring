@@ -13,7 +13,7 @@ public interface BaseService<T> {
 
     public T update(T entity);
 
-    public void updateALL(List<T> list);
+    public List<T> updateALL(List<T> list);
 
     public T getOne(Integer id);
 

@@ -7,7 +7,7 @@
         <label>栏目模型
             <select name="model.id">
             <#list modelList as cur_model>
-                <#if cur_model.id == node.model.id>
+                <#if (node.model.id)?? && cur_model.id == node.model.id>
                     <option selected="selected" value="${(cur_model.id)!''}">${(cur_model.title)!''}</option>
                 <#else>
                     <option value="${(cur_model.id)!''}">${cur_model.name}${(cur_model.title)!''}</option>

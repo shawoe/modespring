@@ -31,6 +31,7 @@ public class ModeSpringController extends BaseController {
     @RequestMapping(value = "{name}", method = RequestMethod.GET)
     public ModelAndView center(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
         modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("site", Context.getSite());
         modelAndView.addObject("MospNodeName", name);
         User user = (User) session.getAttribute("ModeSpringUser");
         if (user == null) {

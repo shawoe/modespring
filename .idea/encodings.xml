@@ -6,7 +6,9 @@
     <file url="file://$PROJECT_DIR$/modespring.iml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pom.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/global.properties" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/jdbc.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/modespring.properties" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/web/WEB-INF" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/web/_index.jsp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/web/style" charset="UTF-8" />

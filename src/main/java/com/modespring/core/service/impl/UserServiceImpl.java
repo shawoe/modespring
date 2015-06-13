@@ -1,6 +1,7 @@
 package com.modespring.core.service.impl;
 
 import com.modespring.core.domain.User;
+import com.modespring.core.repository.RoleDao;
 import com.modespring.core.repository.UserDao;
 import com.modespring.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ import java.util.List;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    RoleDao roleDao;
 
     @Autowired
     UserDao userDao;
@@ -42,6 +46,7 @@ public class UserServiceImpl implements UserService {
         if (isExisted(user.getName())) {
             throw new Exception("用户已存在");
         }
+        user.setRole(roleDao.findByName("user"));
         return userDao.save(user);
     }
 

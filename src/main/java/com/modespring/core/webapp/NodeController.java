@@ -5,7 +5,7 @@ import com.modespring.core.domain.Node;
 import com.modespring.core.service.ArticleService;
 import com.modespring.core.service.NodeService;
 import com.modespring.core.webapp.access.BaseController;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +32,7 @@ public class NodeController extends BaseController {
     @RequestMapping(value = "{name}", method = RequestMethod.GET)
     public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
         modelAndView.addObject("nodeList", Context.getNodeList());
+        modelAndView.addObject("site", Context.getSite());
         Node node = nodeService.getByName(name);
         modelAndView.addObject("node", node);
         List<Article> articleList = articleService.getByNodeId(node.getId());

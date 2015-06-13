@@ -31,8 +31,8 @@ public class ModelServiceImpl implements ModelService {
         return modelDao.saveAndFlush(model);
     }
 
-    public void updateALL(List<Model> modelList) {
-        modelDao.save(modelList);
+    public List<Model> updateALL(List<Model> modelList) {
+        return modelDao.save(modelList);
     }
 
     public Model getOne(Integer id) {

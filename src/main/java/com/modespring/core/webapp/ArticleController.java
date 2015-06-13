@@ -1,27 +1,27 @@
 package com.modespring.core.webapp;
 
+import com.alibaba.fastjson.JSONObject;
 import com.modespring.core.domain.Article;
 import com.modespring.core.domain.Field;
 import com.modespring.core.domain.Node;
-import com.modespring.core.repository.FieldDao;
 import com.modespring.core.service.ArticleService;
+import com.modespring.core.service.FieldService;
 import com.modespring.core.service.NodeService;
 import com.modespring.core.webapp.access.BaseController;
 import org.apache.commons.io.FileUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by Shawoe on 2015/5/22.
@@ -37,7 +37,7 @@ public class ArticleController extends BaseController {
     private ArticleService articleService;
 
     @Autowired
-    private FieldDao fieldDao;
+    private FieldService fieldService;
 
     @RequestMapping(value = "upload", method = RequestMethod.GET)
     public ModelAndView upload(ModelAndView modelAndView, HttpSession session) {
@@ -46,10 +46,10 @@ public class ArticleController extends BaseController {
 
     @RequestMapping(value = "upload", method = RequestMethod.POST)
     public ModelAndView uploadAction(ModelAndView modelAndView, HttpSession session, @RequestParam MultipartFile[] file) throws IOException {
-        for(MultipartFile myfile : file){
-            if(myfile.isEmpty()){
+        for (MultipartFile myfile : file) {
+            if (myfile.isEmpty()) {
                 System.out.println("文件未上传");
-            }else{
+            } else {
                 System.out.println("文件长度: " + myfile.getSize());
                 System.out.println("文件类型: " + myfile.getContentType());
                 System.out.println("文件名称: " + myfile.getName());
@@ -61,8 +61,41 @@ public class ArticleController extends BaseController {
                 FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(realPath, myfile.getOriginalFilename()));
             }
         }
-        modelAndView.addObject("message","success");
+        modelAndView.addObject("message", "success");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "uploadAjax", method = RequestMethod.POST)
+    @ResponseBody
+    public String uploadAjax(ModelAndView modelAndView, HttpSession session, @RequestParam("file") MultipartFile[] file) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("success", false);
+        for (MultipartFile cur_file : file) {
+            if (cur_file.isEmpty()) {
+                map.put("msg", "文件未上传，请选择你要上传的文件");
+            } else {
+                String realPath = session.getServletContext().getRealPath("/images");
+                String fileName = cur_file.getOriginalFilename();
+                if(fileName.indexOf('.') != -1){
+                    String fileExt = fileName.substring(fileName.lastIndexOf('.'));
+                    DateFormat format = new SimpleDateFormat("yyyyMMddhhmmss");
+                    String newFileName = cur_file.getSize() + "-"  + format.format(new Date())+ fileExt;
+                    System.out.println(newFileName+"------------------------------------------------------------------------------");
+                    map.put("success", true);
+                    map.put("file_path", "/images/" + newFileName);
+                    try {
+                        FileUtils.copyInputStreamToFile(cur_file.getInputStream(), new File(realPath, newFileName));
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        map.put("success", false);
+                        map.put("msg", "文件未成功上传");
+                    }
+                }
+            }
+        }
+        return objectMapper.writeValueAsString(new JSONObject(map));
     }
 
     @RequestMapping(value = "{nodeName}/{id}", method = RequestMethod.GET)
@@ -94,14 +127,16 @@ public class ArticleController extends BaseController {
     public ModelAndView writeAction(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, Article article, String fieldName[], String fieldTitle[], String fieldValue[]) {
         modelAndView.addObject("nodeList", Context.getNodeList());
         List<Field> fieldList = new ArrayList<>();
-        for (int i = 0; i < fieldName.length; i++) {
-            Field field = new Field();
-            field.setName(fieldName[i]);
-            field.setTitle(fieldTitle[i]);
-            field.setValue(fieldValue[i]);
-            fieldList.add(field);
+        if (fieldName != null) {
+            for (int i = 0; i < fieldName.length; i++) {
+                Field field = new Field();
+                field.setName(fieldName[i]);
+                field.setTitle(fieldTitle[i]);
+                field.setValue(fieldValue[i]);
+                fieldList.add(field);
+            }
         }
-        fieldList = fieldDao.save(fieldList);
+        fieldList = fieldService.createALL(fieldList);
         Node node = nodeService.getByName(nodeName);
         article.setNode(node);
         article.setValueList(fieldList);

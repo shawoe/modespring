@@ -1,7 +1,7 @@
 <body>
 <div class="wrapper">
     <header>
-        <h1><img src="/image/logo2.png"></h1>
+        <h1><img src="${(site.logo)!''}"></h1>
         <ul class="shortcut">
             <li><a>济南</a></li>
         <#if Session.currentUserName??>

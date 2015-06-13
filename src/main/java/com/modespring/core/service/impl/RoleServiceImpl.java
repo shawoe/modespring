@@ -35,8 +35,8 @@ public class RoleServiceImpl implements RoleService {
         return roleDao.saveAndFlush(role);
     }
 
-    public void updateALL(List<Role> roleList) {
-        roleDao.save(roleList);
+    public List<Role> updateALL(List<Role> roleList) {
+        return roleDao.save(roleList);
     }
 
     public Role getOne(Integer id) {

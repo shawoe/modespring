@@ -31,8 +31,8 @@ public class NodeServiceImpl implements NodeService {
         return nodeDao.saveAndFlush(node);
     }
 
-    public void updateALL(List<Node> nodeList) {
-        nodeDao.save(nodeList);
+    public List<Node> updateALL(List<Node> nodeList) {
+        return nodeDao.save(nodeList);
     }
 
     public Node getOne(Integer id) {

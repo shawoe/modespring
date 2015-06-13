@@ -23,7 +23,7 @@ public class LoginMospController extends BaseController {
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public ModelAndView loginModeSpring(ModelAndView modelAndView, HttpSession session) {
         modelAndView.addObject("nodeList", Context.getNodeList());
-        if (session.getAttribute("ModeSpringUser") != null) {
+        if (session.getAttribute("MospUserName") != null) {
             modelAndView.setViewName("redirect:/modespring/center.html");
         }
         return modelAndView;
@@ -31,11 +31,12 @@ public class LoginMospController extends BaseController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView loginModeSpringAction(ModelAndView modelAndView, HttpSession session, User user) {
-        if (session.getAttribute("ModeSpringUser") != null) {
+        if (session.getAttribute("MospUserName") != null) {
             modelAndView.setViewName("redirect:/modespring/center.html");
         } else try {
             user = userService.login(user.getName(), user.getPassword());
             session.setAttribute("ModeSpringUser", user);
+            session.setAttribute("MospUserName", user.getName());
             modelAndView.setViewName("redirect:/modespring/center.html");
         } catch (Exception e) {
             modelAndView.addObject("errorMessage", e.getMessage());

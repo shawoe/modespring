@@ -1,7 +1,9 @@
 package com.modespring.core.repository;
 
 import com.modespring.core.domain.Role;
+import com.modespring.core.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,4 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoleDao extends JpaRepository<Role, Integer> {
 
+    @Query("SELECT role FROM Role role WHERE role.name = ?1")
+    public Role findByName(String name);
 }

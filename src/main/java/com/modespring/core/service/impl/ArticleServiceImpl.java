@@ -33,8 +33,8 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.saveAndFlush(article);
     }
 
-    public void updateALL(List<Article> articleList) {
-        articleDao.save(articleList);
+    public List<Article> updateALL(List<Article> articleList) {
+        return articleDao.save(articleList);
     }
 
     public Article getOne(Integer id) {

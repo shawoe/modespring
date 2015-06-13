@@ -23,6 +23,7 @@
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
+
     <!-- 配置字符编码过滤器，编码格式设为UTF-8，避免中文乱码 -->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>

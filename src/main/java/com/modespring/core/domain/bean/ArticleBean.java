@@ -14,6 +14,7 @@ public abstract class ArticleBean extends BaseBean {
 
     private Date publishDate;
 
+    @Column(columnDefinition="BLOB")
     private String content;
 
     private String nodeTree;

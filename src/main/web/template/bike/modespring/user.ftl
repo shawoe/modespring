@@ -43,8 +43,8 @@
                     <td>${user.id}</td>
                     <td><a href="/modespring/user/${user.name}.html">${user.name}</a></td>
                     <td>${user.email}</td>
-                    <td>${user.role.name}</td>
-                    <td>${user.role.power}</td>
+                    <td>${(user.role.name)!''}</td>
+                    <td>${(user.role.power)!''}</td>
                     <td>${(user.linkman.name)!''}</td>
                     <td>${(user.linkman.sex)!''}</td>
                     <td>${(user.lastLogin)!''}</td>

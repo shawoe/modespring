@@ -2,8 +2,10 @@ package com.modespring.core.service.singleton;
 
 import com.modespring.core.domain.pojo.Mosp;
 import com.modespring.core.domain.Node;
-import com.modespring.core.domain.Site;
+import com.modespring.core.domain.pojo.Site;
 import com.modespring.core.repository.NodeDao;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ import java.util.List;
 @Scope(value = "singleton")
 public class ContextService {
 
-    private Site context;
+    private Site site;
     private List<Node> nodeList;
     private List<Mosp> mospList;
 
@@ -29,30 +31,50 @@ public class ContextService {
     public ContextService(NodeDao nodeDao) {
         this.nodeList = nodeDao.findAll();
         this.initMosplist();
+        this.initSite();
+    }
+
+    protected void initSite () {
+        PropertiesConfiguration properties = new PropertiesConfiguration();
+        properties.setEncoding("utf8");
+        try {
+            properties.load("global.properties");
+        } catch (ConfigurationException e) {
+            e.printStackTrace();
+        }
+        this.site = new Site();
+        this.site.setTitle(properties.getString("site.title"));
+        this.site.setLogo(properties.getString("site.logo"));
+        this.site.setUrl(properties.getString("site.url"));
+        this.site.setMospUrl(properties.getString("site.mospUrl"));
     }
 
     protected void initMosplist () {
-        mospList = new ArrayList<>();
-        mospList.add(new Mosp("count","站点统计"));
-        mospList.add(new Mosp("global","全局设置"));
-        mospList.add(new Mosp("node","栏目管理"));
-        mospList.add(new Mosp("model","模型管理"));
-        mospList.add(new Mosp("power","权限管理"));
-        mospList.add(new Mosp("user","用户管理"));
-        mospList.add(new Mosp("logging","日志管理"));
-        mospList.add(new Mosp("about","关于我们"));
+        PropertiesConfiguration properties = new PropertiesConfiguration();
+        properties.setEncoding("utf8");
+        try {
+            properties.load("modespring.properties");
+        } catch (ConfigurationException e) {
+            e.printStackTrace();
+        }
+        String[] mospName = properties.getString("column.name").split("\\|");
+        String[] mospTitle = properties.getString("column.title").split("\\|");
+        this.mospList = new ArrayList<>();
+        for (int i = 0; i < mospName.length && i < mospTitle.length; i++) {
+            mospList.add(i, new Mosp(mospName[i], mospTitle[i]));
+        }
     }
 
     public void flush() {
         this.nodeList = nodeDao.findAll();
     }
 
-    public Site getContext() {
-        return context;
+    public Site getSite() {
+        return site;
     }
 
-    public void setContext(Site context) {
-        this.context = context;
+    public void setSite(Site site) {
+        this.site = site;
     }
 
     public List<Node> getNodeList() {

@@ -8,10 +8,8 @@
 </header>
 <section class="login">
     <form id="loginForm" action="/modespring/login.html" method="post">
-        <label for="loginFormName">用户名</label>
-        <input id="loginFormName" name="name" type="text">
-        <label for="loginFormPassword">密码</label>
-        <input id="loginFormPassword" name="password" type="password">
+        <label>用户名：<input name="name" type="text"></label>
+        <label>密码：<input name="password" type="password"></label>
         <input id="loginButton" type="submit" value="登录"/>
     </form>
 </section>

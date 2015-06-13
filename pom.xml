@@ -7,24 +7,12 @@
     <groupId>com.modespring</groupId>
     <artifactId>modespring</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-    <name>ModeSpring WebApp</name>
     <url>https://github.com/shawoe/modespring</url>
 
     <properties>
         <spring.version>4.0.3.RELEASE</spring.version>
         <spring-data-jpa.version>1.7.1.RELEASE</spring-data-jpa.version>
-        <junit.version>4.11</junit.version>
-        <hibernate.version>4.3.6.Final</hibernate.version>
-        <mysql.version>5.1.6</mysql.version>
-        <jstl.version>1.2</jstl.version>
-        <freemarker.version>2.3.20</freemarker.version>
-        <commons-lang.version>2.6</commons-lang.version>
-        <commons-dbcp.version>1.4</commons-dbcp.version>
-        <logback.version>1.0.13</logback.version>
-        <slf4j.version>1.7.5</slf4j.version>
-        <servlet.version>3.0.1</servlet.version>
-        <aspectj.version>1.8.5</aspectj.version>
+        <jackson.version>2.5.3</jackson.version>
     </properties>
 
     <dependencies>
@@ -33,7 +21,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>${servlet.version}</version>
+            <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
 
@@ -41,7 +29,7 @@
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>${freemarker.version}</version>
+            <version>2.3.20</version>
         </dependency>
 
         <!-- Spring -->
@@ -114,8 +102,29 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
+            <version>1.7.5</version>
         </dependency>
+
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.6</version>
+        </dependency>
+
+        <!--@ResponseBody,要把对象转换成json格式，缺少转换依赖的jar包-->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+
 
         <!-- aspectj -->
         <dependency>
@@ -128,7 +137,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <version>4.11</version>
             <scope>test</scope>
         </dependency>
 
@@ -136,14 +145,14 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate.version}</version>
+            <version>4.3.6.Final</version>
         </dependency>
 
         <!-- logback -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
+            <version>1.0.13</version>
             <scope>runtime</scope>
             <exclusions>
                 <exclusion>
@@ -157,14 +166,14 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
+            <version>5.1.6</version>
         </dependency>
 
         <!-- commons -->
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
-            <version>${commons-dbcp.version}</version>
+            <version>1.4</version>
         </dependency>
 
         <dependency>
@@ -174,9 +183,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>1.10</version>
         </dependency>
 
     </dependencies>
