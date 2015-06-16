@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class FieldManageController extends BaseController {
     private FieldDao fieldDao;
 
     @RequestMapping(value = "model/{modelName}/field", method = RequestMethod.PUT)
-    public ModelAndView create(ModelAndView modelAndView, HttpSession session, @PathVariable String modelName, Field field) {
+    public ModelAndView create(ModelAndView modelAndView, @PathVariable String modelName, Field field) {
         Model model =  modelService.getByName(modelName);
         List<Field> fieldList = modelService.getFieldList(modelName);
         field = fieldDao.save(field);
@@ -43,7 +42,7 @@ public class FieldManageController extends BaseController {
     }
 
     @RequestMapping(value = "model/{modelName}/field", method = RequestMethod.POST)
-    public ModelAndView editAll(ModelAndView modelAndView, HttpSession session, @PathVariable String modelName, Integer[] id, String[] name, String[] title, Integer[] delete) throws UnsupportedEncodingException {
+    public ModelAndView editAll(ModelAndView modelAndView, @PathVariable String modelName, Integer[] id, String[] name, String[] title, Integer[] delete) throws UnsupportedEncodingException {
 //        List<Model> modelList = new ArrayList<Model>();
 //        for (int i = 0; i < id.length; i++) {
 //            Model model = modelService.getOne(id[i]);
@@ -63,7 +62,7 @@ public class FieldManageController extends BaseController {
 
     @Transactional
     @RequestMapping(value = "model/{name}/field", method = RequestMethod.GET)
-    public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
+    public ModelAndView getOne(ModelAndView modelAndView, @PathVariable String name) {
         modelAndView.addObject("mospList", Context.getMospList());
         modelAndView.addObject("MospNodeName", "model");
         Model model = modelService.getByName(name);

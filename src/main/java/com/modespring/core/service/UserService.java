@@ -21,4 +21,8 @@ public interface UserService {
 
     public User updateDetails(User user);
 
+    public void delete(Integer id) throws Exception;
+
+    public void deleteAll(Integer[] id) throws Exception;
+
 }

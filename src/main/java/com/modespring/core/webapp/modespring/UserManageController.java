@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
-
 /**
  * Created by Shawoe on 2015/5/8.
  */
@@ -27,7 +25,7 @@ public class UserManageController extends BaseController {
     private UserService userService;
 
     @RequestMapping(value = "user", method = RequestMethod.GET)
-    public ModelAndView getAll(ModelAndView modelAndView, HttpSession session) {
+    public ModelAndView getAll(ModelAndView modelAndView) {
         modelAndView.addObject("mospList", Context.getMospList());
         modelAndView.addObject("MospNodeName", "user");
         modelAndView.addObject("userList", userService.getAll());
@@ -36,7 +34,7 @@ public class UserManageController extends BaseController {
     }
 
     @RequestMapping(value = "user", method = RequestMethod.PUT)
-    public ModelAndView create(ModelAndView modelAndView, HttpSession session, User user) {
+    public ModelAndView create(ModelAndView modelAndView, User user) {
         try {
             userService.register(user);
         } catch (Exception e) {
@@ -47,7 +45,7 @@ public class UserManageController extends BaseController {
     }
 
     @RequestMapping(value = "user/{username}", method = RequestMethod.GET)
-    public ModelAndView getUserDetails(ModelAndView modelAndView, HttpSession session, @PathVariable String username) {
+    public ModelAndView getUserDetails(ModelAndView modelAndView, @PathVariable String username) {
         modelAndView.addObject("mospList", Context.getMospList());
         modelAndView.addObject("MospNodeName", "user");
         modelAndView.setViewName("modespring/userDetails");
@@ -55,27 +53,16 @@ public class UserManageController extends BaseController {
         return modelAndView;
     }
 
-//    @RequestMapping(value = "node", method = RequestMethod.POST)
-//    public ModelAndView editAll(ModelAndView modelAndView, HttpSession session, Integer[] id, String[] title, Integer[] parentId, Integer[] delete) throws UnsupportedEncodingException {
-//        List<Node> nodeList = new ArrayList<Node>();
-//        for (int i = 0; i < id.length; i++) {
-//            Node node = nodeService.getOne(id[i]);
-//            node.setTitle(title[i]);
-//            if (parentId[i] > 0) {
-//                Node parentNode = nodeService.getOne(parentId[i]);
-//                node.setLevel(parentNode.getLevel() + 1);
-//                node.setParentNode(parentNode);
-//            }
-//            nodeList.add(node);
-//        }
-//        nodeService.updateALL(nodeList);
-//        for (int i = 0; delete != null && i < delete.length; i++) {
-//            nodeService.delete(delete[i]);
-//        }
-//        Context.flush();
-//        modelAndView.addObject("nodeList", Context.getNodeList());
-//        return modelAndView;
-//    }
+    @RequestMapping(value = "user", method = RequestMethod.DELETE)
+    public ModelAndView editAll(ModelAndView modelAndView, Integer[] delete) {
+        try {
+            userService.deleteAll(delete);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        modelAndView.setViewName("redirect:/modespring/user.html");
+        return modelAndView;
+    }
 
 }
 

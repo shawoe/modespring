@@ -62,4 +62,16 @@ public class UserServiceImpl implements UserService {
         return userDao.saveAndFlush(user);
     }
 
+    @Override
+    public void delete(Integer id) throws Exception {
+
+    }
+
+    @Override
+    public void deleteAll(Integer[] id) throws Exception {
+        for (int i = 0; id != null && i < id.length; i++) {
+            userDao.delete(id[i]);
+        }
+    }
+
 }

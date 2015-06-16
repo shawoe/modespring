@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -30,7 +29,7 @@ public class ArticleManageController extends BaseController {
     private ArticleService articleService;
 
     @RequestMapping(value = "{nodeName}/article", method = RequestMethod.GET)
-    public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName) {
+    public ModelAndView getOne(ModelAndView modelAndView, @PathVariable String nodeName) {
         modelAndView.addObject("mospList", Context.getMospList());
         modelAndView.addObject("MospNodeName", "node");
         modelAndView.addObject("nodeList", Context.getNodeList());
@@ -48,7 +47,7 @@ public class ArticleManageController extends BaseController {
     }
 
     @RequestMapping(value = "{nodeName}/article", method = RequestMethod.DELETE)
-    public ModelAndView editAll(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, Integer[] delete) {
+    public ModelAndView editAll(ModelAndView modelAndView, @PathVariable String nodeName, Integer[] delete) {
         try {
             articleService.deleteAll(delete);
         } catch (Exception e) {

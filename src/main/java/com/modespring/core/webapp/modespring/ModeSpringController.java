@@ -23,7 +23,7 @@ public class ModeSpringController extends BaseController {
     public UserService userService;
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
-    public ModelAndView getOne(ModelAndView modelAndView, HttpSession session) {
+    public ModelAndView getOne(ModelAndView modelAndView) {
         modelAndView.setViewName("redirect:/modespring/login.html");
         return modelAndView;
     }

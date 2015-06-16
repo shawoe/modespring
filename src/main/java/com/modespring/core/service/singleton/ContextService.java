@@ -1,11 +1,10 @@
 package com.modespring.core.service.singleton;
 
-import com.modespring.core.domain.pojo.Mosp;
+import com.modespring.core.common.PropertiesUtil;
 import com.modespring.core.domain.Node;
+import com.modespring.core.domain.pojo.Mosp;
 import com.modespring.core.domain.pojo.Site;
 import com.modespring.core.repository.NodeDao;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -35,30 +34,16 @@ public class ContextService {
     }
 
     protected void initSite () {
-        PropertiesConfiguration properties = new PropertiesConfiguration();
-        properties.setEncoding("utf8");
-        try {
-            properties.load("global.properties");
-        } catch (ConfigurationException e) {
-            e.printStackTrace();
-        }
         this.site = new Site();
-        this.site.setTitle(properties.getString("site.title"));
-        this.site.setLogo(properties.getString("site.logo"));
-        this.site.setUrl(properties.getString("site.url"));
-        this.site.setMospUrl(properties.getString("site.mospUrl"));
+        this.site.setTitle(PropertiesUtil.getStringProperty("global","site.title"));
+        this.site.setLogo(PropertiesUtil.getStringProperty("global", "site.logo"));
+        this.site.setUrl(PropertiesUtil.getStringProperty("global", "site.url"));
+        this.site.setMospUrl(PropertiesUtil.getStringProperty("global", "site.mospUrl"));
     }
 
     protected void initMosplist () {
-        PropertiesConfiguration properties = new PropertiesConfiguration();
-        properties.setEncoding("utf8");
-        try {
-            properties.load("modespring.properties");
-        } catch (ConfigurationException e) {
-            e.printStackTrace();
-        }
-        String[] mospName = properties.getString("column.name").split("\\|");
-        String[] mospTitle = properties.getString("column.title").split("\\|");
+        String[] mospName = PropertiesUtil.getStringProperties("modespring", "column.name");
+        String[] mospTitle = PropertiesUtil.getStringProperties("modespring", "column.title");
         this.mospList = new ArrayList<>();
         for (int i = 0; i < mospName.length && i < mospTitle.length; i++) {
             mospList.add(i, new Mosp(mospName[i], mospTitle[i]));

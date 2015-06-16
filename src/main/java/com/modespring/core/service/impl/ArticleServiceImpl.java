@@ -1,11 +1,14 @@
 package com.modespring.core.service.impl;
 
 import com.modespring.core.domain.Article;
+import com.modespring.core.domain.Field;
 import com.modespring.core.repository.ArticleDao;
+import com.modespring.core.repository.FieldDao;
 import com.modespring.core.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,8 +20,26 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleDao articleDao;
 
+    @Autowired
+    private FieldDao fieldDao;
+
     public List<Article> getByNodeId(Integer id) {
         return articleDao.findByNodeId(id);
+    }
+
+    @Override
+    public List<Field> addFieldValue(String fieldName[], String fieldTitle[], String fieldValue[]) {
+        List<Field> fieldList = new ArrayList<>();
+        if (fieldName != null) {
+            for (int i = 0; i < fieldName.length; i++) {
+                Field field = new Field();
+                field.setName(fieldName[i]);
+                field.setTitle(fieldTitle[i]);
+                field.setValue(fieldValue[i]);
+                fieldList.add(field);
+            }
+        }
+        return fieldDao.save(fieldList);
     }
 
     public Article create(Article article) {

@@ -13,7 +13,7 @@
             </select>
             <input type="hidden" name="_method" value="put"/>
             <input name="name" type="text"/>
-            <input name="password" type="password"/>
+            <input name="password" type="text"/>
             <input name="email" type="text"/>
             <input type="submit" value="创建用户"/>
         </form>

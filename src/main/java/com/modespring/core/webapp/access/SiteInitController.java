@@ -1,8 +1,11 @@
 package com.modespring.core.webapp.access;
 
-import com.modespring.core.service.singleton.ContextService;
-import com.modespring.core.domain.*;
+import com.modespring.core.domain.Node;
+import com.modespring.core.domain.Power;
+import com.modespring.core.domain.Role;
+import com.modespring.core.domain.User;
 import com.modespring.core.repository.*;
+import com.modespring.core.service.singleton.ContextService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

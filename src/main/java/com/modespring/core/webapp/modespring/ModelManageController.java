@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -24,7 +23,7 @@ public class ModelManageController extends BaseController {
     private ModelService modelService;
 
     @RequestMapping(value = "model", method = RequestMethod.GET)
-    public ModelAndView getAll(ModelAndView modelAndView, HttpSession session) {
+    public ModelAndView getAll(ModelAndView modelAndView) {
         modelAndView.addObject("mospList", Context.getMospList());
         modelAndView.addObject("MospNodeName", "model");
         modelAndView.addObject("modelList", modelService.getAll());
@@ -32,7 +31,7 @@ public class ModelManageController extends BaseController {
     }
 
     @RequestMapping(value = "model", method = RequestMethod.PUT)
-    public ModelAndView create(ModelAndView modelAndView, HttpSession session, Model model) {
+    public ModelAndView create(ModelAndView modelAndView, Model model) {
         modelService.create(model);
         Context.flush();
         modelAndView.setViewName("redirect:/modespring/model.html");
@@ -40,7 +39,7 @@ public class ModelManageController extends BaseController {
     }
 
     @RequestMapping(value = "model", method = RequestMethod.POST)
-    public ModelAndView editAll(ModelAndView modelAndView, HttpSession session, Integer[] id, String[] name, String[] title, Integer[] delete) throws UnsupportedEncodingException {
+    public ModelAndView editAll(ModelAndView modelAndView, Integer[] id, String[] name, String[] title, Integer[] delete) throws UnsupportedEncodingException {
         modelService.updateALL(id,name,title);
         try {
             modelService.deleteAll(delete);
@@ -53,7 +52,7 @@ public class ModelManageController extends BaseController {
     }
 
     @RequestMapping(value = "model/{id}", method = RequestMethod.GET)
-    public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable Integer id) {
+    public ModelAndView getOne(ModelAndView modelAndView, @PathVariable Integer id) {
         modelAndView.addObject("mospList", Context.getMospList());
         modelAndView.addObject("MospNodeName", "model");
         Model model = modelService.getOne(id);
@@ -63,7 +62,7 @@ public class ModelManageController extends BaseController {
     }
 
     @RequestMapping(value = "model/{id}", method = RequestMethod.POST)
-    public ModelAndView edit(ModelAndView modelAndView, HttpSession session, @PathVariable Integer id, Model model) {
+    public ModelAndView edit(ModelAndView modelAndView, @PathVariable Integer id, Model model) {
         modelService.update(model);
         Context.flush();
         modelAndView.setViewName("redirect:/modespring/model.html");
