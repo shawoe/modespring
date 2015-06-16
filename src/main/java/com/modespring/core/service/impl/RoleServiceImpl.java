@@ -31,12 +31,22 @@ public class RoleServiceImpl implements RoleService {
         roleDao.delete(id);
     }
 
+    @Override
+    public void deleteAll(Integer[] id) throws Exception {
+
+    }
+
     public Role update(Role role) {
         return roleDao.saveAndFlush(role);
     }
 
     public List<Role> updateALL(List<Role> roleList) {
         return roleDao.save(roleList);
+    }
+
+    @Override
+    public List<Role> updateALL(Integer[] id, String[] name, String[] title) {
+        return null;
     }
 
     public Role getOne(Integer id) {

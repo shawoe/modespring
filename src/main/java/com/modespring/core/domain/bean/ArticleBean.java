@@ -14,10 +14,12 @@ public abstract class ArticleBean extends BaseBean {
 
     private Date publishDate;
 
-    @Column(columnDefinition="BLOB")
+    @Column(columnDefinition="LONGTEXT")
     private String content;
 
     private String nodeTree;
+
+    private String titleImage;
 
     @ManyToOne
     @JoinColumn
@@ -72,6 +74,14 @@ public abstract class ArticleBean extends BaseBean {
 
     public void setNodeTree(String nodeTree) {
         this.nodeTree = nodeTree;
+    }
+
+    public String getTitleImage() {
+        return titleImage;
+    }
+
+    public void setTitleImage(String titleImage) {
+        this.titleImage = titleImage;
     }
 
     public String getContent() {

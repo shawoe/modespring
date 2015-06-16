@@ -31,6 +31,7 @@ public class UserDetailController extends BaseController {
     @RequestMapping(value = "{name}", method = RequestMethod.GET)
     public ModelAndView edit(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
         modelAndView.addObject("nodeList", Context.getNodeList());
+        modelAndView.addObject("site", Context.getSite());
         String username = (String) session.getAttribute("currentUserName");
         Node node = nodeService.getByName("member");
         modelAndView.addObject("node", node);

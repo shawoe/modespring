@@ -110,56 +110,56 @@ public class SiteInitController {
             node_focus.setName("focus");
             node_focus.setTitle("推荐");
             nodeList.add(node_focus);
-            for (int i = 0; i < 2; i++) {
-                Node child_node = new Node(node_focus);
-                child_node.setName("focus" + i);
-                child_node.setTitle("推荐分类" + i);
-                childList.add(child_node);
-            }
+//            for (int i = 0; i < 2; i++) {
+//                Node child_node = new Node(node_focus);
+//                child_node.setName("focus" + i);
+//                child_node.setTitle("推荐分类" + i);
+//                childList.add(child_node);
+//            }
 
             Node node_guide = new Node(node_global);
             node_guide.setName("guide");
             node_guide.setTitle("导购");
             nodeList.add(node_guide);
-            for (int i = 0; i < 2; i++) {
-                Node child_node = new Node(node_guide);
-                child_node.setName("guide" + i);
-                child_node.setTitle("导购分类" + i);
-                childList.add(child_node);
-            }
+//            for (int i = 0; i < 2; i++) {
+//                Node child_node = new Node(node_guide);
+//                child_node.setName("guide" + i);
+//                child_node.setTitle("导购分类" + i);
+//                childList.add(child_node);
+//            }
 
             Node node_rent = new Node(node_global);
             node_rent.setName("rent");
             node_rent.setTitle("租车");
             nodeList.add(node_rent);
-            for (int i = 0; i < 3; i++) {
-                Node child_node = new Node(node_rent);
-                child_node.setName("rent" + i);
-                child_node.setTitle("租车分类" + i);
-                childList.add(child_node);
-            }
+//            for (int i = 0; i < 3; i++) {
+//                Node child_node = new Node(node_rent);
+//                child_node.setName("rent" + i);
+//                child_node.setTitle("租车分类" + i);
+//                childList.add(child_node);
+//            }
             nodeDao.save(nodeList);
-            nodeDao.save(childList);
-
-            // 添加文章
-            List<Article> articleList = new ArrayList<Article>();
-            for (int i = 0; i < 5; i++) {
-                Article article = new Article(node_focus);
-                article.setName("focus" + i);
-                article.setTitle("推荐文章" + i);
-                // 添加字段
-                List<Field> fieldList = new ArrayList<Field>();
-                for (int j = 0; j < 3; j++) {
-                    Field field = new Field();
-                    field.setName("field" + j);
-                    field.setTitle("新增字段" + j);
-                    fieldList.add(field);
-                }
-                fieldDao.save(fieldList);
-                article.setValueList(fieldList);
-                articleList.add(article);
-            }
-            articleDao.save(articleList);
+//            nodeDao.save(childList);
+//
+//            // 添加文章
+//            List<Article> articleList = new ArrayList<Article>();
+//            for (int i = 0; i < 5; i++) {
+//                Article article = new Article(node_focus);
+//                article.setName("focus" + i);
+//                article.setTitle("推荐文章" + i);
+//                // 添加字段
+//                List<Field> fieldList = new ArrayList<Field>();
+//                for (int j = 0; j < 3; j++) {
+//                    Field field = new Field();
+//                    field.setName("field" + j);
+//                    field.setTitle("新增字段" + j);
+//                    fieldList.add(field);
+//                }
+//                fieldDao.save(fieldList);
+//                article.setValueList(fieldList);
+//                articleList.add(article);
+//            }
+//            articleDao.save(articleList);
 
             // 初始化成功
             isFirstOpen = false;

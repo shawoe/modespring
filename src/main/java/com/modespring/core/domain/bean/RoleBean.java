@@ -2,6 +2,7 @@ package com.modespring.core.domain.bean;
 
 import com.modespring.core.domain.Power;
 
+import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
@@ -15,7 +16,7 @@ public abstract class RoleBean extends BaseBean {
 
     private Integer power;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
     private List<Power> powerList;
 

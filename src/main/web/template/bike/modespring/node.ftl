@@ -42,7 +42,8 @@
                         <td><input name="id" type="hidden" value="${node.id}"/>${node.id}</td>
                         <td><input name="name" type="text" value="${node.name}"/></td>
                         <td><input name="title" type="text" value="${node.title}"/></td>
-                        <td><a href="/modespring/node/${(node.id)!''}.html">编辑</a></td>
+                        <td><a href="/modespring/node/${(node.id)!''}.html">编辑栏目</a></td>
+                        <td><a href="/modespring/${(node.name)!''}/article.html">查看文章</a></td>
                         <td><a href="/${(node.name)!''}/write.html">发表文章</a></td>
                     </tr>
 
@@ -53,7 +54,8 @@
                                 <td><input name="id" type="hidden" value="${childNode.id}"/>${childNode.id}</td>
                                 <td><input name="name" type="text" value="${childNode.name}"/></td>
                                 <td><input name="title" type="text" value="${childNode.title}"/></td>
-                                <td><a href="/modespring/node/${(childNode.id)!''}.html">编辑</a></td>
+                                <td><a href="/modespring/node/${(childNode.id)!''}.html">编辑栏目</a></td>
+                                <td><a href="/modespring/${(childNode.name)!''}/article.html">查看文章</a></td>
                                 <td><a href="/${(childNode.name)!''}/write.html">发表文章</a></td>
                             </tr>
                         </#if>

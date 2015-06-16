@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,11 +28,34 @@ public class ModelServiceImpl implements ModelService {
         modelDao.delete(id);
     }
 
+    @Override
+    public void deleteAll(Integer[] id) throws Exception {
+        for (int i = 0; id != null && i < id.length; i++) {
+            try {
+                modelDao.delete(id[i]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public Model update(Model model) {
         return modelDao.saveAndFlush(model);
     }
 
     public List<Model> updateALL(List<Model> modelList) {
+        return modelDao.save(modelList);
+    }
+
+    @Override
+    public List<Model> updateALL(Integer[] id, String[] name, String[] title) {
+        List<Model> modelList = new ArrayList<Model>();
+        for (int i = 0; i < id.length; i++) {
+            Model model = modelDao.getOne(id[i]);
+            model.setName(name[i]);
+            model.setTitle(title[i]);
+            modelList.add(model);
+        }
         return modelDao.save(modelList);
     }
 

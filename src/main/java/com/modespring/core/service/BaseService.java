@@ -9,11 +9,15 @@ public interface BaseService<T> {
 
     public T create(T entity);
 
-    public void delete(Integer id);
+    public void delete(Integer id) throws Exception;
+
+    public void deleteAll(Integer[] id) throws Exception;
 
     public T update(T entity);
 
     public List<T> updateALL(List<T> list);
+
+    public List<T> updateALL(Integer[] id, String[] name, String[] title);
 
     public T getOne(Integer id);
 

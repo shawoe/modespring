@@ -29,12 +29,24 @@ public class ArticleServiceImpl implements ArticleService {
         articleDao.delete(id);
     }
 
+    @Override
+    public void deleteAll(Integer[] id) throws Exception {
+        for (int i = 0; id != null && i < id.length; i++) {
+                articleDao.delete(id[i]);
+        }
+    }
+
     public Article update(Article article) {
         return articleDao.saveAndFlush(article);
     }
 
     public List<Article> updateALL(List<Article> articleList) {
         return articleDao.save(articleList);
+    }
+
+    @Override
+    public List<Article> updateALL(Integer[] id, String[] name, String[] title) {
+        return null;
     }
 
     public Article getOne(Integer id) {

@@ -12,8 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Shawoe on 2015/5/1.
@@ -43,16 +41,11 @@ public class ModelManageController extends BaseController {
 
     @RequestMapping(value = "model", method = RequestMethod.POST)
     public ModelAndView editAll(ModelAndView modelAndView, HttpSession session, Integer[] id, String[] name, String[] title, Integer[] delete) throws UnsupportedEncodingException {
-        List<Model> modelList = new ArrayList<Model>();
-        for (int i = 0; i < id.length; i++) {
-            Model model = modelService.getOne(id[i]);
-            model.setName(name[i]);
-            model.setTitle(title[i]);
-            modelList.add(model);
-        }
-        modelService.updateALL(modelList);
-        for (int i = 0; delete != null && i < delete.length; i++) {
-            modelService.delete(delete[i]);
+        modelService.updateALL(id,name,title);
+        try {
+            modelService.deleteAll(delete);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         Context.flush();
         modelAndView.setViewName("redirect:/modespring/model.html");

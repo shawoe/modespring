@@ -1,9 +1,10 @@
 <#include "common/_simditor.ftl">
 <#include "common/_header.ftl">
 <section class="content">
-    <form id="writeArticleForm" action="/${(node.name)!''}/write.html" method="post">
+    <form id="writeArticleForm" action="/${(node.name)!''}/write.html" enctype="multipart/form-data" method="post">
         <label>文章标题<input name="title" type="text"></label>
         <label>文章编码<input name="name" type="text"></label>
+        <label>标题图片<input name="titleImageFile" type="file"></label>
     <#if node.model??>
         <#list node.model.fieldList as field>
             <input name="fieldName" type="hidden" value="${(field.name)!''}">

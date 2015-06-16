@@ -39,32 +39,6 @@ public class ArticleController extends BaseController {
     @Autowired
     private FieldService fieldService;
 
-    @RequestMapping(value = "upload", method = RequestMethod.GET)
-    public ModelAndView upload(ModelAndView modelAndView, HttpSession session) {
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "upload", method = RequestMethod.POST)
-    public ModelAndView uploadAction(ModelAndView modelAndView, HttpSession session, @RequestParam MultipartFile[] file) throws IOException {
-        for (MultipartFile myfile : file) {
-            if (myfile.isEmpty()) {
-                System.out.println("文件未上传");
-            } else {
-                System.out.println("文件长度: " + myfile.getSize());
-                System.out.println("文件类型: " + myfile.getContentType());
-                System.out.println("文件名称: " + myfile.getName());
-                System.out.println("文件原名: " + myfile.getOriginalFilename());
-                System.out.println("========================================");
-                //如果用的是Tomcat服务器，则文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\WEB-INF\\upload\\文件夹中
-                String realPath = session.getServletContext().getRealPath("/WEB-INF/upload");
-                //这里不必处理IO流关闭的问题，因为FileUtils.copyInputStreamToFile()方法内部会自动把用到的IO流关掉，我是看它的源码才知道的
-                FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(realPath, myfile.getOriginalFilename()));
-            }
-        }
-        modelAndView.addObject("message", "success");
-        return modelAndView;
-    }
-
     @RequestMapping(value = "uploadAjax", method = RequestMethod.POST)
     @ResponseBody
     public String uploadAjax(ModelAndView modelAndView, HttpSession session, @RequestParam("file") MultipartFile[] file) throws IOException {
@@ -81,7 +55,6 @@ public class ArticleController extends BaseController {
                     String fileExt = fileName.substring(fileName.lastIndexOf('.'));
                     DateFormat format = new SimpleDateFormat("yyyyMMddhhmmss");
                     String newFileName = cur_file.getSize() + "-"  + format.format(new Date())+ fileExt;
-                    System.out.println(newFileName+"------------------------------------------------------------------------------");
                     map.put("success", true);
                     map.put("file_path", "/images/" + newFileName);
                     try {
@@ -101,6 +74,7 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "{nodeName}/{id}", method = RequestMethod.GET)
     public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, @PathVariable Integer id) {
         modelAndView.addObject("nodeList", Context.getNodeList());
+        modelAndView.addObject("site", Context.getSite());
         Article article = articleService.getOne(id);
         modelAndView.addObject("article", article);
         Node node = nodeService.getByName(nodeName);
@@ -117,6 +91,7 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "{nodeName}/write", method = RequestMethod.GET)
     public ModelAndView write(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName) {
         modelAndView.addObject("nodeList", Context.getNodeList());
+        modelAndView.addObject("site", Context.getSite());
         Node node = nodeService.getByName(nodeName);
         modelAndView.addObject("node", node);
         modelAndView.setViewName("write");
@@ -124,7 +99,7 @@ public class ArticleController extends BaseController {
     }
 
     @RequestMapping(value = "{nodeName}/write", method = RequestMethod.POST)
-    public ModelAndView writeAction(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, Article article, String fieldName[], String fieldTitle[], String fieldValue[]) {
+    public ModelAndView writeAction(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, Article article,@RequestParam MultipartFile[] titleImageFile, String fieldName[], String fieldTitle[], String fieldValue[]) throws IOException {
         modelAndView.addObject("nodeList", Context.getNodeList());
         List<Field> fieldList = new ArrayList<>();
         if (fieldName != null) {
@@ -140,6 +115,27 @@ public class ArticleController extends BaseController {
         Node node = nodeService.getByName(nodeName);
         article.setNode(node);
         article.setValueList(fieldList);
+        // 这段代码我一定会重构的！
+        for (MultipartFile cur_file : titleImageFile) {
+            if (cur_file.isEmpty()) {
+                System.out.println("文件未上传，请选择你要上传的文件");
+            } else {
+                String realPath = session.getServletContext().getRealPath("/images");
+                String fileName = cur_file.getOriginalFilename();
+                if(fileName.indexOf('.') != -1){
+                    String fileExt = fileName.substring(fileName.lastIndexOf('.'));
+                    DateFormat format = new SimpleDateFormat("yyyyMMddhhmmss");
+                    String newFileName = cur_file.getSize() + "-"  + format.format(new Date())+ fileExt;
+                    article.setTitleImage("/images/" + newFileName);
+                    try {
+                        FileUtils.copyInputStreamToFile(cur_file.getInputStream(), new File(realPath, newFileName));
+                        article.setTitleImage("/images/" + newFileName);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
         article = articleService.create(article);
         modelAndView.setViewName("redirect:/" + nodeName + "/" + article.getId() + ".html");
         return modelAndView;

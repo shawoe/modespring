@@ -4,8 +4,7 @@
     <ul class="list">
     <#list articleList as cur_art>
         <li>
-            <img src="/image/jinan.jpg">
-
+            <img src="${(cur_art.titleImage)!'/image/jinan.jpg'}">
             <div></div>
             <article>
                 <a href="/${(node.name)!''}/${(cur_art.id)!''}.html">${(cur_art.title)!''}</a>

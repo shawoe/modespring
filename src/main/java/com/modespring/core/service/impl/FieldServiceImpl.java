@@ -29,12 +29,22 @@ public class FieldServiceImpl implements FieldService {
         fieldDao.delete(id);
     }
 
+    @Override
+    public void deleteAll(Integer[] id) throws Exception {
+
+    }
+
     public Field update(Field field) {
         return fieldDao.saveAndFlush(field);
     }
 
     public List<Field> updateALL(List<Field> fieldList) {
         return fieldDao.save(fieldList);
+    }
+
+    @Override
+    public List<Field> updateALL(Integer[] id, String[] name, String[] title) {
+        return null;
     }
 
     public Field getOne(Integer id) {

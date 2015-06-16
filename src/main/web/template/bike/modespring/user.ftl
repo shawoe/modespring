@@ -5,7 +5,7 @@
     <section class="create">
         <h2>创建用户</h2>
 
-        <form id="newUserForm" action="/admin/user.html" method="post">
+        <form id="newUserForm" action="/modespring/user.html" method="post">
             <select name="role.id">
             <#list roleList as role>
                 <option value="${role.id}">${role.name}</option>

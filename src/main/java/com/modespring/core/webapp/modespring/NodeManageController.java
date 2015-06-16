@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,16 +47,11 @@ public class NodeManageController extends BaseController {
 
     @RequestMapping(value = "node", method = RequestMethod.POST)
     public ModelAndView editAll(ModelAndView modelAndView, HttpSession session, Integer[] id, String[] name, String[] title, Integer[] delete) throws UnsupportedEncodingException {
-        List<Node> nodeList = new ArrayList<Node>();
-        for (int i = 0; i < id.length; i++) {
-            Node node = nodeService.getOne(id[i]);
-            node.setName(name[i]);
-            node.setTitle(title[i]);
-            nodeList.add(node);
-        }
-        nodeService.updateALL(nodeList);
-        for (int i = 0; delete != null && i < delete.length; i++) {
-            nodeService.delete(delete[i]);
+        nodeService.updateALL(id,name,title);
+        try {
+            nodeService.deleteAll(delete);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         Context.flush();
         modelAndView.setViewName("redirect:/modespring/node.html");

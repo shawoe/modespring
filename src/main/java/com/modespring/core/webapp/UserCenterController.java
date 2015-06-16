@@ -29,6 +29,7 @@ public class UserCenterController extends BaseController {
     @RequestMapping(value = "center", method = RequestMethod.GET)
     public ModelAndView memberCenter(ModelAndView modelAndView, HttpSession session) {
         modelAndView.addObject("nodeList", Context.getNodeList());
+        modelAndView.addObject("site", Context.getSite());
         String username = (String) session.getAttribute("currentUserName");
         Node node = nodeService.getByName("member");
         modelAndView.addObject("node", node);

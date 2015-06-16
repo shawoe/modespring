@@ -8,7 +8,7 @@
             <input type="hidden" name="_method" value="put"/>
             <label>模型编码<input name="name" type="text"/></label>
             <label>模型名称<input name="title" type="text"/></label>
-            <input type="submit" value="创建栏目"/>
+            <input type="submit" value="创建模型"/>
         </form>
     </section>
 
