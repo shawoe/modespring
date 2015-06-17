@@ -3,13 +3,13 @@
 <section class="main">
     <ul class="list">
     <#list articleList as cur_art>
-        <li>
-            <img src="${(cur_art.titleImage)!'/image/jinan.jpg'}">
-            <div></div>
-            <article>
-                <a href="/${(node.name)!''}/${(cur_art.id)!''}.html">${(cur_art.title)!''}</a>
-            </article>
-        </li>
+        <a href="/${(node.name)!''}/${(cur_art.id)!''}.html">
+            <li>
+                <img src="${(cur_art.titleImage)!'/image/jinan.jpg'}">
+                <div></div>
+                <article>${(cur_art.title)!''}</article>
+            </li>
+        </a>
     </#list>
     </ul>
 </section>

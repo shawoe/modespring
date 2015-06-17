@@ -1,7 +1,7 @@
 <body>
 <div class="wrapper">
     <header>
-        <h1><img src="${(site.logo)!''}"></h1>
+        <h1><a href="${(site.url)!""}"><img src="${(site.logo)!''}"></a></h1>
         <ul class="shortcut">
             <li><a>济南</a></li>
         <#if Session.currentUserName??>
@@ -9,6 +9,7 @@
             <li><a href="/modespring/index.html">后台管理</a></li>
         <#else>
             <li><a href="/login.html">登录</a></li>
+            <li><a href="/register.html">注册</a></li>
         </#if>
         </ul>
     </header>

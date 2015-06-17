@@ -1,6 +1,8 @@
 package com.modespring.core.service.impl;
 
+import com.modespring.core.domain.Article;
 import com.modespring.core.domain.Node;
+import com.modespring.core.repository.ArticleDao;
 import com.modespring.core.repository.NodeDao;
 import com.modespring.core.service.NodeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class NodeServiceImpl implements NodeService {
     @Autowired
     NodeDao nodeDao;
 
+    @Autowired
+    ArticleDao articleDao;
+
     public Node create(Node node) {
         Node parentNode = nodeDao.findOne(node.getParentNode().getId());
         node.setLevel(parentNode.getLevel() + 1);
@@ -25,8 +30,8 @@ public class NodeServiceImpl implements NodeService {
     }
 
     public Boolean hasArticle(Integer id) {
-        List<Node> nodeList = nodeDao.findAll();
-        return nodeList.size() > 0;
+        List<Article> articleList = articleDao.findByNodeId(id);
+        return articleList.size() > 0;
     }
 
     public void delete(Integer id) throws Exception {
@@ -58,9 +63,9 @@ public class NodeServiceImpl implements NodeService {
 
     @Override
     public List<Node> updateALL(Integer[] id, String[] name, String[] title) {
-        List<Node> nodeList = new ArrayList<Node>();
+        List<Node> nodeList = new ArrayList<>();
         for (int i = 0; i < id.length; i++) {
-            Node node = nodeDao.getOne(id[i]);
+            Node node = nodeDao.findOne(id[i]);
             node.setName(name[i]);
             node.setTitle(title[i]);
             nodeList.add(node);

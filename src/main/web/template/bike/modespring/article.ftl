@@ -8,6 +8,7 @@
                 <th></th>
                 <th>ID</th>
                 <th>文章标题</th>
+                <th></th>
             </tr>
             <form id="nodeListForm" action="/modespring/${(node.name)!''}/article.html" method="post">
             <#list articleList as cur_art>
@@ -15,7 +16,7 @@
                     <td><input type="checkbox" name="delete" value="${cur_art.id}"/></td>
                     <td><input name="id" type="hidden" value="${cur_art.id}"/>${node.id}</td>
                     <td><a href="/${(node.name)!''}/${(cur_art.id)!''}.html">${(cur_art.title)!''}</a></td>
-
+                    <td><a href="/${(node.name)!''}/${(cur_art.id)!''}/edit.html">修改文章</a></td>
                 </tr>
             </#list>
                 <tr>

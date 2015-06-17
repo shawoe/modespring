@@ -2,13 +2,17 @@ package com.modespring.core.service.impl;
 
 import com.modespring.core.domain.Article;
 import com.modespring.core.domain.Field;
+import com.modespring.core.domain.Node;
 import com.modespring.core.repository.ArticleDao;
 import com.modespring.core.repository.FieldDao;
 import com.modespring.core.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,6 +29,18 @@ public class ArticleServiceImpl implements ArticleService {
 
     public List<Article> getByNodeId(Integer id) {
         return articleDao.findByNodeId(id);
+    }
+
+    @Override
+    public String createUniqueName(Node node) {
+        String name = node.getName();
+        while (node.getParentNode() != null) {
+            node = node.getParentNode();
+            name = node.getName() + "-" + name;
+        }
+        DateFormat format = new SimpleDateFormat("yyyyMMddhhmmss");
+        name += "-" + format.format(new Date());
+        return name;
     }
 
     @Override

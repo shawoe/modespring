@@ -28,6 +28,7 @@ public class RegisterController extends BaseController {
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public ModelAndView register(ModelAndView modelAndView, HttpSession session) {
         modelAndView.addObject("nodeList", Context.getNodeList());
+        modelAndView.addObject("site", Context.getSite());
         Node node = nodeService.getByName("member");
         modelAndView.addObject("node", node);
         if (session.getAttribute("currentUser") != null) {

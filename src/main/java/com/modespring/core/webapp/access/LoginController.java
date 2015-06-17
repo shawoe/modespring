@@ -28,6 +28,7 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView modelAndView, HttpSession session) {
         modelAndView.addObject("nodeList", Context.getNodeList());
+        modelAndView.addObject("site", Context.getSite());
         Node node = nodeService.getByName("member");
         modelAndView.addObject("node", node);
         if (session.getAttribute("currentUserName") != null) {
@@ -38,7 +39,6 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView loginAction(ModelAndView modelAndView, HttpSession session, User user) {
-        modelAndView.addObject("nodeList", Context.getNodeList());
         try {
             user = userService.login(user.getName(), user.getPassword());
             session.setAttribute("currentUserName", user.getName());
@@ -52,6 +52,7 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public ModelAndView logout(ModelAndView modelAndView, HttpSession session) {
         modelAndView.addObject("nodeList", Context.getNodeList());
+        modelAndView.addObject("site", Context.getSite());
         if (session.getAttribute("currentUserName") != null) {
             session.removeAttribute("currentUserName");
         }

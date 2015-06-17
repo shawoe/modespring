@@ -43,7 +43,7 @@ public class ArticleController extends BaseController {
         for (MultipartFile cur_file : file) {
             String realPath = session.getServletContext().getRealPath("/images");
             try {
-                String fileName = FileUploadUtil.uploadFile(cur_file,realPath);
+                String fileName = FileUploadUtil.uploadFile(cur_file, realPath);
                 map.put("success", true);
                 map.put("file_path", "/images/" + fileName);
             } catch (Exception e) {
@@ -83,23 +83,55 @@ public class ArticleController extends BaseController {
     }
 
     @RequestMapping(value = "{nodeName}/write", method = RequestMethod.POST)
-    public ModelAndView writeAction(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, Article article,@RequestParam MultipartFile[] titleImageFile, String fieldName[], String fieldTitle[], String fieldValue[]) throws IOException {
+    public ModelAndView writeAction(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, Article article, @RequestParam MultipartFile titleImageFile, String fieldName[], String fieldTitle[], String fieldValue[]) throws IOException {
         modelAndView.addObject("nodeList", Context.getNodeList());
         List<Field> fieldList = articleService.addFieldValue(fieldName, fieldTitle, fieldValue);
         Node node = nodeService.getByName(nodeName);
         article.setNode(node);
+        article.setName(articleService.createUniqueName(node));
         article.setValueList(fieldList);
-        for (MultipartFile cur_file : titleImageFile) {
-            String realPath = session.getServletContext().getRealPath("/images");
-            try {
-                String fileName = FileUploadUtil.uploadFile(cur_file,realPath);
-                article.setTitleImage("/images/" + fileName);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        String realPath = session.getServletContext().getRealPath("/images");
+        try {
+            String fileName = FileUploadUtil.uploadFile(titleImageFile, realPath);
+            article.setTitleImage("/images/" + fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         article = articleService.create(article);
         modelAndView.setViewName("redirect:/" + nodeName + "/" + article.getId() + ".html");
         return modelAndView;
     }
+
+    @RequestMapping(value = "{nodeName}/{id}/edit", method = RequestMethod.GET)
+    public ModelAndView edit(ModelAndView modelAndView, @PathVariable String nodeName, @PathVariable Integer id) {
+        modelAndView.addObject("nodeList", Context.getNodeList());
+        modelAndView.addObject("site", Context.getSite());
+        Node node = nodeService.getByName(nodeName);
+        modelAndView.addObject("node", node);
+        Article article = articleService.getOne(id);
+        modelAndView.addObject("article", article);
+        modelAndView.setViewName("edit");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "{nodeName}/{id}/edit", method = RequestMethod.POST)
+    public ModelAndView editAction(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, @PathVariable Integer id, Article article, @RequestParam MultipartFile titleImageFile, String fieldName[], String fieldTitle[], String fieldValue[]) throws IOException {
+        modelAndView.addObject("nodeList", Context.getNodeList());
+        List<Field> fieldList = articleService.addFieldValue(fieldName, fieldTitle, fieldValue);
+        Node node = nodeService.getByName(nodeName);
+        article.setNode(node);
+        article.setName(articleService.createUniqueName(node));
+        article.setValueList(fieldList);
+        String realPath = session.getServletContext().getRealPath("/images");
+        try {
+            String fileName = FileUploadUtil.uploadFile(titleImageFile, realPath);
+            article.setTitleImage("/images/" + fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        article = articleService.create(article);
+        modelAndView.setViewName("redirect:/" + nodeName + "/" + article.getId() + ".html");
+        return modelAndView;
+    }
+
 }
