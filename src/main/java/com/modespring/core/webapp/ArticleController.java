@@ -6,8 +6,8 @@ import com.modespring.core.domain.Article;
 import com.modespring.core.domain.Field;
 import com.modespring.core.domain.Node;
 import com.modespring.core.service.ArticleService;
+import com.modespring.core.service.ContextService;
 import com.modespring.core.service.NodeService;
-import com.modespring.core.webapp.access.BaseController;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,10 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping
-public class ArticleController extends BaseController {
+public class ArticleController {
+
+    @Autowired
+    protected ContextService contextService;
 
     @Autowired
     private NodeService nodeService;
@@ -57,8 +60,8 @@ public class ArticleController extends BaseController {
 
     @RequestMapping(value = "{nodeName}/{id}", method = RequestMethod.GET)
     public ModelAndView getOne(ModelAndView modelAndView, @PathVariable String nodeName, @PathVariable Integer id) {
-        modelAndView.addObject("nodeList", Context.getNodeList());
-        modelAndView.addObject("site", Context.getSite());
+        modelAndView.addObject("nodeList", contextService.getNodeList());
+        modelAndView.addObject("site", contextService.getSite());
         Article article = articleService.getOne(id);
         modelAndView.addObject("article", article);
         Node node = nodeService.getByName(nodeName);
@@ -74,8 +77,8 @@ public class ArticleController extends BaseController {
 
     @RequestMapping(value = "{nodeName}/write", method = RequestMethod.GET)
     public ModelAndView write(ModelAndView modelAndView, @PathVariable String nodeName) {
-        modelAndView.addObject("nodeList", Context.getNodeList());
-        modelAndView.addObject("site", Context.getSite());
+        modelAndView.addObject("nodeList", contextService.getNodeList());
+        modelAndView.addObject("site", contextService.getSite());
         Node node = nodeService.getByName(nodeName);
         modelAndView.addObject("node", node);
         modelAndView.setViewName("write");
@@ -83,20 +86,16 @@ public class ArticleController extends BaseController {
     }
 
     @RequestMapping(value = "{nodeName}/write", method = RequestMethod.POST)
-    public ModelAndView writeAction(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, Article article, @RequestParam MultipartFile titleImageFile, String fieldName[], String fieldTitle[], String fieldValue[]) throws IOException {
-        modelAndView.addObject("nodeList", Context.getNodeList());
+    public ModelAndView writeAction(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, Article article, @RequestParam MultipartFile titleImageFile, String fieldName[], String fieldTitle[], String fieldValue[]) throws Exception {
+        modelAndView.addObject("nodeList", contextService.getNodeList());
         List<Field> fieldList = articleService.addFieldValue(fieldName, fieldTitle, fieldValue);
         Node node = nodeService.getByName(nodeName);
         article.setNode(node);
         article.setName(articleService.createUniqueName(node));
         article.setValueList(fieldList);
         String realPath = session.getServletContext().getRealPath("/images");
-        try {
-            String fileName = FileUploadUtil.uploadFile(titleImageFile, realPath);
-            article.setTitleImage("/images/" + fileName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String fileName = FileUploadUtil.uploadFile(titleImageFile, realPath);
+        article.setTitleImage("/images/" + fileName);
         article = articleService.create(article);
         modelAndView.setViewName("redirect:/" + nodeName + "/" + article.getId() + ".html");
         return modelAndView;
@@ -104,8 +103,8 @@ public class ArticleController extends BaseController {
 
     @RequestMapping(value = "{nodeName}/{id}/edit", method = RequestMethod.GET)
     public ModelAndView edit(ModelAndView modelAndView, @PathVariable String nodeName, @PathVariable Integer id) {
-        modelAndView.addObject("nodeList", Context.getNodeList());
-        modelAndView.addObject("site", Context.getSite());
+        modelAndView.addObject("nodeList", contextService.getNodeList());
+        modelAndView.addObject("site", contextService.getSite());
         Node node = nodeService.getByName(nodeName);
         modelAndView.addObject("node", node);
         Article article = articleService.getOne(id);
@@ -115,19 +114,17 @@ public class ArticleController extends BaseController {
     }
 
     @RequestMapping(value = "{nodeName}/{id}/edit", method = RequestMethod.POST)
-    public ModelAndView editAction(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, @PathVariable Integer id, Article article, @RequestParam MultipartFile titleImageFile, String fieldName[], String fieldTitle[], String fieldValue[]) throws IOException {
-        modelAndView.addObject("nodeList", Context.getNodeList());
+    public ModelAndView editAction(ModelAndView modelAndView, HttpSession session, @PathVariable String nodeName, @PathVariable Integer id, Article article, @RequestParam MultipartFile titleImageFile, String fieldName[], String fieldTitle[], String fieldValue[]) throws Exception {
+        modelAndView.addObject("nodeList", contextService.getNodeList());
         List<Field> fieldList = articleService.addFieldValue(fieldName, fieldTitle, fieldValue);
         Node node = nodeService.getByName(nodeName);
         article.setNode(node);
         article.setName(articleService.createUniqueName(node));
         article.setValueList(fieldList);
-        String realPath = session.getServletContext().getRealPath("/images");
-        try {
+        if (!titleImageFile.isEmpty()) {
+            String realPath = session.getServletContext().getRealPath("/images");
             String fileName = FileUploadUtil.uploadFile(titleImageFile, realPath);
             article.setTitleImage("/images/" + fileName);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         article = articleService.create(article);
         modelAndView.setViewName("redirect:/" + nodeName + "/" + article.getId() + ".html");

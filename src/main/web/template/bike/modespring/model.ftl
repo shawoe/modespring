@@ -6,7 +6,7 @@
         <h2>创建模型</h2>
         <form id="newModelForm" action="/modespring/model.html" method="post">
             <input type="hidden" name="_method" value="put"/>
-            <label>模型编码<input name="name" type="text"/></label>
+            <label>模型唯一标识<input name="name" type="text"/></label>
             <label>模型名称<input name="title" type="text"/></label>
             <input type="submit" value="创建模型"/>
         </form>
@@ -18,8 +18,8 @@
             <tr>
                 <th></th>
                 <th>ID</th>
-                <th>栏目编号</th>
-                <th>栏目名称</th>
+                <th>模型唯一标识</th>
+                <th>模型名称</th>
                 <th></th>
             </tr>
             <form id="modelListForm" action="/modespring/model.html" method="post">

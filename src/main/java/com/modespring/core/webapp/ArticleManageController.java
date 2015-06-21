@@ -1,10 +1,10 @@
-package com.modespring.core.webapp.modespring;
+package com.modespring.core.webapp;
 
 import com.modespring.core.domain.Article;
 import com.modespring.core.domain.Node;
 import com.modespring.core.service.ArticleService;
+import com.modespring.core.service.ContextService;
 import com.modespring.core.service.NodeService;
-import com.modespring.core.webapp.access.BaseController;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,10 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "modespring")
-public class ArticleManageController extends BaseController {
+public class ArticleManageController {
+
+    @Autowired
+    protected ContextService contextService;
 
     @Autowired
     private NodeService nodeService;
@@ -30,10 +33,10 @@ public class ArticleManageController extends BaseController {
 
     @RequestMapping(value = "{nodeName}/article", method = RequestMethod.GET)
     public ModelAndView getOne(ModelAndView modelAndView, @PathVariable String nodeName) {
-        modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("mospList", contextService.getMospList());
         modelAndView.addObject("MospNodeName", "node");
-        modelAndView.addObject("nodeList", Context.getNodeList());
-        modelAndView.addObject("site", Context.getSite());
+        modelAndView.addObject("nodeList", contextService.getNodeList());
+        modelAndView.addObject("site", contextService.getSite());
         Node node = nodeService.getByName(nodeName);
         modelAndView.addObject("node", node);
         List<Article> articleList = articleService.getByNodeId(node.getId());

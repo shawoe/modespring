@@ -2,6 +2,7 @@ package com.modespring.core.webapp.access;
 
 import com.modespring.core.domain.Node;
 import com.modespring.core.domain.User;
+import com.modespring.core.service.ContextService;
 import com.modespring.core.service.NodeService;
 import com.modespring.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,10 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping
-public class LoginController extends BaseController {
+public class LoginController {
+
+    @Autowired
+    protected ContextService contextService;
 
     @Autowired
     private NodeService nodeService;
@@ -27,8 +31,8 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView modelAndView, HttpSession session) {
-        modelAndView.addObject("nodeList", Context.getNodeList());
-        modelAndView.addObject("site", Context.getSite());
+        modelAndView.addObject("nodeList", contextService.getNodeList());
+        modelAndView.addObject("site", contextService.getSite());
         Node node = nodeService.getByName("member");
         modelAndView.addObject("node", node);
         if (session.getAttribute("currentUserName") != null) {
@@ -51,8 +55,8 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public ModelAndView logout(ModelAndView modelAndView, HttpSession session) {
-        modelAndView.addObject("nodeList", Context.getNodeList());
-        modelAndView.addObject("site", Context.getSite());
+        modelAndView.addObject("nodeList", contextService.getNodeList());
+        modelAndView.addObject("site", contextService.getSite());
         if (session.getAttribute("currentUserName") != null) {
             session.removeAttribute("currentUserName");
         }

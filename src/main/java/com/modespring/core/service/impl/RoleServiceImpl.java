@@ -21,8 +21,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleDao roleDao;
-
-
+    
     public Role create(Role role) {
         return roleDao.save(role);
     }
@@ -63,6 +62,6 @@ public class RoleServiceImpl implements RoleService {
 
     @Transactional
     public void accessControl() {
-        int accessControl = roleDao.getOne(1).getPowerList().indexOf(powerDao.getOne(1));
+        int accessControl = roleDao.findOne(1).getPowerList().indexOf(powerDao.findOne(1));
     }
 }

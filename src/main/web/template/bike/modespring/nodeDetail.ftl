@@ -2,7 +2,7 @@
 <#include "common/_header.ftl">
 <section class="content">
     <form action="/modespring/node/${(node.id)!''}.html" method="post">
-        <label>栏目唯一编码<input name="name" type="text" value="${(node.name)!''}"></label>
+        <label>栏目唯一标识<input name="name" type="text" value="${(node.name)!''}"></label>
         <label>栏目名称<input name="title" type="text" value="${(node.title)!''}"></label>
         <label>栏目模型
             <select name="model.id">

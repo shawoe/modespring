@@ -5,22 +5,33 @@
     <section class="create">
         <h2>创建栏目</h2>
         <form id="newNodeForm" action="/modespring/node.html" method="post">
-            <select name="parentNode.id">
-            <#list nodeList as node>
-                <#if node.level==0>
-                    <option value="${node.id}">${node.name}</option>
-                </#if>
-                <#list nodeList as childNode>
-                    <#if childNode.level==1 && childNode.parentNode.id==node.id>
-                        <option value="${childNode.id}">${childNode.name}</option>
-                    </#if>
-                </#list>
-            </#list>
-            </select>
-            <input type="hidden" name="_method" value="put"/>
-            <input name="name" type="text"/>
-            <input name="title" type="text"/>
-            <input type="submit" value="创建栏目"/>
+        <table>
+            <tr><th>父级栏目</th><th>栏目唯一标识</th><th>栏目名称</th><th></th></tr>
+            <tr>
+                <td>
+                    <select name="parentNode.id">
+                    <#list nodeList as node>
+                        <#if node.level==0>
+                            <option value="${node.id}">${node.name}</option>
+                        </#if>
+                        <#list nodeList as childNode>
+                            <#if childNode.level==1 && childNode.parentNode.id==node.id>
+                                <option value="${childNode.id}">${childNode.name}</option>
+                            </#if>
+                        </#list>
+                    </#list>
+                    </select>
+                </td>
+                <td><input name="name" type="text"></td>
+                <td><input name="title" type="text"></td>
+                <td>
+                    <input type="hidden" name="_method" value="put">
+                    <input type="submit" value="创建栏目">
+                </td>
+            </tr>
+
+
+        </table>
         </form>
     </section>
 

@@ -10,4 +10,5 @@ import java.util.List;
 public interface FieldService extends BaseService<Field> {
 
     public List<Field> createALL(List<Field> fieldList);
+    public void deleteAll(List<Field> fieldList) throws Exception;
 }

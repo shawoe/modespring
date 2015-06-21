@@ -1,12 +1,13 @@
 <body>
 <div class="wrapper">
     <header>
-        <h1><a href="${(site.url)!""}"><img src="${(site.logo)!''}"></a></h1>
+        <h1><a href="${(site.url)!""}"><img src="${(site.logo)!''}" alt="${(site.title)!''}"></a></h1>
         <ul class="shortcut">
             <li><a>济南</a></li>
         <#if Session.currentUserName??>
             <li><a href="/center.html">会员中心</a></li>
-            <li><a href="/modespring/index.html">后台管理</a></li>
+            <li><a href="/logout.html">退出登录</a></li>
+            <li><a href="/modespring/index.html">进入后台</a></li>
         <#else>
             <li><a href="/login.html">登录</a></li>
             <li><a href="/register.html">注册</a></li>

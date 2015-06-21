@@ -1,5 +1,6 @@
+<body>
 <header>
-    <h1><img src="/image/modespring.png"></h1>
+    <h1><img src="/image/modespring.png" alt="ModeSpring"></h1>
     <ul>
         <li><a href="/index.html">前台首页</a></li>
         <li><a href="/logout.html">退出登录</a></li>

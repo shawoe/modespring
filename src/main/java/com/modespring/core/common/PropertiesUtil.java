@@ -8,36 +8,41 @@ import org.apache.commons.configuration.PropertiesConfiguration;
  */
 public class PropertiesUtil {
 
-    public static Integer getIntegerProperty(String file, String key) {
+    public static Integer getIntegerProperty(String file, String key) throws ConfigurationException {
         PropertiesConfiguration properties = new PropertiesConfiguration();
         properties.setEncoding("utf8");
-        try {
-            properties.load(file + ".properties");
-        } catch (ConfigurationException e) {
-            e.printStackTrace();
-        }
+        properties.load(file + ".properties");
         return Integer.valueOf(properties.getString(key));
     }
 
-    public static String getStringProperty(String file, String key) {
+    public static String getStringProperty(String file, String key) throws ConfigurationException {
         PropertiesConfiguration properties = new PropertiesConfiguration();
         properties.setEncoding("utf8");
-        try {
-            properties.load(file + ".properties");
-        } catch (ConfigurationException e) {
-            e.printStackTrace();
-        }
+        properties.load(file + ".properties");
         return properties.getString(key);
     }
 
-    public static String[] getStringProperties(String file, String key) {
+    public static void createStringProperty(String file, String key, String value) throws ConfigurationException {
         PropertiesConfiguration properties = new PropertiesConfiguration();
         properties.setEncoding("utf8");
-        try {
-            properties.load(file + ".properties");
-        } catch (ConfigurationException e) {
-            e.printStackTrace();
-        }
+        properties.load(file + ".properties");
+        properties.addProperty(key, value);
+        properties.save(file + ".properties");
+    }
+
+    public static void updateStringProperty(String file, String key, String value) throws ConfigurationException {
+        PropertiesConfiguration properties = new PropertiesConfiguration();
+        properties.setEncoding("utf8");
+        properties.load(file + ".properties");
+        properties.clearProperty(key);
+        properties.addProperty(key, value);
+        properties.save(file + ".properties");
+    }
+
+    public static String[] getStringProperties(String file, String key) throws ConfigurationException {
+        PropertiesConfiguration properties = new PropertiesConfiguration();
+        properties.setEncoding("utf8");
+        properties.load(file + ".properties");
         return properties.getString(key).split("\\|");
     }
 

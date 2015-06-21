@@ -1,8 +1,8 @@
-package com.modespring.core.webapp.modespring;
+package com.modespring.core.webapp;
 
 import com.modespring.core.domain.Role;
+import com.modespring.core.service.ContextService;
 import com.modespring.core.service.RoleService;
-import com.modespring.core.webapp.access.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,14 +15,17 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping(value = "modespring")
-public class RoleManageController extends BaseController {
+public class RoleManageController {
+
+    @Autowired
+    protected ContextService contextService;
 
     @Autowired
     private RoleService roleService;
 
     @RequestMapping(value = "role", method = RequestMethod.GET)
     public ModelAndView getAll(ModelAndView modelAndView) {
-        modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("mospList", contextService.getMospList());
         modelAndView.addObject("MospNodeName", "role");
         modelAndView.addObject("roleList", roleService.getAll());
         return modelAndView;
@@ -37,7 +40,7 @@ public class RoleManageController extends BaseController {
 
     @RequestMapping(value = "role/{name}", method = RequestMethod.GET)
     public ModelAndView getUserDetails(ModelAndView modelAndView, @PathVariable String name) {
-        modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("mospList", contextService.getMospList());
         modelAndView.addObject("MospNodeName", "role");
         modelAndView.setViewName("modespring/roleDetails");
         modelAndView.addObject("role", roleService.getByName(name));

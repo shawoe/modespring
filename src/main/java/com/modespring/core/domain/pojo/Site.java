@@ -8,6 +8,10 @@ public class Site {
     private String logo;
     private String url;
     private String mospUrl;
+    private String jdbcUrl;
+    private String jdbcName;
+    private String jdbcUsername;
+    private String jdbcPassword;
     private Boolean open;
 
     public String getTitle() {
@@ -40,6 +44,38 @@ public class Site {
 
     public void setMospUrl(String mospUrl) {
         this.mospUrl = mospUrl;
+    }
+
+    public String getJdbcUrl() {
+        return jdbcUrl;
+    }
+
+    public void setJdbcUrl(String jdbcUrl) {
+        this.jdbcUrl = jdbcUrl;
+    }
+
+    public String getJdbcName() {
+        return jdbcName;
+    }
+
+    public void setJdbcName(String jdbcName) {
+        this.jdbcName = jdbcName;
+    }
+
+    public String getJdbcUsername() {
+        return jdbcUsername;
+    }
+
+    public void setJdbcUsername(String jdbcUsername) {
+        this.jdbcUsername = jdbcUsername;
+    }
+
+    public String getJdbcPassword() {
+        return jdbcPassword;
+    }
+
+    public void setJdbcPassword(String jdbcPassword) {
+        this.jdbcPassword = jdbcPassword;
     }
 
     public Boolean getOpen() {

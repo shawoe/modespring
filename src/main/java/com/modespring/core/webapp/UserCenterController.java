@@ -2,9 +2,9 @@ package com.modespring.core.webapp;
 
 import com.modespring.core.domain.Node;
 import com.modespring.core.domain.User;
+import com.modespring.core.service.ContextService;
 import com.modespring.core.service.NodeService;
 import com.modespring.core.service.UserService;
-import com.modespring.core.webapp.access.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,10 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping
-public class UserCenterController extends BaseController {
+public class UserCenterController {
+
+    @Autowired
+    protected ContextService contextService;
 
     @Autowired
     private NodeService nodeService;
@@ -28,8 +31,8 @@ public class UserCenterController extends BaseController {
 
     @RequestMapping(value = "center", method = RequestMethod.GET)
     public ModelAndView memberCenter(ModelAndView modelAndView, HttpSession session) {
-        modelAndView.addObject("nodeList", Context.getNodeList());
-        modelAndView.addObject("site", Context.getSite());
+        modelAndView.addObject("nodeList", contextService.getNodeList());
+        modelAndView.addObject("site", contextService.getSite());
         String username = (String) session.getAttribute("currentUserName");
         Node node = nodeService.getByName("member");
         modelAndView.addObject("node", node);

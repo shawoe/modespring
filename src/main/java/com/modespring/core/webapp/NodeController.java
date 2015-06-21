@@ -3,8 +3,8 @@ package com.modespring.core.webapp;
 import com.modespring.core.domain.Article;
 import com.modespring.core.domain.Node;
 import com.modespring.core.service.ArticleService;
+import com.modespring.core.service.ContextService;
 import com.modespring.core.service.NodeService;
-import com.modespring.core.webapp.access.BaseController;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,10 @@ import java.util.List;
  */
 @Controller
 @RequestMapping
-public class NodeController extends BaseController {
+public class NodeController {
+
+    @Autowired
+    protected ContextService contextService;
 
     @Autowired
     private NodeService nodeService;
@@ -31,8 +34,8 @@ public class NodeController extends BaseController {
 
     @RequestMapping(value = "{name}", method = RequestMethod.GET)
     public ModelAndView getOne(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
-        modelAndView.addObject("nodeList", Context.getNodeList());
-        modelAndView.addObject("site", Context.getSite());
+        modelAndView.addObject("nodeList", contextService.getNodeList());
+        modelAndView.addObject("site", contextService.getSite());
         Node node = nodeService.getByName(name);
         modelAndView.addObject("node", node);
         List<Article> articleList = articleService.getByNodeId(node.getId());

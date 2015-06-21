@@ -3,6 +3,7 @@ package com.modespring.core.service.impl;
 import com.modespring.core.domain.Field;
 import com.modespring.core.domain.Model;
 import com.modespring.core.repository.ModelDao;
+import com.modespring.core.service.FieldService;
 import com.modespring.core.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public class ModelServiceImpl implements ModelService {
     @Autowired
     ModelDao modelDao;
 
+    @Autowired
+    FieldService fieldService;
+
     public Model create(Model model) {
         return modelDao.save(model);
     }
@@ -30,12 +34,8 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public void deleteAll(Integer[] id) throws Exception {
-        for (int i = 0; id != null && i < id.length; i++) {
-            try {
-                modelDao.delete(id[i]);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        for (Integer cur_id : id) {
+            modelDao.delete(cur_id);
         }
     }
 
@@ -51,7 +51,7 @@ public class ModelServiceImpl implements ModelService {
     public List<Model> updateALL(Integer[] id, String[] name, String[] title) {
         List<Model> modelList = new ArrayList<Model>();
         for (int i = 0; i < id.length; i++) {
-            Model model = modelDao.getOne(id[i]);
+            Model model = modelDao.findOne(id[i]);
             model.setName(name[i]);
             model.setTitle(title[i]);
             modelList.add(model);

@@ -1,8 +1,9 @@
-package com.modespring.core.webapp.modespring;
+package com.modespring.core.webapp;
 
 import com.modespring.core.domain.Model;
+import com.modespring.core.service.ContextService;
 import com.modespring.core.service.ModelService;
-import com.modespring.core.webapp.access.BaseController;
+import org.apache.commons.configuration.ConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,43 +18,46 @@ import java.io.UnsupportedEncodingException;
  */
 @Controller
 @RequestMapping(value = "modespring")
-public class ModelManageController extends BaseController {
+public class ModelManageController {
+
+    @Autowired
+    protected ContextService contextService;
 
     @Autowired
     private ModelService modelService;
 
     @RequestMapping(value = "model", method = RequestMethod.GET)
     public ModelAndView getAll(ModelAndView modelAndView) {
-        modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("mospList", contextService.getMospList());
         modelAndView.addObject("MospNodeName", "model");
         modelAndView.addObject("modelList", modelService.getAll());
         return modelAndView;
     }
 
     @RequestMapping(value = "model", method = RequestMethod.PUT)
-    public ModelAndView create(ModelAndView modelAndView, Model model) {
+    public ModelAndView create(ModelAndView modelAndView, Model model) throws ConfigurationException {
         modelService.create(model);
-        Context.flush();
+        contextService.flush();
         modelAndView.setViewName("redirect:/modespring/model.html");
         return modelAndView;
     }
 
     @RequestMapping(value = "model", method = RequestMethod.POST)
-    public ModelAndView editAll(ModelAndView modelAndView, Integer[] id, String[] name, String[] title, Integer[] delete) throws UnsupportedEncodingException {
+    public ModelAndView editAll(ModelAndView modelAndView, Integer[] id, String[] name, String[] title, Integer[] delete) throws UnsupportedEncodingException, ConfigurationException {
         modelService.updateALL(id,name,title);
         try {
             modelService.deleteAll(delete);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Context.flush();
+        contextService.flush();
         modelAndView.setViewName("redirect:/modespring/model.html");
         return modelAndView;
     }
 
     @RequestMapping(value = "model/{id}", method = RequestMethod.GET)
     public ModelAndView getOne(ModelAndView modelAndView, @PathVariable Integer id) {
-        modelAndView.addObject("mospList", Context.getMospList());
+        modelAndView.addObject("mospList", contextService.getMospList());
         modelAndView.addObject("MospNodeName", "model");
         Model model = modelService.getOne(id);
         modelAndView.addObject("currentModel", model);
@@ -62,9 +66,9 @@ public class ModelManageController extends BaseController {
     }
 
     @RequestMapping(value = "model/{id}", method = RequestMethod.POST)
-    public ModelAndView edit(ModelAndView modelAndView, @PathVariable Integer id, Model model) {
+    public ModelAndView edit(ModelAndView modelAndView, @PathVariable Integer id, Model model) throws ConfigurationException {
         modelService.update(model);
-        Context.flush();
+        contextService.flush();
         modelAndView.setViewName("redirect:/modespring/model.html");
         return modelAndView;
     }

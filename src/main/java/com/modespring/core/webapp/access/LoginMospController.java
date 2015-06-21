@@ -1,6 +1,7 @@
 package com.modespring.core.webapp.access;
 
 import com.modespring.core.domain.User;
+import com.modespring.core.service.ContextService;
 import com.modespring.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,14 +16,17 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping(value = "modespring")
-public class LoginMospController extends BaseController {
+public class LoginMospController {
+
+    @Autowired
+    protected ContextService contextService;
 
     @Autowired
     public UserService userService;
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public ModelAndView loginModeSpring(ModelAndView modelAndView, HttpSession session) {
-        modelAndView.addObject("nodeList", Context.getNodeList());
+        modelAndView.addObject("nodeList", contextService.getNodeList());
         if (session.getAttribute("MospUserName") != null) {
             modelAndView.setViewName("redirect:/modespring/center.html");
         }

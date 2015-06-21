@@ -2,10 +2,7 @@ package com.modespring.core.domain.bean;
 
 import com.modespring.core.domain.Field;
 
-import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -15,7 +12,7 @@ import java.util.List;
 public abstract class ModelBean extends BaseBean {
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable
+    @JoinColumn
     private List<Field> fieldList;
 
     public List<Field> getFieldList() {

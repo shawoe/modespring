@@ -6,7 +6,7 @@
         <h2>添加字段</h2>
         <form id="newFieldForm" action="/modespring/model/${(currentModel.name)!''}/field.html" method="post">
             <input type="hidden" name="_method" value="put"/>
-            <label>字段编码<input name="name" type="text"/></label>
+            <label>字段唯一标识<input name="name" type="text"/></label>
             <label>字段名称<input name="title" type="text"/></label>
             <label>字段默认值<input name="value" type="text"/></label>
             <input type="submit" value="添加字段"/>
@@ -23,7 +23,7 @@
                 <th>字段名称</th>
                 <th></th>
             </tr>
-            <form id="fieldListForm" action="/modespring/${(currentModel.name)!''}/field.html" method="post">
+            <form action="/modespring/model/${(currentModel.name)!''}/field.html" method="post">
             <#list fieldList as field>
                     <tr>
                         <td><input type="checkbox" name="delete" value="${field.id}"/></td>

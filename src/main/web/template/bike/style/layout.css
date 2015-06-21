@@ -189,13 +189,17 @@ section.content form div.fieldList {
     position: relative;
 }
 
-section.content form img.titleImage {
+section.content form div.fieldList img {
     position: absolute;
     right: 0;
     height: 100px;
     width: 150px;
 }
 
+img.avatar {
+    height: 200px;
+    width: 200px;
+}
 
 section.content label {
     margin: 10px;

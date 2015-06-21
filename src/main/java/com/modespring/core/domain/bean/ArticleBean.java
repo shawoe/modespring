@@ -30,7 +30,7 @@ public abstract class ArticleBean extends BaseBean {
     private Node node;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable
+    @JoinColumn
     private List<Field> valueList;
 
     @OneToMany

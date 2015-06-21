@@ -7,7 +7,7 @@
 
         <form id="newUserForm" action="/modespring/role.html" method="post">
             <input type="hidden" name="_method" value="put"/>
-            <label>角色编码：<input name="name" type="text"></label>
+            <label>角色唯一标识：<input name="name" type="text"></label>
             <label>角色头衔：<input name="title" type="text"></label>
             <input type="submit" value="创建角色"/>
         </form>
@@ -19,7 +19,7 @@
             <tr>
                 <th>删除</th>
                 <th>ID</th>
-                <th>角色编码</th>
+                <th>角色唯一标识</th>
                 <th>角色头衔</th>
             </tr>
             <form id="deleteUserForm" action="/modespring/role.html" method="post">

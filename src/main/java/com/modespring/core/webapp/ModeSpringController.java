@@ -1,8 +1,8 @@
-package com.modespring.core.webapp.modespring;
+package com.modespring.core.webapp;
 
 import com.modespring.core.domain.User;
+import com.modespring.core.service.ContextService;
 import com.modespring.core.service.UserService;
-import com.modespring.core.webapp.access.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +17,10 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping(value = "modespring")
-public class ModeSpringController extends BaseController {
+public class ModeSpringController {
+
+    @Autowired
+    protected ContextService contextService;
 
     @Autowired
     public UserService userService;
@@ -30,8 +33,8 @@ public class ModeSpringController extends BaseController {
 
     @RequestMapping(value = "{name}", method = RequestMethod.GET)
     public ModelAndView center(ModelAndView modelAndView, HttpSession session, @PathVariable String name) {
-        modelAndView.addObject("mospList", Context.getMospList());
-        modelAndView.addObject("site", Context.getSite());
+        modelAndView.addObject("mospList", contextService.getMospList());
+        modelAndView.addObject("site", contextService.getSite());
         modelAndView.addObject("MospNodeName", name);
         User user = (User) session.getAttribute("ModeSpringUser");
         if (user == null) {

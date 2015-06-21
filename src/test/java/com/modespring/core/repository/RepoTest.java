@@ -1,9 +1,11 @@
 package com.modespring.core.repository;
 
+import com.modespring.core.common.PropertiesUtil;
 import com.modespring.core.domain.Article;
 import com.modespring.core.domain.Image;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +32,13 @@ import java.util.Set;
 public class RepoTest {
 
     @Test
-    public  void test() throws IOException {
-        PropertiesConfiguration pc = new PropertiesConfiguration();
-        pc.setEncoding("utf8");
-        try {
-            pc.load("modespring.properties");
-        } catch (ConfigurationException e) {
-            e.printStackTrace();
-        }
-        String[] names = pc.getString("column.title").split("\\|");
-        for (String name :names) {
-            System.out.println(name+"-----------------------------------------------------");
-        }
+    public  void test() throws IOException, ConfigurationException {
+//        PropertiesUtil.createStringProperty("global","a","a");
+//        PropertiesUtil.createStringProperty("global","b","a");
+        PropertiesUtil.updateStringProperty("global", "a", "c");
+        Assert.assertEquals(PropertiesUtil.getStringProperty("global", "site.title"), "校园玩车助理");
+        Assert.assertEquals(PropertiesUtil.getStringProperty("global", "b"),"a");
+        Assert.assertEquals(PropertiesUtil.getStringProperty("global", "a"),"c");
     }
 
 

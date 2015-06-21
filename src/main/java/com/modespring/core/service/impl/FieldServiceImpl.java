@@ -6,6 +6,7 @@ import com.modespring.core.service.FieldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +32,15 @@ public class FieldServiceImpl implements FieldService {
 
     @Override
     public void deleteAll(Integer[] id) throws Exception {
+        for (Integer cur_id : id) {
+            fieldDao.delete(cur_id);
+        }
+    }
 
+    public void deleteAll(List<Field> fieldList) throws Exception {
+        for (Field field : fieldList) {
+            fieldDao.delete(field);
+        }
     }
 
     public Field update(Field field) {
@@ -44,7 +53,14 @@ public class FieldServiceImpl implements FieldService {
 
     @Override
     public List<Field> updateALL(Integer[] id, String[] name, String[] title) {
-        return null;
+        List<Field> fieldList = new ArrayList<>();
+        for (int i = 0; i < id.length; i++) {
+            Field field = fieldDao.findOne(id[i]);
+            field.setName(name[i]);
+            field.setTitle(title[i]);
+            fieldList.add(field);
+        }
+        return fieldDao.save(fieldList);
     }
 
     public Field getOne(Integer id) {

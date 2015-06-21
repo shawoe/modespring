@@ -3,7 +3,7 @@
 <section class="content">
     <form action="/${(node.name)!''}/${(article.id)!''}/edit.html" enctype="multipart/form-data" method="post">
         <div class="fieldList">
-            <img class="titleImage" src="${(article.titleImage)!''}">
+            <img class="avatar" src="${(article.titleImage)!''}">
             <label>文章标题：<input name="title" type="text" value="${(article.title)!''}"></label>
             <label>更换标题图：<input name="titleImageFile" type="file"></label>
         </div>
